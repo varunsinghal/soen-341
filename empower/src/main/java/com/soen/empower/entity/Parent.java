@@ -9,11 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
-
 @Entity
-public class Teacher {
-
+public class Parent {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -23,16 +20,11 @@ public class Teacher {
 	@JoinColumn(name="user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "teacher")
-	private List<Course> courses;
-
-	public Teacher() {
-
-	}
+	@OneToMany(mappedBy = "parent")
+	private List<Student> students;
 	
-	public Teacher(Long id, String name) {
-		this.id = id;
-		this.name = name;
+	public Parent() {
+		
 	}
 
 	public Long getId() {
@@ -51,14 +43,6 @@ public class Teacher {
 		this.name = name;
 	}
 
-	public List<Course> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
-	
 	public User getUser() {
 		return user;
 	}
@@ -67,5 +51,13 @@ public class Teacher {
 		this.user = user;
 	}
 
+	public List<Student> getStudents() {
+		return students;
+	}
 
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
+	
+	
 }

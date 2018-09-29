@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -19,6 +21,10 @@ public class Student {
 	
 	@OneToMany(mappedBy="student")
 	private List<Academic> academics;
+	
+	@ManyToOne
+	@JoinColumn(name="parent_id")
+	private Parent parent;
 
 	public Student() {
 

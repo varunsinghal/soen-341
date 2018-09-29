@@ -17,22 +17,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private DataSource dataSource;
 	
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception{		
-		authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{	
+//		auth.inMemoryAuthentication()
+//        .withUser("user").password("password").roles("PARENT")
+//        .and()
+//        .withUser("admin").password("password").roles("TEACHER");
+		// JDBC authentication instead of in memory auth method.
+		// Roles - Teacher and Parent
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
 		.usersByUsernameQuery(
-			"select username, password, enabled from user where username=?")
+			"select username, password, enabled from users where username=?")
 		.authoritiesByUsernameQuery(
-			"select username, role from user_roles where username=?");
+			"select username, role from users where username=?");
 	}
 	
 	//Authorization
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
+		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/teacher*").hasRole("TEACHER")
-		.antMatchers("/parent*").hasRole("PARENT")
-		.antMatchers("/","/login*").permitAll()
+//		.antMatchers("/teacher/*").hasRole("TEACHER")
+//		.antMatchers("/parent/*").hasRole("PARENT")
+		.antMatchers("/","/login*", "/monitor/*").permitAll()
 		.and()
 		.httpBasic();
 	}

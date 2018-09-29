@@ -3,9 +3,10 @@ package com.soen.empower.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User {
 	
 	@Id
@@ -15,10 +16,16 @@ public class User {
 	private String password;
 	private int enabled = 1;
 	
-	@OneToOne(mappedBy = "role")
-	private UserRole role;
+	private String role;
 	
 	public User(){
+	}
+	
+	public User(Long id, String username, String password, String role) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.setRole(role);
 	}
 
 	public Long getId() {
@@ -52,5 +59,15 @@ public class User {
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	
 
 }

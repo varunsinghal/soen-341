@@ -1,0 +1,38 @@
+package com.soen.empower.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.soen.empower.entity.Course;
+import com.soen.empower.entity.Teacher;
+import com.soen.empower.service.TeacherService;
+
+@RestController
+@RequestMapping("/teacher")
+public class TeacherController {
+	
+	@Autowired
+	private TeacherService teacherService;
+	
+	@RequestMapping("/all")
+	public List<Teacher> fetchAll(){
+		return teacherService.findAll();
+	}
+	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public String addTeacher(@ModelAttribute Teacher teacher) {
+		teacherService.add(teacher);
+		return "Added successfully";
+	}
+	
+	@RequestMapping(value="/{id}")
+	public List<Course> fetchCourses( @PathVariable Long id) {
+		return teacherService.findCoursesByTeacherId(id);
+	}
+}

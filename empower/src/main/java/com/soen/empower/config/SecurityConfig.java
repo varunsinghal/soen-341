@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/teacher/**").access("hasRole('ROLE_TEACHER')")
 		.antMatchers("/parent/**").access("hasRole('ROLE_PARENT')")
-		.antMatchers("/","/login*", "/monitor/*").permitAll()
+		.antMatchers("/","/login*", "/monitor/*", "/h2-console*").permitAll()
 		.and()
         .formLogin()
         .loginPage("/login").successHandler(myAuthenticationSuccessHandler)

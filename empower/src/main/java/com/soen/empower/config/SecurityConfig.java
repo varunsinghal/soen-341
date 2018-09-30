@@ -16,16 +16,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private DataSource dataSource;
 	
+
+	@Autowired
+	MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{	
 		// Roles - Teacher and Parent
-		System.out.println("inside authentication....");
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
 		.usersByUsernameQuery(
 			"select username, password, enabled from users where username=?")
 		.authoritiesByUsernameQuery(
 			"select username, role from users where username=?");
-		System.out.println("outside authentication....");
 	}
 	
 	//Authorization
@@ -39,10 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/","/login*", "/monitor/*").permitAll()
 		.and()
         .formLogin()
-        .loginPage("/login")
+        .loginPage("/login").successHandler(myAuthenticationSuccessHandler)
         .permitAll()
         .and()
         .logout()
         .permitAll();
 	}
+
 }

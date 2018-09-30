@@ -3,6 +3,8 @@ package com.soen.empower.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class TeacherController {
 	
 	@RequestMapping("/all")
 	public List<Teacher> fetchAll(){
+		Authentication auth2 = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth2.getName());
+		System.out.println(auth2.getAuthorities());
 		return teacherService.findAll();
 	}
 	

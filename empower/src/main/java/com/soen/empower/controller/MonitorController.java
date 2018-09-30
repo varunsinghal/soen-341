@@ -28,5 +28,4 @@ public class MonitorController {
 		userService.add(user);
 		return "Added successfully";
 	}
-	
 }	

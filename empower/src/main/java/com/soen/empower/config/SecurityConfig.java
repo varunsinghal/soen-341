@@ -18,17 +18,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{	
-//		auth.inMemoryAuthentication()
-//        .withUser("user").password("password").roles("PARENT")
-//        .and()
-//        .withUser("admin").password("password").roles("TEACHER");
-		// JDBC authentication instead of in memory auth method.
 		// Roles - Teacher and Parent
+		System.out.println("inside authentication....");
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
 		.usersByUsernameQuery(
 			"select username, password, enabled from users where username=?")
 		.authoritiesByUsernameQuery(
 			"select username, role from users where username=?");
+		System.out.println("outside authentication....");
 	}
 	
 	//Authorization
@@ -37,10 +34,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		.csrf().disable()
 		.authorizeRequests()
-//		.antMatchers("/teacher/*").hasRole("TEACHER")
-//		.antMatchers("/parent/*").hasRole("PARENT")
+		.antMatchers("/teacher/**").access("hasRole('ROLE_TEACHER')")
+		.antMatchers("/parent/**").access("hasRole('ROLE_PARENT')")
 		.antMatchers("/","/login*", "/monitor/*").permitAll()
 		.and()
-		.httpBasic();
+        .formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+        .logout()
+        .permitAll();
 	}
 }

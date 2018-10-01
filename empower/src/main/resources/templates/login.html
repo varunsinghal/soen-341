@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login Page</title>
+<link th:href="@{/css/loginstyle.css}" href="/css/loginstyle.css"  rel="stylesheet" type="text/css"  />
+</head>
+<body>
+	<div th:if="${param.error}">
+		<div class="alert alert-danger">Invalid username and password.</div>
+	</div>
+	<div th:if="${param.logout}">
+		<div class="alert alert-info">You have been logged out.</div>
+	</div>
+
+	<div class="login">
+		<img th:src="@{/img/avatar.png}" class="avatar">
+		<!--sourcing image-->
+		<h1>Login</h1>
+		<form th:action="@{/login}" method="post">
+			<!-- creating a login form with username&passowrd-->
+			<p>Username</p>
+			<input type="text" name="username" placeholder="Enter Username">
+			<p>Password</p>
+			<input type="password" name="password" placeholder="Enter Password">
+			<input type="submit" name="" value="Log in"><br>
+			<!-- a submit button with a login value-->
+
+			<a href="#">I Forgot my password</a><br>
+			<!-- adding a forgot my password and create an account button-->
+			<a href="#">Create an account</a>
+		</form>
+	</div>
+
+
+
+
+	<!-- <div th:replace="fragments/footer :: footer"/> -->
+	<!-- <div th:replace="fragments/header :: header-css"/>   -->
+	<!-- <div th:replace="fragments/header :: header"/>  -->
+</body>
+</html>

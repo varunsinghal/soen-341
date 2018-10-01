@@ -25,6 +25,9 @@ public class Teacher {
 
 	@OneToMany(mappedBy = "teacher")
 	private List<Course> courses;
+	
+	@OneToMany(mappedBy = "teacher")
+	private List<Card> cards;
 
 	public Teacher() {
 
@@ -66,6 +69,16 @@ public class Teacher {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+	
+	
 
 
 }

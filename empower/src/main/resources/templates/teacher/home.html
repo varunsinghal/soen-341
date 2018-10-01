@@ -5,6 +5,13 @@
 
 </head>
 <body>
-Teacher
+	<table>
+		<tr th:each="card : ${cards}">
+			<td th:text="${card.id}">1</td>
+			<td><a href="#" th:text="${card.title}">Title ...</a></td>
+			<td th:text="${card.text}">Text ...</td>
+		</tr>
+	</table>
+
 </body>
 </html>

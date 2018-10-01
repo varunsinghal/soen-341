@@ -31,6 +31,10 @@ public class TeacherService {
 		Teacher teacher = teacherRepository.findById(id);
 		return teacher.getCourses();
 	}
+	
+	public Teacher findById(Long id) {
+		return teacherRepository.findById(id);
+	}
 
 	
 }

@@ -1,19 +1,11 @@
 package com.soen.empower.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.soen.empower.entity.Course;
-import com.soen.empower.entity.Teacher;
+import com.soen.empower.service.CardService;
 import com.soen.empower.service.TeacherService;
 
 @Controller
@@ -23,15 +15,21 @@ public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;
 	
+	@Autowired
+	private CardService cardService;
+	
 	@RequestMapping("")
 	public String index() {
 		return "redirect:/teacher/home";
 	}
 	
 	@RequestMapping("/home")
-	public String teacherHome() {
-		return "teacher/home";
+	public ModelAndView teacherHome() {
+		ModelAndView model = new ModelAndView("teacher/home");
+		model.addObject("cards", cardService.fetchAll());
+		return model;
 	}
+	
 	
 //	@RequestMapping("/all")
 //	public List<Teacher> fetchAll(){

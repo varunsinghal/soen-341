@@ -5,9 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 
 
@@ -17,22 +15,12 @@ public class Teacher {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String name;
-	
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private User user;
 
 	@OneToMany(mappedBy = "teacher")
 	private List<Course> courses;
 
 	public Teacher() {
 
-	}
-	
-	public Teacher(Long id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	public Long getId() {
@@ -43,14 +31,6 @@ public class Teacher {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public List<Course> getCourses() {
 		return courses;
 	}
@@ -58,14 +38,5 @@ public class Teacher {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 
 }

@@ -19,8 +19,8 @@ public class Card {
 	private String text;
 	
 	@ManyToOne
-	@JoinColumn(name="teacher_id")
-	private Teacher teacher;
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	@OneToMany(mappedBy="card")
 	private List<Comment> comments;
@@ -49,16 +49,16 @@ public class Card {
 		return text;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
 	}
 
 	public List<Comment> getComments() {

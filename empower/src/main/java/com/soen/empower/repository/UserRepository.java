@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.soen.empower.entity.User;
 
 public interface UserRepository  extends CrudRepository<User, String>{
-
+	public User findById(Long id);
+	public User findByUsername(String username);
 }

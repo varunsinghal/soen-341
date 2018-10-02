@@ -1,8 +1,13 @@
 package com.soen.empower.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +23,36 @@ public class User {
 	
 	private String role;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Card> cards;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments;
+	
+	@OneToOne
+	@JoinColumn(name="teacher_id")
+	private Teacher teacher;
+	
+	@OneToOne
+	@JoinColumn(name="parent_id")
+	private Parent parent;
+	
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public User(){
 	}
 	
@@ -66,6 +101,22 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
 	}
 	
 	

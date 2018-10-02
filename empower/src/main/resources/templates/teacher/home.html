@@ -5,6 +5,9 @@
 
 </head>
 <body>
+<p th:text="${session.user_id}">Test</p> 
+<p th:text="${session.name}">Full name</p>
+	
 	<table>
 		<tr th:each="card : ${cards}">
 			<td th:text="${card.id}">1</td>

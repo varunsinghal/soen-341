@@ -2,19 +2,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<div th:replace="fragments/layout :: header" />
 </head>
 <body>
-<p th:text="${session.user_id}">Test</p> 
-<p th:text="${session.name}">Full name</p>
-	
-	<table>
-		<tr th:each="card : ${cards}">
-			<td th:text="${card.id}">1</td>
-			<td><a href="#" th:text="${card.title}">Title ...</a></td>
-			<td th:text="${card.text}">Text ...</td>
-		</tr>
-	</table>
+	<div th:replace="fragments/layout :: nav" />
 
+	<div class="container">
+		<!-- Content here -->
+		<div class="row">
+			<div class="col-8">
+				<div class="card">
+					<div class="card-body">
+						<form th:action="@{/teacher/addPost}" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Title"
+									name="title">
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" rows="3" name="text"></textarea>
+							</div>
+							<input type="hidden" name="user.id" th:value="${session.user_id}" />
+							<button type="submit" class="btn btn-primary mb-2">Post</button>
+						</form>
+					</div>
+				</div>
+
+				<br />
+				<hr>
+				<br />
+				<div class="card border-primary mb-3" th:each="card : ${cards}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${card.title}">Card title</h5>
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:text="${card.user.teacher.name}">author</h6>
+						<p class="card-text" th:text="${card.text}">Some quick example
+							text to build on the card title and make up the bulk of the
+							card's content.</p>
+						<a href="#" class="card-link">Link</a> <a href="#"
+							class="card-link">Another link</a>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			<div class="col-4">...</div>
+		</div>
+
+	</div>
+
+
+	<div th:replace="fragments/layout :: footer" />
 </body>
 </html>

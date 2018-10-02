@@ -1,5 +1,6 @@
 package com.soen.empower.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Card {
@@ -24,6 +26,12 @@ public class Card {
 	
 	@OneToMany(mappedBy="card")
 	private List<Comment> comments;
+	
+	private Date created = new Date();
+	private Date updated = new Date();
+
+	@PreUpdate
+	public void setLastUpdate() {  this.updated = new Date(); }
 	
 	public Card() {
 		
@@ -67,6 +75,22 @@ public class Card {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 	
 	

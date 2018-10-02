@@ -34,7 +34,8 @@
 					<div class="card-body">
 						<h5 class="card-title" th:text="${card.title}">Card title</h5>
 						<h6 class="card-subtitle mb-2 text-muted"
-							th:text="${card.user.teacher.name}">author</h6>
+							th:text="${card.user.name}">author</h6>
+							<span th:text="${card.created}"></span>
 						<p class="card-text" th:text="${card.text}">Some quick example
 							text to build on the card title and make up the bulk of the
 							card's content.</p>
@@ -51,8 +52,11 @@
 						</div>
 						<div class="card" th:each="comment: ${card.comments}">
 							<div class="card-body">
-								<p class="card-text" th:text="${comment.text}">Some
-									comment...</p>
+								<p class="card-text">
+								<span th:text="${comment.user.name}"></span>
+								<span th:text="${comment.created}"></span>
+								<span th:text="${comment.text}">Some
+									comment...</span></p>
 							</div>
 						</div>
 						<!-- comments end -->

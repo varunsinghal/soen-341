@@ -26,15 +26,14 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		
 		User user = userService.findByName(authentication.getName());
 		request.getSession().setAttribute("user_id", user.getId());
+		request.getSession().setAttribute("name", user.getName());
 		
 		for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("ROLE_TEACHER".equals(auth.getAuthority())){
             	request.getSession().setAttribute("teacher_id", user.getTeacher().getId());
-            	request.getSession().setAttribute("name", user.getTeacher().getName());
             	response.sendRedirect("/teacher");
             } else if ("ROLE_PARENT".equals(auth.getAuthority())) {
             	request.getSession().setAttribute("parent_id", user.getParent().getId());
-            	request.getSession().setAttribute("name", user.getParent().getName());
             	response.sendRedirect("/parent");
             }
         }

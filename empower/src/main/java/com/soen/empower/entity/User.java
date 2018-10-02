@@ -20,6 +20,7 @@ public class User {
 	private String username;
 	private String password;
 	private int enabled = 1;
+	private String name;
 	
 	private String role;
 	
@@ -117,6 +118,14 @@ public class User {
 
 	public void setParent(Parent parent) {
 		this.parent = parent;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

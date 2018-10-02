@@ -15,18 +15,12 @@ public class Teacher {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String name;
 
 	@OneToMany(mappedBy = "teacher")
 	private List<Course> courses;
 
 	public Teacher() {
 
-	}
-	
-	public Teacher(Long id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	public Long getId() {
@@ -35,14 +29,6 @@ public class Teacher {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public List<Course> getCourses() {

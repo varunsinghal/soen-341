@@ -40,7 +40,7 @@ public class TeacherController {
 		return "redirect:/teacher/home";
 	}
 	
-	@RequestMapping("/addComment")
+	@RequestMapping(value = "/addComment", method=RequestMethod.POST)
 	public String addComment(@ModelAttribute Comment comment) {
 		commentService.add(comment);
 		return "redirect:/teacher/home";

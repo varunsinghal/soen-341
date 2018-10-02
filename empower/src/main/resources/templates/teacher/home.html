@@ -40,11 +40,27 @@
 							card's content.</p>
 						<a href="#" class="card-link">Link</a> <a href="#"
 							class="card-link">Another link</a>
+						<!-- comments -->
+						<div class="card">
+							<form method="post" th:action="@{/teacher/addComment}">
+								<input type="text" class="form-group" name="text" />
+								<input type="hidden" name="user.id" th:value="${session.user_id}" />
+								<input type="hidden" name="card.id" th:value="${card.id}" />
+								<button type="submit" class="btn btn-primary mb-2">Add comment</button>
+							</form>
+						</div>
+						<div class="card" th:each="comment: ${card.comments}">
+							<div class="card-body">
+								<p class="card-text" th:text="${comment.text}">Some
+									comment...</p>
+							</div>
+						</div>
+						<!-- comments end -->
 					</div>
 				</div>
-				
-				
-				
+
+
+
 			</div>
 			<div class="col-4">...</div>
 		</div>

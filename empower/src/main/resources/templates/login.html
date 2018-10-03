@@ -4,8 +4,11 @@
 <head>
 <title>Login Page</title>
 <link th:href="@{/css/loginstyle.css}" href="/css/loginstyle.css"  rel="stylesheet" type="text/css"  />
+                <link rel="stylesheet" type="text/css" href="loginstyle.css">
+
 </head>
 <body>
+    
 	<div th:if="${param.error}">
 		<div class="alert alert-danger">Invalid username and password.</div>
 	</div>

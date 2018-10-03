@@ -6,14 +6,13 @@
 </head>
 <body>
 	<div th:replace="fragments/layout :: nav" />
-
 	<div class="container">
 		<!-- Content here -->
 		<div class="row justify-content-center">
 			<div class="col-8 ">
 				<div class="card bg-light mb-3">
 					<div class="card-body">
-                        <h5 class="card-body" th:text="${card.title}">Add Announcement</h5>
+                        <h5 class="card-body">Add Announcement</h5>
 						<form th:action="@{/teacher/addPost}" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Title"

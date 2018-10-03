@@ -8,7 +8,7 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="">  
+	<!-- <link rel="icon" href="">  -->
 
 	<title>Empower</title>
 
@@ -53,17 +53,17 @@
 						</div></li>
 				</ul>
                 <li class="nav-item active">
-          <a class="navbar-brand" href="#">
-    <img src="home.png" width="50" height="50" alt="">
+          <a class="navbar-brand" th:href="@{/}">
+    <img th:src="@{/img/home.png}" width="50" height="50" alt="">
   </a><span class="sr-only">(current)
       </li>
                  <li class="nav-item active">
         <a class="navbar-brand" href="#">
-    <img src="mailicon.png" width="50" height="50" alt=""></a>
+    <img th:src="@{/img/mailicon.png}" width="50" height="50" alt=""></a>
       </li>
                 <li class="nav-item active">
-         <a class="navbar-brand" href="#">
-    <img src="logout.png" width="35" height="35" alt=""></a>
+         <a class="navbar-brand" th:href="@{/logout}">
+    <img th:src="@{/img/logout.png}" width="35" height="35" alt=""></a>
     </li>
                 <li></li>
 				

@@ -9,10 +9,11 @@
 
 	<div class="container">
 		<!-- Content here -->
-		<div class="row">
-			<div class="col-8">
-				<div class="card">
+		<div class="row justify-content-center">
+			<div class="col-8 ">
+				<div class="card bg-light mb-3">
 					<div class="card-body">
+                        <h5 class="card-body" th:text="${card.title}">Add Announcement</h5>
 						<form th:action="@{/teacher/addPost}" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Title"
@@ -30,7 +31,7 @@
 				<br />
 				<hr>
 				<br />
-				<div class="card border-primary mb-3" th:each="card : ${cards}">
+				<div class="card border-0 mb-3" th:each="card : ${cards}">
 					<div class="card-body">
 						<h5 class="card-title" th:text="${card.title}">Card title</h5>
 						<h6 class="card-subtitle mb-2 text-muted"
@@ -39,26 +40,27 @@
 						<p class="card-text" th:text="${card.text}">Some quick example
 							text to build on the card title and make up the bulk of the
 							card's content.</p>
-						<a href="#" class="card-link">Link</a> <a href="#"
-							class="card-link">Another link</a>
+						
 						<!-- comments -->
-						<div class="card">
-							<form method="post" th:action="@{/teacher/addComment}">
-								<input type="text" class="form-group" name="text" />
-								<input type="hidden" name="user.id" th:value="${session.user_id}" />
-								<input type="hidden" name="card.id" th:value="${card.id}" />
-								<button type="submit" class="btn btn-primary mb-2">Add comment</button>
-							</form>
-						</div>
-						<div class="card" th:each="comment: ${card.comments}">
+                        <div class="card " th:each="comment: ${card.comments}">
 							<div class="card-body">
 								<p class="card-text">
 								<span th:text="${comment.user.name}"></span>
 								<span th:text="${comment.created}"></span>
-								<span th:text="${comment.text}">Some
-									comment...</span></p>
+								<span th:text="${comment.text}"><i>Some
+									comment...</i></span></p>
 							</div>
 						</div>
+                        <br>
+						<div class="card border-0  " >
+							<form method="post" th:action="@{/teacher/addComment}">
+								<input type="text" class="form-control" name="text" />
+								<input type="hidden" name="user.id" th:value="${session.user_id}" />
+								<input type="hidden" name="card.id" th:value="${card.id}" /><br>
+								<button type="submit" class="btn float-right btn-primary mb-2 ">Comment</button>
+							</form>
+						</div>
+
 						<!-- comments end -->
 					</div>
 				</div>
@@ -66,11 +68,11 @@
 
 
 			</div>
-			<div class="col-4">...</div>
+			
 		</div>
 
 	</div>
-
+    
 
 	<div th:replace="fragments/layout :: footer" />
 </body>

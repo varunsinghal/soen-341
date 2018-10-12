@@ -16,10 +16,7 @@ public class CardService {
 	private CardRepository cardRepository;
 	
 	public List<Card> fetchAll() {
-		List<Card> cards = new ArrayList<>();
-		for(Card card: cardRepository.findAll())
-			cards.add(card);
-		return cards;
+		return new ArrayList<>(cardRepository.findAllByOrderByIdDesc());
 	}
 	
 	public void add(Card card) {

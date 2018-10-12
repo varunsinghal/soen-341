@@ -13,7 +13,7 @@
 				<div class="card bg-light mb-3">
 					<div class="card-body">
                         <h5 class="card-body">Add Announcement</h5>
-						<form th:action="@{/teacher/addPost}" method="post">
+						<form th:action="@{/user/addPost}" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Title"
 									name="title">
@@ -52,7 +52,7 @@
 						</div>
                         <br>
 						<div class="card border-0  " >
-							<form method="post" th:action="@{/teacher/addComment}">
+							<form method="post" th:action="@{/user/addComment}">
 								<input type="text" class="form-control" name="text" />
 								<input type="hidden" name="user.id" th:value="${session.user_id}" />
 								<input type="hidden" name="card.id" th:value="${card.id}" /><br>

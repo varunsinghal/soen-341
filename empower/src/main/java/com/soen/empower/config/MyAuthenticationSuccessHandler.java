@@ -25,6 +25,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         User user = userService.findByName(authentication.getName());
         request.getSession().setAttribute("user_id", user.getId());
         request.getSession().setAttribute("name", user.getName());
+        request.getSession().setAttribute("full_name", user.getFullName());
+        request.getSession().setAttribute("description", user.getDescription());
 
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("ROLE_TEACHER".equals(auth.getAuthority()))

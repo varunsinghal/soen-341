@@ -38,11 +38,16 @@ public class UserController {
         return "redirect:/user/home";
     }
 
-    // TODO: post page
-
     @RequestMapping(value = "/addComment", method= RequestMethod.POST)
     public String addComment(@ModelAttribute Comment comment) {
         commentService.add(comment);
         return "redirect:/user/home";
+    }
+
+    @RequestMapping("/message")
+    public ModelAndView message(){
+        ModelAndView model = new ModelAndView("user/message");
+
+        return model;
     }
 }

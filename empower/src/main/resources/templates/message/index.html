@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: header"/>
+</head>
+<body>
+<div th:replace="fragments/layout :: nav"/>
+<link th:href="@{/css/message.css}" rel="stylesheet"/>
+<br>
+<br>
+<div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>Recent</h4>
+                    </div>
+                    <div class="srch_bar">
+                        <div class="stylish-input-group">
+                            <a th:href="@{/message/new}"><i class="fas fa-plus-circle"></i> new message</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    <div class="chat_list" th:each="conversation : ${conversations}"> <!-- active_chat -->
+                        <div class="chat_people">
+                            <div class="chat_img">
+                                <!--<img src=""> -->
+                            </div>
+                            <div class="chat_ib">
+                                <h5>
+                                    <a th:href="@{/message/} + ${conversation.id}">
+                                        <span th:text="${conversation.otherUser.name}"></span>
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                        <span th:text="${conversation.user.name}"></span>
+                                    </a>
+                                    <!--<span class="chat_date" th:text=""></span>-->
+                                </h5>
+                                <p><span>Last message activity: </span><span th:text="${conversation.updated}"></span></p>
+                            </div>
+                        </div>
+                    </div> <!-- .chat_list ends -->
+
+                </div>
+            </div>
+            <!-- -->
+            <div class="mesgs">
+                <div class="msg_history text-center">
+                    Send <a th:href="@{/message/new}"><i class="fas fa-plus-circle"></i> new message</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/layout :: footer"/>
+</body>
+</html>

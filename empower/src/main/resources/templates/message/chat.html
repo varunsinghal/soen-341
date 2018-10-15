@@ -49,7 +49,25 @@
             <!-- -->
             <div class="mesgs">
                 <div class="msg_history">
-                    
+                    <div th:each="message : ${messages}">
+
+                        <!-- incoming message -->
+                        <div class="incoming_msg" th:if="${message.from.id != session.user_id}">
+                            <div class="incoming_msg_img"> <!-- img --></div>
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p th:text="${message.text}"></p>
+                                    <span class="time_date" th:text="${message.created}"> </span></div>
+                            </div>
+                        </div>
+                        <!-- outgoing message -->
+                        <div class="outgoing_msg" th:if="${message.from.id == session.user_id}">
+                            <div class="sent_msg">
+                                <p th:text="${message.text}"></p>
+                                <span class="time_date"> </span></div>
+                        </div>
+                        <!-- -->
+                    </div>
                     <form th:action="@{/message/addNewMessage}" method="post">
                         <input type="hidden" name="user.id" th:value="${currentConversation.user.id}"/>
                         <input type="hidden" name="otherUser.id" th:value="${currentConversation.otherUser.id}"/>

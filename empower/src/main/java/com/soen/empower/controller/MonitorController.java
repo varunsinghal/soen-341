@@ -2,11 +2,10 @@ package com.soen.empower.controller;
 
 import java.util.List;
 
+import com.soen.empower.entity.Message;
+import com.soen.empower.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.soen.empower.entity.Card;
 import com.soen.empower.entity.Teacher;
@@ -27,6 +26,9 @@ public class MonitorController {
 	
 	@Autowired
 	private CardService cardService;
+
+	@Autowired
+	private MessageService messageService;
 	
 	// --------------------------------------------------------------------------------
 	
@@ -69,4 +71,9 @@ public class MonitorController {
 	}
 	
 	// --------------------------------------------------------------------------------
+
+	@RequestMapping("/messages")
+	public List<Message> allMessages(@RequestParam(value="id") int conId){
+		return messageService.fetch((long) conId);
+	}
 }	

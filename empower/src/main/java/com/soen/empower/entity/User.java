@@ -31,6 +31,9 @@ public class User {
 	
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private List<Conversation> conversations;
 	
 	@OneToOne
 	@JoinColumn(name="teacher_id")
@@ -145,4 +148,12 @@ public class User {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+    public List<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(List<Conversation> conversations) {
+        this.conversations = conversations;
+    }
 }

@@ -14,7 +14,7 @@ public class ConversationService {
     private ConversationRepository conversationRepository;
 
     public List<Conversation> fetchAll(Long currentUserId) {
-        return conversationRepository.findAllByUserIdOrOtherUserId(currentUserId, currentUserId);
+        return conversationRepository.findAllByUserIdOrOtherUserIdOrderByUpdatedDesc(currentUserId, currentUserId);
     }
 
     public Conversation resolve(Conversation conversation) {

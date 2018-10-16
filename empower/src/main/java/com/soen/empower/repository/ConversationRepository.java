@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ConversationRepository extends CrudRepository<Conversation, String> {
 
-    List<Conversation> findAllByUserIdOrOtherUserId(Long currentUserId, Long otherUserId);
+    List<Conversation> findAllByUserIdOrOtherUserIdOrderByUpdatedDesc(Long currentUserId, Long otherUserId);
 
     Conversation findByUserIdAndOtherUserId(Long userId, Long otherUserId);
 

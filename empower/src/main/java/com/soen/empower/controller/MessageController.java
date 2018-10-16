@@ -43,6 +43,19 @@ public class MessageController {
         return model;
     }
 
-  
+    @RequestMapping("/new")
+    public ModelAndView newMessage(HttpSession session, @ModelAttribute Message message) {
+        return new ModelAndView("message/new");
+    }
+
+    @RequestMapping(value = "/addNewMessage", method = RequestMethod.POST)
+    public String addNewMessage(HttpSession session, @ModelAttribute Message message, @ModelAttribute Conversation conversation) {
+        Conversation resolvedConversation = conversationService.resolve(conversation);
+        message.setConversation(resolvedConversation);
+        Message savedMessage = messageService.add(message);
+        resolvedConversation.setLastMessageId(savedMessage.getId());
+        conversationService.update(resolvedConversation);
+        return "redirect:/message/" + resolvedConversation.getId();
+    }
 
 }

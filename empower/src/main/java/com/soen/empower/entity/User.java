@@ -1,153 +1,146 @@
 package com.soen.empower.entity;
 
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
-	private String username;
-	private String password;
-	private int enabled = 1;
-	private String name;
-	private String fullName;
-	private String description;
-	
-	private String role;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Card> cards;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Comment> comments;
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
+    private String password;
+    private int enabled = 1;
+    private String name;
+    private String fullName;
+    private String description;
+
+    private String role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Card> cards;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "user")
     private List<Conversation> conversations;
-	
-	@OneToOne
-	@JoinColumn(name="teacher_id")
-	private Teacher teacher;
-	
-	@OneToOne
-	@JoinColumn(name="parent_id")
-	private Parent parent;
-	
-	public List<Card> getCards() {
-		return cards;
-	}
 
-	public void setCards(List<Card> cards) {
-		this.cards = cards;
-	}
+    @OneToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+    @OneToOne
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    public List<Card> getCards() {
+        return cards;
+    }
 
-	public User(){
-	}
-	
-	public User(Long id, String username, String password, String role) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.setRole(role);
-	}
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public User() {
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public User(Long id, String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.setRole(role);
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public int getEnabled() {
-		return enabled;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
+    public int getEnabled() {
+        return enabled;
+    }
 
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
 
-	public Parent getParent() {
-		return parent;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setParent(Parent parent) {
-		this.parent = parent;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Teacher getTeacher() {
+        return teacher;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
-	public String getFullName() {
-		return fullName;
-	}
+    public Parent getParent() {
+        return parent;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public List<Conversation> getConversations() {
         return conversations;

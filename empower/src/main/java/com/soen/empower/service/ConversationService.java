@@ -18,8 +18,10 @@ public class ConversationService {
     }
 
     public Conversation resolve(Conversation conversation) {
-        Conversation resolvedConversation = conversationRepository.findByUserIdAndOtherUserId(conversation.getUser().getId(), conversation.getOtherUser().getId());
-        if (resolvedConversation == null) resolvedConversation = conversationRepository.findByUserIdAndOtherUserId(conversation.getOtherUser().getId(), conversation.getUser().getId());
+        Conversation resolvedConversation = conversationRepository.findByUserIdAndOtherUserId(
+                conversation.getUser().getId(), conversation.getOtherUser().getId());
+        if (resolvedConversation == null) resolvedConversation = conversationRepository.findByUserIdAndOtherUserId(
+                conversation.getOtherUser().getId(), conversation.getUser().getId());
         if(resolvedConversation == null) resolvedConversation = conversationRepository.save(conversation);
         return resolvedConversation;
     }

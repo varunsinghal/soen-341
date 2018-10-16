@@ -32,22 +32,16 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value="/addPost", method=RequestMethod.POST)
+    @RequestMapping(value = "/addPost", method = RequestMethod.POST)
     public String addPost(@ModelAttribute Card card) {
         cardService.add(card);
         return "redirect:/user/home";
     }
 
-    @RequestMapping(value = "/addComment", method= RequestMethod.POST)
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(@ModelAttribute Comment comment) {
         commentService.add(comment);
         return "redirect:/user/home";
     }
 
-    @RequestMapping("/message")
-    public ModelAndView message(){
-        ModelAndView model = new ModelAndView("user/message");
-
-        return model;
-    }
 }

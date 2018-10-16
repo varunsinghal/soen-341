@@ -5,6 +5,7 @@ import com.soen.empower.entity.Conversation;
 import com.soen.empower.entity.Message;
 import com.soen.empower.service.ConversationService;
 import com.soen.empower.service.MessageService;
+import com.soen.empower.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,9 @@ public class MessageController {
 
     @Autowired
     private ConversationService conversationService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("")
     public ModelAndView index(HttpSession session) {

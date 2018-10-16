@@ -54,9 +54,9 @@
                         </div>
                         <div class="btn-toolbar justify-content-between">
                             <input type="hidden" name="user.id" th:value="${session.user_id}"/>
-                            <input type="hidden" name="otherUser.id" value=""/>
+                            <input type="hidden" name="otherUser.id" id="otherUserid" value=""/>
                             <input type="hidden" name="from.id" th:value="${session.user_id}"/>
-                            <input type="hidden" name="to.id" value=""/>
+                            <input type="hidden" name="to.id" id="toid" value=""/>
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </div>
@@ -71,10 +71,31 @@
     </div>
 </div>
 
+
+<div th:replace="fragments/layout :: footer"/>
 <script>
+$( function() {
+		$( "#username" ).autocomplete({
+			source: [{value:1, label: "a"}, {value:2, label: "b"}, {value:3, label: "c"}, {value:4, label: "d"}],
+			select: function( event, ui ) {
+			    console.log(ui);
+				$("#username").val( ui.item.label );
+				$("#otherUserid").val( ui.item.value);
+				$("#toid").val(ui.item.value);
+				return false;
+			},
+			change: function (event, ui) {
+				if(!ui.item){
+					$("#username").val("");
+					$("#otherUserid").val("");
+					$("#toid").val("");
+				}
+			}
+		});
+	} );
+
 
 </script>
 
-<div th:replace="fragments/layout :: footer"/>
 </body>
 </html>

@@ -13,21 +13,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="h5" th:text="${session.name}">Username</div>
-                    <div class="h7 text-muted">Fullname : <span th:text="${session.full_name}"></span></div>
-                    <div class="h7" th:text="${session.description}">
+                    <div class="h7 text-muted">
+                        <a th:href="@{/user/profile/}"><i class="fas fa-external-link-alt"></i> View profile</a>
                     </div>
                 </div>
-                <!--<ul class="list-group list-group-flush">-->
-                <!--<li class="list-group-item">-->
-                <!--<div class="h6 text-muted">Followers</div>-->
-                <!--<div class="h5">5.2342</div>-->
-                <!--</li>-->
-                <!--<li class="list-group-item">-->
-                <!--<div class="h6 text-muted">Following</div>-->
-                <!--<div class="h5">6758</div>-->
-                <!--</li>-->
-                <!--<li class="list-group-item">Vestibulum at eros</li>-->
-                <!--</ul>-->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Fullname</div>
+                        <div class="h6" th:text="${session.full_name}"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Description</div>
+                        <div class="h6" th:text="${session.description}"></div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-md-6 gedf-main">
@@ -107,11 +106,14 @@
                                 <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                             </div>
                             <div class="ml-2">
-                                <div class="h5 m-0" th:text="${card.user.name}"></div>
+                                <div class="h5 m-0" th:text="${card.user.username}"></div>
                                 <div class="h7 text-muted" th:text="${card.user.fullName}"></div>
                                 <div class="text-muted h7 mb-4"><i class="far fa-clock"></i> <span
                                         th:text="${card.created}"></span>
                                 </div>
+                                <a th:href="@{/user/profile/} + ${card.user.id}">
+                                    <div class="h7 text-muted">View profile</div>
+                                </a>
                             </div>
                         </div>
                         <div>
@@ -145,7 +147,9 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:each="comment: ${card.comments}">
-                        <a th:href="@{/user/profile}"><span th:text="${comment.user.name}"></span></a> :
+                        <a th:href="@{/user/profile/} + ${comment.user.id}"><span
+                                th:text="${comment.user.username}"></span></a>
+                        :
                         <span th:text="${comment.text}"><i>Some comment...</i></span>
                         <span th:text="${comment.created}" style="float:right"></span>
                     </li>
@@ -167,24 +171,25 @@
         <div class="col-md-3">
             <div class="card gedf-card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">News by developer !!! </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Follow this space for upcoming news</h6>
+                    <p class="card-text">Sprint 3 Features have been implemented which include messaging and user
+                        profile.</p>
+                    <a href="https://github.com/varunsinghal/soen-341" class="card-link" target="_blank">Source code</a>
+                    <a href="https://github.com/varunsinghal/soen-341/issues" class="card-link" target="_blank">Raise
+                        issue</a>
                 </div>
             </div>
-            <div class="card gedf-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
+            <!--<div class="card gedf-card">-->
+            <!--<div class="card-body">-->
+            <!--<h5 class="card-title">Card title</h5>-->
+            <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+            <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the-->
+            <!--card's content.</p>-->
+            <!--<a href="#" class="card-link">Card link</a>-->
+            <!--<a href="#" class="card-link">Another link</a>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </div>

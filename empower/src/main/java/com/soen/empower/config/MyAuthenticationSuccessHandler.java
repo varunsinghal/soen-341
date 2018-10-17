@@ -24,7 +24,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
         User user = userService.findByName(authentication.getName());
         request.getSession().setAttribute("user_id", user.getId());
-        request.getSession().setAttribute("name", user.getName());
+        request.getSession().setAttribute("name", user.getUsername());
         request.getSession().setAttribute("full_name", user.getFullName());
         request.getSession().setAttribute("description", user.getDescription());
 

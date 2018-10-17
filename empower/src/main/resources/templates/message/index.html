@@ -33,9 +33,9 @@
                             <div class="chat_ib">
                                 <h5>
                                     <a th:href="@{/message/} + ${conversation.id}">
-                                        <span th:text="${conversation.otherUser.name}"></span>
+                                        <span th:text="${conversation.otherUser.fullName}"></span>
                                         <i class="fas fa-arrows-alt-h"></i>
-                                        <span th:text="${conversation.user.name}"></span>
+                                        <span th:text="${conversation.user.fullName}"></span>
                                     </a>
                                     <!--<span class="chat_date" th:text=""></span>-->
                                 </h5>

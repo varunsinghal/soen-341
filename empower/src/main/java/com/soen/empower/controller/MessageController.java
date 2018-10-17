@@ -16,19 +16,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * The Class MessageController.
+ */
 @Controller
 @RequestMapping("/message")
 public class MessageController {
 
+    /** The message service. */
     @Autowired
     private MessageService messageService;
 
+    /** The conversation service. */
     @Autowired
     private ConversationService conversationService;
 
+    /** The user service. */
     @Autowired
     private UserService userService;
 
+    /**
+     * Index.
+     *
+     * @param session the session
+     * @return the model and view
+     */
     @RequestMapping("")
     public ModelAndView index(HttpSession session) {
         ModelAndView model = new ModelAndView("message/index");
@@ -37,6 +49,13 @@ public class MessageController {
         return model;
     }
 
+    /**
+     * Index.
+     *
+     * @param session the session
+     * @param conversationId the conversation id
+     * @return the model and view
+     */
     @RequestMapping("/{id}")
     public ModelAndView index(HttpSession session, @PathVariable(value = "id") String conversationId) {
         ModelAndView model = new ModelAndView("message/chat");
@@ -47,11 +66,26 @@ public class MessageController {
         return model;
     }
 
+    /**
+     * New message.
+     *
+     * @param session the session
+     * @param message the message
+     * @return the model and view
+     */
     @RequestMapping("/new")
     public ModelAndView newMessage(HttpSession session, @ModelAttribute Message message) {
         return new ModelAndView("message/new");
     }
 
+    /**
+     * Adds the new message.
+     *
+     * @param session the session
+     * @param message the message
+     * @param conversation the conversation
+     * @return the string
+     */
     @RequestMapping(value = "/addNewMessage", method = RequestMethod.POST)
     public String addNewMessage(HttpSession session, @ModelAttribute Message message, @ModelAttribute Conversation conversation) {
         Conversation resolvedConversation = conversationService.resolve(conversation);

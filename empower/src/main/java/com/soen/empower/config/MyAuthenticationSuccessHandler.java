@@ -13,11 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The Class MyAuthenticationSuccessHandler.
+ */
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+    
+    /** The user service. */
     @Autowired
     private UserService userService;
 
+    /*
+     * @see org.springframework.security.web.authentication.AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.Authentication)
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {

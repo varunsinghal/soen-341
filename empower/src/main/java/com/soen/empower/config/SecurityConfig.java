@@ -10,16 +10,28 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ * The Class SecurityConfig.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    
+    /** The data source. */
     @Autowired
     private DataSource dataSource;
 
 
+    /** The my authentication success handler. */
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
+    /**
+     * Configure global.
+     *
+     * @param auth the auth
+     * @throws Exception the exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // Roles - Teacher and Parent
@@ -30,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select username, role from users where username=?");
     }
 
-    //Authorization
+        //Authorization
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

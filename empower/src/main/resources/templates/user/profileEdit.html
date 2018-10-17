@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: header"/>
+</head>
+<body>
+<div th:replace="fragments/layout :: nav"/>
+
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+
+        <div class="col-md-6 gedf-main">
+            <form method="post" th:action="@{/user/save}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h5" th:text="${user.username}"></div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h7 text-muted">Fullname</div>
+                            <input type="text" class="form-control" name="fullName" th:value="${user.fullName}">
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h7 text-muted">Email</div>
+                            <input type="text" class="form-control" name="email" th:value="${user.email}">
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h7 text-muted">Date of birth</div>
+                            <input type="text" class="form-control" name="dob" th:value="${user.dob}">
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h7 text-muted">Description</div>
+                            <textarea name="description" class="form-control" rows="3"
+                                      th:text="${user.description}"></textarea>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h7 text-muted">Role</div>
+                            <div class="h6" th:text="${user.role}"></div>
+                        </li>
+                        <li class="list-group-item">
+                            <input type="hidden" name="id" th:value="${user.id}">
+                            <input type="hidden" name="username" th:value="${user.username}">
+                            <input type="hidden" name="password" th:value="${user.password}">
+                            <input type="hidden" name="role" th:value="${user.role}">
+                            <div th:if="${user.role} == 'ROLE_TEACHER'">
+                                <input type="hidden" name="teacher.id" th:value="${user.teacher.id}">
+                            </div>
+                            <div th:if="${user.role} == 'ROLE_PARENT'">
+                                <input type="hidden" name="parent.id" th:value="${user.parent.id}">
+                            </div>
+                            <input type="submit" name="submit" class="btn btn-success" value="Update profile">
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/layout :: footer"/>
+
+
+</body>
+</html>

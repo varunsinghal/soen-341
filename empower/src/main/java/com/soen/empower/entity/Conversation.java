@@ -43,6 +43,13 @@ public class Conversation {
 
     }
 
+    public Conversation(Long id, User user, User otherUser, Long lastMessageId) {
+        this.id = id;
+        this.user = user;
+        this.otherUser = otherUser;
+        this.lastMessageId = lastMessageId;
+    }
+
     /**
      * Gets the id.
      *

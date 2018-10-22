@@ -35,6 +35,18 @@ public class Message {
     @JoinColumn(name="conversation_id")
     private Conversation conversation;
 
+    public Message(){
+
+    }
+
+    public Message(Long id, String text, User to, User from, Conversation conversation) {
+        this.id = id;
+        this.text = text;
+        this.to = to;
+        this.from = from;
+        this.conversation = conversation;
+    }
+
     /**
      * Gets the id.
      *

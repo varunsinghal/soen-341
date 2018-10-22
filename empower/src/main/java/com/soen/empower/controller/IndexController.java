@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author Varun Singhal
  * @version 1.0
- * @see LoginController
  * @since 1.0
  */
 @Controller

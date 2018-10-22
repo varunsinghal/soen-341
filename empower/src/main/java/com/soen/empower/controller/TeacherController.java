@@ -4,28 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * The Class TeacherController.
+ * Placeholder for teacher specific URLs.
+ *
+ * @author Varun Singhal
+ * @version 1.0
+ * @since 1.0
  */
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
 
-//	@RequestMapping("/all")
-//	public List<Teacher> fetchAll(){
-//		Authentication auth2 = SecurityContextHolder.getContext().getAuthentication();
-//		System.out.println(auth2.getName());
-//		System.out.println(auth2.getAuthorities());
-//		return teacherService.findAll();
-//	}
-//	
-//	@RequestMapping(value="/add", method=RequestMethod.POST)
-//	public String addTeacher(@ModelAttribute Teacher teacher) {
-//		teacherService.add(teacher);
-//		return "Added successfully";
-//	}
-//	
-//	@RequestMapping(value="/{id}")
-//	public List<Course> fetchCourses( @PathVariable Long id) {
-//		return teacherService.findCoursesByTeacherId(id);
-//	}
 }

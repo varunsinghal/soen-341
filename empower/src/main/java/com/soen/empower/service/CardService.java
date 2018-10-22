@@ -10,7 +10,7 @@ import com.soen.empower.entity.Card;
 import com.soen.empower.repository.CardRepository;
 
 /**
- * The Class CardService.
+ *
  */
 @Service
 public class CardService {

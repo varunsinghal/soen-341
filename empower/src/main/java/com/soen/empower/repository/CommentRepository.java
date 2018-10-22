@@ -1,12 +1,9 @@
 package com.soen.empower.repository;
 
+import com.soen.empower.entity.Comment;
 import org.springframework.data.repository.CrudRepository;
 
-import com.soen.empower.entity.Comment;
 
-/**
- * The Interface CommentRepository.
- */
-public interface CommentRepository extends CrudRepository<Comment, String>{
+public interface CommentRepository extends CrudRepository<Comment, String> {
 
 }

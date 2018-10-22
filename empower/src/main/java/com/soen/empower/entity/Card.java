@@ -56,6 +56,13 @@ public class Card {
 		
 	}
 
+	public Card(Long id, String title, String text, User user) {
+		this.id = id;
+		this.title = title;
+		this.text = text;
+		this.user = user;
+	}
+
 	/**
 	 * Gets the id.
 	 *

@@ -52,6 +52,13 @@ public class Comment {
 		
 	}
 
+	public Comment(Long id, String text, User user, Card card) {
+		this.id = id;
+		this.text = text;
+		this.user = user;
+		this.card = card;
+	}
+
 	/**
 	 * Gets the id.
 	 *

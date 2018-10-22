@@ -29,6 +29,10 @@ public class Parent {
 		
 	}
 
+	public Parent(Long id) {
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

@@ -137,12 +137,11 @@ public class UserController {
     /**
      * saveProfile method on POST request uses the userService to update the user profile.
      *
-     * @param session the session attribute to identify the logged in user
      * @param user    the mapped data structure to the entity user.
      * @return redirect the user to their profile user/profile.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProfile(HttpSession session, @ModelAttribute User user) {
+    public String saveProfile(@ModelAttribute User user) {
         userService.save(user);
         return "redirect:/user/profile";
     }

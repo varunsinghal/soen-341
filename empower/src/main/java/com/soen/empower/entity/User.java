@@ -111,11 +111,13 @@ public class User {
      * @param password the password
      * @param role the role
      */
-    public User(Long id, String username, String password, String role) {
+    public User(Long id, String username, String password, String role, Teacher teacher, Parent parent) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.setRole(role);
+        this.parent = parent;
+        this.teacher = teacher;
     }
 
     /**

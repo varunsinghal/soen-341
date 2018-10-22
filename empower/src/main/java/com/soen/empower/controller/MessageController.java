@@ -69,25 +69,23 @@ public class MessageController {
     /**
      * New message.
      *
-     * @param session the session
      * @param message the message
      * @return the model and view
      */
     @RequestMapping("/new")
-    public ModelAndView newMessage(HttpSession session, @ModelAttribute Message message) {
+    public ModelAndView newMessage(@ModelAttribute Message message) {
         return new ModelAndView("message/new");
     }
 
     /**
      * Adds the new message.
      *
-     * @param session the session
      * @param message the message
      * @param conversation the conversation
      * @return the string
      */
     @RequestMapping(value = "/addNewMessage", method = RequestMethod.POST)
-    public String addNewMessage(HttpSession session, @ModelAttribute Message message, @ModelAttribute Conversation conversation) {
+    public String addNewMessage(@ModelAttribute Message message, @ModelAttribute Conversation conversation) {
         Conversation resolvedConversation = conversationService.resolve(conversation);
         message.setConversation(resolvedConversation);
         Message savedMessage = messageService.add(message);

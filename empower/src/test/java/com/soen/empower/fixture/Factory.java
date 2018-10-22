@@ -2,6 +2,8 @@ package com.soen.empower.fixture;
 
 import com.soen.empower.entity.*;
 
+import java.util.List;
+
 public class Factory {
     public static Teacher teacher1 = new Teacher((long) 1);
     public static Parent parent1 = new Parent((long) 1);
@@ -12,4 +14,7 @@ public class Factory {
     public static Comment comment1 = new Comment((long) 1, "comment 1", user1, card1);
 
 
+    public static Conversation conversation1 = new Conversation((long) 1, user1, user2, (long) 2);
+    public static Message message1 = new Message((long) 1, "new message", user2, user1, conversation1);
+    public static Message message2 = new Message((long) 2, "new message 2", user1, user2, conversation1);
 }

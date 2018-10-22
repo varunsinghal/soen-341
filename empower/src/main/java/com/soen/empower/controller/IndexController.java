@@ -25,6 +25,14 @@ public class IndexController {
         return "redirect:/login";
     }
 
-
+    /**
+     * Access to the url localhost:port/login to enable public user to login the system.
+     *
+     * @return the view with name login
+     */
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 }

@@ -1,2 +1,8 @@
 language: java
 jdk: oraclejdk8
+
+before_script: cd empower
+
+install: true
+script: mvn install
+

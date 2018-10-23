@@ -1,6 +1,8 @@
 language: java
 jdk: oraclejdk8
 
+before_intall: cd empower
+
 install: true
 script: mvn install
 

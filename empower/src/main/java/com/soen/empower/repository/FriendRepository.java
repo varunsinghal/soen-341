@@ -9,4 +9,6 @@ public interface FriendRepository extends CrudRepository<Friend, String> {
     Friend findByUserIdAndOtherUserIdOrUserIdAndOtherUserIdAndEnabled(Long userId, Long otherUserId, Long userId1, Long otherUserId1, int enabled);
 
     List<Friend> findAllByUserIdAndEnabled(long userId, int enabled);
+
+    List<Friend> findAllByOtherUserIdAndEnabled(long userId, int enabled);
 }

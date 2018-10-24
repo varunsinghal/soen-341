@@ -5,6 +5,7 @@ import com.soen.empower.entity.Comment;
 import com.soen.empower.entity.User;
 import com.soen.empower.service.CardService;
 import com.soen.empower.service.CommentService;
+import com.soen.empower.service.FriendService;
 import com.soen.empower.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,9 @@ public class UserController {
      */
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FriendService friendService;
 
     /**
      * Default method when controller is triggered via http://localhost:port/user/.
@@ -113,8 +117,10 @@ public class UserController {
      * @return the view named user/profile.
      */
     @RequestMapping("/profile/{id}")
-    public ModelAndView viewOtherProfile(@PathVariable(value = "id") Long id) {
+    public ModelAndView viewOtherProfile(HttpSession session, @PathVariable(value = "id") Long id) {
         ModelAndView model = new ModelAndView("user/profile");
+        Long userId = (Long) session.getAttribute("user_id");
+        model.addObject("friendStatus", friendService.areFriends(userId, id));
         model.addObject("user", userService.findById(id));
         return model;
     }

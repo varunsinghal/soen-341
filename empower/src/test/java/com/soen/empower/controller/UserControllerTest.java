@@ -3,6 +3,7 @@ package com.soen.empower.controller;
 import com.soen.empower.fixture.Factory;
 import com.soen.empower.service.CardService;
 import com.soen.empower.service.CommentService;
+import com.soen.empower.service.FriendService;
 import com.soen.empower.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,9 @@ public class UserControllerTest {
 
     @MockBean
     private CommentService commentService;
+
+    @MockBean
+    private FriendService friendService;
 
     @Test
     public void getIndex_ReturnsRedirectURL() throws Exception {
@@ -72,9 +76,10 @@ public class UserControllerTest {
 
     @Test
     public void viewOtherProfile_ReturnsProfilePage() throws Exception {
-        when(userService.findById((long) 1)).thenReturn(Factory.user1);
+        when(userService.findById((long) 2)).thenReturn(Factory.user2);
+        when(friendService.areFriends((long) 1, (long) 2)).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/profile/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/profile/2").sessionAttr("user_id", (long) 1))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("user/profile"));
     }

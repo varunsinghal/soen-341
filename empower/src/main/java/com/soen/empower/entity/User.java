@@ -1,13 +1,11 @@
 package com.soen.empower.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
  * Entity class which depict the attributes of user.
  *
- * @author Kishor Tare, Varun Singhal
  * @version 1.3
  * @since 1.0
  */
@@ -28,14 +26,14 @@ public class User {
     private String dob;
     private String role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Card> cards;
-
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "user")
-    private List<Conversation> conversations;
+//    @OneToMany(mappedBy = "user")
+//    private List<Card> cards;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Comment> comments;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Conversation> conversations;
 
     @OneToOne
     @JoinColumn(name = "teacher_id")
@@ -44,6 +42,9 @@ public class User {
     @OneToOne
     @JoinColumn(name = "parent_id")
     private Parent parent;
+
+//    @OneToMany(mappedBy = "user")
+//    private List<Friend> friends;
 
     public User() {
     }
@@ -57,21 +58,21 @@ public class User {
         this.teacher = teacher;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Card> getCards() {
+//        return cards;
+//    }
+//
+//    public void setCards(List<Card> cards) {
+//        this.cards = cards;
+//    }
+//
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
     public Long getId() {
         return id;
@@ -145,13 +146,13 @@ public class User {
         this.description = description;
     }
 
-    public List<Conversation> getConversations() {
-        return conversations;
-    }
-
-    public void setConversations(List<Conversation> conversations) {
-        this.conversations = conversations;
-    }
+//    public List<Conversation> getConversations() {
+//        return conversations;
+//    }
+//
+//    public void setConversations(List<Conversation> conversations) {
+//        this.conversations = conversations;
+//    }
 
     public String getEmail() {
         return email;
@@ -168,4 +169,12 @@ public class User {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+//    public List<Friend> getFriends() {
+//        return friends;
+//    }
+//
+//    public void setFriends(List<Friend> friends) {
+//        this.friends = friends;
+//    }
 }

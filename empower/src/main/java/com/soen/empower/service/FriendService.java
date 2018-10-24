@@ -15,4 +15,9 @@ public class FriendService {
         Friend record = friendRepository.findByUserIdAndOtherUserIdOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, otherUserId, userId, 1);
         return record != null;
     }
+
+    public void addRequest(Friend friend) {
+        friend.setEnabled(0);
+        friendRepository.save(friend);
+    }
 }

@@ -5,6 +5,8 @@ import com.soen.empower.repository.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FriendService {
 
@@ -19,5 +21,9 @@ public class FriendService {
     public void addRequest(Friend friend) {
         friend.setEnabled(0);
         friendRepository.save(friend);
+    }
+
+    public List<Friend> viewRequests(long userId) {
+        return friendRepository.findAllByUserIdAndEnabled(userId, 0);
     }
 }

@@ -70,4 +70,8 @@ public class UserService {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    public List<User> findByPartialName(String search) {
+        return null;
+    }
 }

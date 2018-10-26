@@ -10,24 +10,20 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h5" th:text="${session.name}">Username</div>
-                    <div class="h7 text-muted">
-                        <a th:href="@{/user/profile/}"><i class="fas fa-external-link-alt"></i> View profile</a>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="h7 text-muted">Fullname</div>
-                        <div class="h6" th:text="${session.full_name}"></div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="h7 text-muted">Description</div>
-                        <div class="h6" th:text="${session.description}"></div>
-                    </li>
-                </ul>
-            </div>
+            <!--<div class="card">-->
+            <!--<div class="card-body">-->
+            <!--<div class="h5" th:text="${session.name}">Username</div>-->
+            <!--<div class="h7 text-muted">-->
+            <!--<a th:href="@{/user/profile/}"><i class="fas fa-external-link-alt"></i> View profile</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<ul class="list-group list-group-flush">-->
+            <!--<li class="list-group-item">-->
+            <!--<div class="h7 text-muted">Fullname</div>-->
+            <!--<div class="h6" th:text="${session.full_name}"></div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
         </div>
         <div class="col-md-6 gedf-main">
 
@@ -41,9 +37,10 @@
                                 announcement</a>
                         </li>
                         <!-- TODO: Image upload -->
-                        <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Images</a>-->
-                        <!--</li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                               aria-selected="false" href="#images">Images</a>
+                        </li>
                     </ul>
                 </div>
                 <form th:action="@{/user/addPost}" method="post">

@@ -72,6 +72,6 @@ public class UserService {
     }
 
     public List<User> findByPartialName(String search) {
-        return null;
+        return userRepository.findByFullNameContaining(search);
     }
 }

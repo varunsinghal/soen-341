@@ -21,7 +21,26 @@ public class FriendController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@ModelAttribute Friend friend) {
         friendService.addRequest(friend);
-        return "redirect:/friend/sent";
+        return "redirect:/user/profile/" + friend.getOtherUser().getId();
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String removeFriend(@ModelAttribute Friend friend) {
+        friendService.decline(friend);
+        return "redirect:/user/profile/" + friend.getOtherUser().getId();
+    }
+
+
+    @RequestMapping("/accept")
+    public String acceptRequests(@ModelAttribute Friend friend) {
+        friendService.accept(friend);
+        return "redirect:/friend/received";
+    }
+
+    @RequestMapping("/decline")
+    public String declineRequests(@ModelAttribute Friend friend) {
+        friendService.decline(friend);
+        return "redirect:/friend/received";
     }
 
     @RequestMapping("/sent")
@@ -38,18 +57,6 @@ public class FriendController {
         ModelAndView model = new ModelAndView("friend/received");
         model.addObject("received", friendService.viewReceivedRequests(userId));
         return model;
-    }
-
-    @RequestMapping("/accept")
-    public String acceptRequests(@ModelAttribute Friend friend) {
-        friendService.accept(friend);
-        return "redirect:/friend/received";
-    }
-
-    @RequestMapping("/decline")
-    public String declineRequests(@ModelAttribute Friend friend) {
-        friendService.decline(friend);
-        return "redirect:/friend/received";
     }
 
 }

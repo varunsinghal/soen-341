@@ -4,5 +4,5 @@ jdk: oraclejdk8
 before_script: cd empower
 
 install: true
-script: mvn install
+script: mvn test
 

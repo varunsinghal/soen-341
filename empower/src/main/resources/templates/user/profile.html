@@ -38,11 +38,25 @@
                         <div class="h7 text-muted">Role</div>
                         <div class="h6" th:text="${user.role}"></div>
                     </li>
-                    <li class="list-group-item" th:if="${session.user_id} == ${user.id}">
-                        <a th:href="@{/user/edit/}"><i class="fas fa-edit"></i> Edit profile</a>
-                    </li>
                 </ul>
             </div>
+        </div> <!-- .col md 6 -->
+        <div class="col-md-3 text-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" height="200px">
+            <ul class="nav flex-column">
+                <li class="nav-item" th:if="${session.user_id} == ${user.id}">
+                    <a class="nav-link" th:href="@{/user/edit/}"><i class="fas fa-edit"></i> Edit profile</a>
+                </li>
+                <li class="nav-item" th:if="${session.user_id} != ${user.id} and ${friendStatus} == true">
+                    <a class="nav-link" th:href="@{/wall/} + ${user.id}"><i class="fas fa-comment-alt"></i> Visit the wall</a>
+                </li>
+                <li class="nav-item" th:if="${session.user_id} != ${user.id} and ${friendStatus} == true">
+                    <a class="nav-link" href="#" id="removeFriend"><i class="fas fa-user-minus"></i> Remove friend</a>
+                </li>
+                <li class="nav-item" th:if="${session.user_id} != ${user.id} and ${friendStatus} == false">
+                    <a class="nav-link" href="#" id="addFriend"><i class="fas fa-user-plus"></i> Add Friend</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

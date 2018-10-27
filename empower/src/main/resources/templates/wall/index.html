@@ -45,7 +45,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="posts" role="tabpanel"
                              aria-labelledby="posts-tab">
-                            <form th:action="@{/user/addPost}" method="post">
+                            <form th:action="@{/wall/addPost} + '/' + ${owner.id}" method="post">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
                                     <input class="form-control" placeholder="Title"
@@ -144,14 +144,14 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:each="comment: ${card.comments}">
                         <a th:href="@{/user/profile/} + ${comment.user.id}"><span
-                                th:text="${comment.user.username}"></span></a>
+                                th:text="${comment.user.fullName}"></span></a>
                         :
                         <span th:text="${comment.text}"><i>Some comment...</i></span>
                         <span th:text="${comment.created}" style="float:right"></span>
                     </li>
                 </ul>
                 <div class="card-body">
-                    <form method="post" th:action="@{/user/addComment}" class="form-inline">
+                    <form method="post" th:action="@{/wall/addComment} + '/' + ${owner.id}" class="form-inline">
                         <div class="input-group col-10" style="padding-left:0px">
                             <input type="text" class="form-control" name="text" placeholder="Comment..."/>
                             <input type="hidden" name="user.id" th:value="${session.user_id}"/>

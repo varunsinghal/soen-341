@@ -19,7 +19,7 @@ public class Friend {
 
     private int enabled = 0;
 
-    Friend(){
+    public Friend(){
     }
 
     public Long getId() {

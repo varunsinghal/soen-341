@@ -10,5 +10,5 @@ public interface CardRepository extends CrudRepository<Card, String> {
 
     List<Card> findAllByOrderByIdDesc();
 
-    List<Card> findByBelongsToId(long userId);
+    List<Card> findByBelongsToIdOrderByIdDesc(long userId);
 }

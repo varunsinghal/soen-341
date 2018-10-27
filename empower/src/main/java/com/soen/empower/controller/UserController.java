@@ -69,31 +69,6 @@ public class UserController {
     }
 
     /**
-     * addPost method receives POST request to save feed post.
-     *
-     * @param card mapped data structure to entity with name card.
-     * @return redirect the request to home.
-     */
-    @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost(@ModelAttribute Card card) {
-        cardService.add(card);
-        return "redirect:/user/home";
-    }
-
-    /**
-     * addComment method receives POST request to save comment to the given feed post.
-     *
-     * @param comment mapped data structure to entity named comment.
-     * @return redirect the request to home.
-     */
-    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
-    public String addComment(@ModelAttribute Comment comment) {
-        commentService.add(comment);
-        return "redirect:/user/home";
-    }
-
-
-    /**
      * ViewProfile method on GET request delivers the view with name user/profile.
      *
      * @param session the session attribute to identify the logged in user.

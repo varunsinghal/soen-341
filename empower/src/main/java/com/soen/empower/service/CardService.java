@@ -39,6 +39,6 @@ public class CardService {
 
 
 	public List<Card> fetchCardsFor(long userId) {
-		return cardRepository.findByBelongsToId(userId);
+		return cardRepository.findByBelongsToIdOrderByIdDesc(userId);
 	}
 }

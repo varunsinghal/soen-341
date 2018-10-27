@@ -55,17 +55,17 @@ public class UserControllerTest {
 //                .andExpect(MockMvcResultMatchers.view().name("user/home"));
     }
 
-    @Test
-    public void addPost_ReturnsHome() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/addPost", Factory.card1))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-    }
+//    @Test
+//    public void addPost_ReturnsHome() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.post("/user/addPost", Factory.card1))
+//                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+//    }
 
-    @Test
-    public void addComment_ReturnsHome() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/addComment", Factory.comment1))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-    }
+//    @Test
+//    public void addComment_ReturnsHome() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.post("/user/addComment", Factory.comment1))
+//                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+//    }
 
     @Test
     public void viewProfile_ReturnsProfilePage() throws Exception {

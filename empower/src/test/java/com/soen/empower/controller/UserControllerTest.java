@@ -77,7 +77,7 @@ public class UserControllerTest {
     @Test
     public void viewOtherProfile_ReturnsProfilePage() throws Exception {
         when(userService.findById((long) 2)).thenReturn(Factory.user2);
-        when(friendService.areFriends((long) 1, (long) 2)).thenReturn(true);
+        when(friendService.areFriends((long) 1, (long) 2)).thenReturn("1");
 
         mockMvc.perform(MockMvcRequestBuilders.get("/user/profile/2").sessionAttr("user_id", (long) 1))
                 .andExpect(MockMvcResultMatchers.status().isOk())

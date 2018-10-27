@@ -13,23 +13,24 @@ public class FriendService {
     @Autowired
     private FriendRepository friendRepository;
 
-    public boolean areFriends(long userId, long otherUserId) {
-        Friend record = friendRepository.findByUserIdAndOtherUserIdOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, otherUserId, userId, 1);
-        return record != null;
+    public String areFriends(long userId, long otherUserId) {
+        Friend friend = friendRepository.findByUserIdAndOtherUserIdAndEnabledOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, 1, otherUserId, userId, 1);
+        if (friend != null) return "1";
+        Friend sent = friendRepository.findByUserIdAndOtherUserIdAndEnabled(userId, otherUserId, 0);
+        if (sent != null) return "0s";
+        Friend received = friendRepository.findByUserIdAndOtherUserIdAndEnabled(otherUserId, userId, 0);
+        if (received != null) return "0r";
+        return "-1";
     }
 
-    public void addRequest(Friend friend) {
+    public void removeFriend(long userId, long otherUserId) {
+        Friend record = friendRepository.findByUserIdAndOtherUserIdAndEnabledOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, 1, otherUserId, userId, 1);
+        friendRepository.delete(record);
+    }
+
+    public void addFriend(Friend friend) {
         friend.setEnabled(0);
         friendRepository.save(friend);
-    }
-
-    public List<Friend> viewSentRequests(long userId) {
-        return friendRepository.findAllByUserIdAndEnabled(userId, 0);
-    }
-
-
-    public List<Friend> viewReceivedRequests(long userId) {
-        return friendRepository.findAllByOtherUserIdAndEnabled(userId, 0);
     }
 
     public void accept(Friend friend) {
@@ -39,5 +40,14 @@ public class FriendService {
 
     public void decline(Friend friend) {
         friendRepository.delete(friend);
+    }
+
+    public List<Friend> viewSentRequests(long userId) {
+        return friendRepository.findAllByUserIdAndEnabled(userId, 0);
+    }
+
+
+    public List<Friend> viewReceivedRequests(long userId) {
+        return friendRepository.findAllByOtherUserIdAndEnabled(userId, 0);
     }
 }

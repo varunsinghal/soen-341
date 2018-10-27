@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -20,14 +21,15 @@ public class FriendController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@ModelAttribute Friend friend) {
-        friendService.addRequest(friend);
+        friendService.addFriend(friend);
         return "redirect:/user/profile/" + friend.getOtherUser().getId();
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String removeFriend(@ModelAttribute Friend friend) {
-        friendService.decline(friend);
-        return "redirect:/user/profile/" + friend.getOtherUser().getId();
+    public String removeFriend(HttpSession session, @RequestParam("id") long otherUserId) {
+        long userId = (long) session.getAttribute("user_id");
+        friendService.removeFriend(userId, otherUserId);
+        return "redirect:/user/profile/" + otherUserId;
     }
 
 

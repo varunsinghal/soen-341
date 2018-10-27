@@ -15,7 +15,7 @@ public class SearchController {
 
     @RequestMapping("")
     public ModelAndView searchIndex(@RequestParam("name") String search) {
-        ModelAndView model = new ModelAndView("search/result");
+        ModelAndView model = new ModelAndView("search/index");
         model.addObject("results", userService.findByPartialName(search));
         return model;
     }

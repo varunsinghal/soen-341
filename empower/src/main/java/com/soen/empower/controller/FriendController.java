@@ -65,7 +65,7 @@ public class FriendController {
     public ModelAndView viewFriendRequestsReceived(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");
         ModelAndView model = new ModelAndView("friend/received");
-        model.addObject("received", friendService.viewReceivedRequests(userId));
+        model.addObject("requests", friendService.viewReceivedRequests(userId));
         return model;
     }
 

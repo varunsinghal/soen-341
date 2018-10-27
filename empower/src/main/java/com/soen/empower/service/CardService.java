@@ -37,4 +37,8 @@ public class CardService {
 		cardRepository.save(card);
 	}
 
+
+	public List<Card> fetchCardsFor(long userId) {
+		return cardRepository.findByBelongsToId(userId);
+	}
 }

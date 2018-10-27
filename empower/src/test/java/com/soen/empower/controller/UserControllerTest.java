@@ -41,16 +41,18 @@ public class UserControllerTest {
     @Test
     public void getIndex_ReturnsRedirectURL() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/user/home"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/wall"));
     }
 
     @Test
-    public void getHome_ReturnsViewWithFeeds() throws Exception {
-        when(cardService.fetchAll()).thenReturn(Arrays.asList(Factory.card1, Factory.card2));
-
+    public void getHome_ReturnsRedirectURL() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/home"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("user/home"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/wall"));
+//        when(cardService.fetchAll()).thenReturn(Arrays.asList(Factory.card1, Factory.card2));
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get("/user/home"))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.view().name("user/home"));
     }
 
     @Test

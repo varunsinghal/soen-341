@@ -53,7 +53,7 @@ public class UserController {
      */
     @RequestMapping("")
     public String index() {
-        return "redirect:/user/home";
+        return "redirect:/wall";
     }
 
     /**
@@ -62,10 +62,10 @@ public class UserController {
      * @return the view with the name user/home.
      */
     @RequestMapping("/home")
-    public ModelAndView home() {
-        ModelAndView model = new ModelAndView("user/home");
-        model.addObject("cards", cardService.fetchAll());
-        return model;
+    public String home() {
+        //ModelAndView model = new ModelAndView("user/home");
+        //model.addObject("cards", cardService.fetchAll());
+        return "redirect:/wall";
     }
 
     /**

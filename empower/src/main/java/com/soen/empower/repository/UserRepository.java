@@ -26,5 +26,5 @@ public interface UserRepository extends CrudRepository<User, String> {
      */
     User findByUsername(String username);
 
-    List<User> findByFullNameContaining(String search);
+    List<User> findByFullNameContainingIgnoreCase(String search);
 }

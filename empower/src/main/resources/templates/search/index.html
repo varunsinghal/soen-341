@@ -7,7 +7,27 @@
 <body>
 <div th:replace="fragments/layout :: nav"/>
 
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
 
+        <div class="col-md-6 gedf-main">
+
+            <div class="card gedf-card" th:each="result : ${results}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${result.fullName}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${result.role}"></h6>
+                    <p class="card-text" th:text="${result.username}"></p>
+                    <a th:href="@{/user/profile/} + ${result.id}" class="card-link">View profile</a>
+                </div>
+            </div>
+        </div> <!-- .col md 6 -->
+        <div class="col-md-3 text-center">
+
+        </div>
+    </div>
+</div>
 
 
 <div th:replace="fragments/layout :: footer"/>

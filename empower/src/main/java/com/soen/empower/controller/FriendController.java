@@ -46,7 +46,7 @@ public class FriendController {
     }
 
     @RequestMapping("/sent")
-    public ModelAndView viewFriendRequestsSend(HttpSession session) {
+    public ModelAndView viewFriendRequestsSent(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");
         ModelAndView model = new ModelAndView("friend/sent");
         model.addObject("requests", friendService.viewSentRequests(userId));

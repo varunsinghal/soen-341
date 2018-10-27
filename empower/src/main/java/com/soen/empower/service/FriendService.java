@@ -13,6 +13,18 @@ public class FriendService {
     @Autowired
     private FriendRepository friendRepository;
 
+    /**
+     * areFriends calculate the friendship status between two users.
+     * Description of status bits
+     * '1' - are friends
+     * '0r' - friendship request received
+     * '0s' - friendship request sent
+     * '-1' - friendship request NOT FOUND.
+     *
+     * @param userId      current logged in user driving the function
+     * @param otherUserId profile viewed by the current user
+     * @return the status of the frienship
+     */
     public String areFriends(long userId, long otherUserId) {
         Friend friend = friendRepository.findByUserIdAndOtherUserIdAndEnabledOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, 1, otherUserId, userId, 1);
         if (friend != null) return "1";

@@ -62,4 +62,8 @@ public class FriendService {
     public List<Friend> viewReceivedRequests(long userId) {
         return friendRepository.findAllByOtherUserIdAndEnabled(userId, 0);
     }
+
+    public List<Friend> fetchFriends(long userId) {
+        return friendRepository.findByUserIdAndEnabledOrOtherUserIdAndEnabled(userId, 1, userId, 1);
+    }
 }

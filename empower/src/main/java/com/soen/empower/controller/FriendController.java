@@ -19,6 +19,14 @@ public class FriendController {
     @Autowired
     private FriendService friendService;
 
+    @RequestMapping("")
+    public ModelAndView indexFriend(HttpSession session) {
+        ModelAndView model = new ModelAndView("friend/index");
+        long userId = (long) session.getAttribute("user_id");
+        model.addObject("friends", friendService.fetchFriends(userId));
+        return model;
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@ModelAttribute Friend friend) {
         friendService.addFriend(friend);

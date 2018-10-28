@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/teacher/**").access("hasRole('ROLE_TEACHER')")
                 .antMatchers("/parent/**").access("hasRole('ROLE_PARENT')")
                 .antMatchers("/user/**", "/message/**", "/friend/**", "/search/**", "/wall/**").access("hasAnyRole('ROLE_TEACHER', 'ROLE_PARENT')")
-                .antMatchers("/", "/login*", "/monitor/*", "/h2-console*").permitAll()
+                .antMatchers("/", "/create*", "/login*", "/monitor/*", "/h2-console*").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login").successHandler(myAuthenticationSuccessHandler)

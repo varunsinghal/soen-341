@@ -1,5 +1,7 @@
 package com.soen.empower.repository;
 
+import com.soen.empower.entity.Dislike;
+import com.soen.empower.entity.Like;
 import com.soen.empower.entity.User;
 import org.springframework.data.repository.CrudRepository;
 

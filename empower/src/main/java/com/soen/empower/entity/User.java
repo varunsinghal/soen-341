@@ -1,6 +1,7 @@
 package com.soen.empower.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -25,6 +26,12 @@ public class User {
     private String email;
     private String dob;
     private String role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "user")
+    private List<Dislike> dislikes;
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Card> cards;
@@ -170,7 +177,23 @@ public class User {
         this.dob = dob;
     }
 
-//    public List<Friend> getFriends() {
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Dislike> getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(List<Dislike> dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    //    public List<Friend> getFriends() {
 //        return friends;
 //    }
 //

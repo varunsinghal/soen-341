@@ -136,10 +136,42 @@
                     <p class="card-text" th:text="${card.text}">
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> Like</a>
-                    <a href="#" class="card-link"><i class="far fa-thumbs-down"></i> Dislike</a>
+                <!-- like dislike -->
+                <div class="card-footer form-inline">
+                    <span th:text="${#lists.size(card.likes)}"></span>&ensp;
+                    <span th:if="${#lists.contains(likedCards, card.id)}">
+                        <form method="post" th:action="@{/wall/removeLike/} + ${owner.id}">
+                            <input type="hidden" name="card.id" th:value="${card.id}">
+                            <input type="hidden" name="user.id" th:value="${session.user_id}">
+                            <i class="fas fa-thumbs-up"></i><input type="submit" value="Liked" class="btn btn-link" >
+                        </form>
+                    </span>
+                    <span th:unless="${#lists.contains(likedCards, card.id)}">
+                        <form method="post" th:action="@{/wall/addLike/} + ${owner.id}">
+                            <input type="hidden" name="card.id" th:value="${card.id}">
+                            <input type="hidden" name="user.id" th:value="${session.user_id}">
+                            <i class="far fa-thumbs-up"></i><input type="submit" value="Like" class="btn btn-link" >
+                        </form>
+                    </span>
+                    &ensp;&ensp;
+                    <span th:text="${#lists.size(card.dislikes)}"></span>&ensp;
+                    <span th:if="${#lists.contains(dislikedCards, card.id)}">
+                        <form method="post" th:action="@{/wall/removeDislike/} + ${owner.id}">
+                            <input type="hidden" name="card.id" th:value="${card.id}">
+                            <input type="hidden" name="user.id" th:value="${session.user_id}">
+                            <i class="fas fa-thumbs-down"></i><input type="submit" value="Disliked" class="btn btn-link" >
+                        </form>
+                    </span>
+                    <span th:unless="${#lists.contains(dislikedCards, card.id)}">
+                        <form method="post" th:action="@{/wall/addDislike/} + ${owner.id}">
+                            <input type="hidden" name="card.id" th:value="${card.id}">
+                            <input type="hidden" name="user.id" th:value="${session.user_id}">
+                            <i class="far fa-thumbs-down"></i><input type="submit" value="Dislike" class="btn btn-link" >
+                        </form>
+                    </span>
+
                 </div>
+                <!-- .like dislike ends -->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:each="comment: ${card.comments}">
                         <a th:href="@{/user/profile/} + ${comment.user.id}"><span
@@ -168,8 +200,7 @@
                 <div class="card-body">
                     <h5 class="card-title">News by developer !!! </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Follow this space for upcoming news</h6>
-                    <p class="card-text">Sprint 3 Features have been implemented which include messaging and user
-                        profile.</p>
+                    <p class="card-text">Sprint 4 Features have been implemented which include friends and wall.</p>
                     <a href="https://github.com/varunsinghal/soen-341" class="card-link" target="_blank">Source code</a>
                     <a href="https://github.com/varunsinghal/soen-341/issues" class="card-link" target="_blank">Raise
                         issue</a>

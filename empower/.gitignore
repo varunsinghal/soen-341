@@ -2,7 +2,10 @@
 !.mvn/wrapper/maven-wrapper.jar
 *.log
 bin/*
-
+data.trace.db
+data.mv.db
+upload-dir/*
+!upload-dir/readme.txt
 ### STS ###
 .apt_generated
 .classpath

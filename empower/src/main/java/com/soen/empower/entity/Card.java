@@ -13,6 +13,7 @@ public class Card {
 
     private String title;
     private String text;
+    private String filename;
 
     @ManyToOne
     @JoinColumn(name = "belongs_to_id")
@@ -136,5 +137,13 @@ public class Card {
 
     public void setDislikes(List<Dislike> dislikes) {
         this.dislikes = dislikes;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

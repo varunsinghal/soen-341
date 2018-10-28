@@ -8,10 +8,8 @@ import com.soen.empower.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -37,6 +35,9 @@ public class WallController {
 
     @Autowired
     private DislikeService dislikeService;
+
+    @Autowired
+    private StorageService storageService;
 
     @RequestMapping("")
     public String indexWall(HttpSession session) {
@@ -69,6 +70,15 @@ public class WallController {
         cardService.add(card);
         return "redirect:/wall/" + userId;
     }
+
+    @RequestMapping(value="/addPostImage/{id}", method = RequestMethod.POST)
+    public String addPostImage(@ModelAttribute Card card, @RequestParam("file") MultipartFile file, @PathVariable("id") long userId) {
+        storageService.store(file);
+        card.setFilename(file.getOriginalFilename());
+        cardService.add(card);
+        return "redirect:/wall/" + userId;
+    }
+
 
     /**
      * addComment method receives POST request to save comment to the given feed post.

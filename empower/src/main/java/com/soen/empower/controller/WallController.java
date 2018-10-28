@@ -2,10 +2,9 @@ package com.soen.empower.controller;
 
 import com.soen.empower.entity.Card;
 import com.soen.empower.entity.Comment;
-import com.soen.empower.service.CardService;
-import com.soen.empower.service.CommentService;
-import com.soen.empower.service.FriendService;
-import com.soen.empower.service.UserService;
+import com.soen.empower.entity.Dislike;
+import com.soen.empower.entity.Like;
+import com.soen.empower.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -33,6 +32,12 @@ public class WallController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private LikeService likeService;
+
+    @Autowired
+    private DislikeService dislikeService;
+
     @RequestMapping("")
     public String indexWall(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");
@@ -46,6 +51,8 @@ public class WallController {
             ModelAndView model = new ModelAndView("wall/index");
             model.addObject("cards", cardService.fetchCardsFor(userId));
             model.addObject("owner", userService.findById(userId));
+            model.addObject("likedCards", likeService.findCardsFor(loggedInUserId));
+            model.addObject("dislikedCards", dislikeService.findCardsFor(loggedInUserId));
             return model;
         }
         throw new AccessDeniedException("403 returned");
@@ -74,6 +81,31 @@ public class WallController {
         commentService.add(comment);
         return "redirect:/wall/" + userId;
     }
+
+    @RequestMapping(value ="/addLike/{id}", method = RequestMethod.POST)
+    public String addLike(@ModelAttribute Like like, @PathVariable("id") long userId){
+        likeService.add(like);
+        return "redirect:/wall/"+ userId;
+    }
+
+    @RequestMapping(value ="/addDislike/{id}", method = RequestMethod.POST)
+    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId){
+        dislikeService.add(dislike);
+        return "redirect:/wall/"+ userId;
+    }
+
+    @RequestMapping(value ="/removeLike/{id}", method = RequestMethod.POST)
+    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long userId){
+        likeService.remove(like);
+        return "redirect:/wall/"+ userId;
+    }
+
+    @RequestMapping(value ="/removeDislike/{id}", method = RequestMethod.POST)
+    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId){
+        dislikeService.remove(dislike);
+        return "redirect:/wall/"+ userId;
+    }
+
 
 
 }

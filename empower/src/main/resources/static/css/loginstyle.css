@@ -1,3 +1,7 @@
+html{
+    font-size:0.7em;
+}
+
 body{ /* this is just the background image of the login page*/
     margin: 0;
     padding: 0;
@@ -11,10 +15,9 @@ body{ /* this is just the background image of the login page*/
 .login{ /*putting the login page in the middle and creating a box around the avatar with the font color*/
     
     width: 320px;
-    height: 420px;
     background:black ;
     color:white;
-    top: 30%;
+    top: 20%;
     left: 40%;
     position: absolute;
     transform: : translate(-50%,-50%);
@@ -46,8 +49,7 @@ h1{ /*moving the h1 header to the middle top so it is below the avatar */
 }
 
 .login input{ /*seperating the usernamebox and the passwordbox a bit from each other after a big fight*/
-    width: 100%;
-    margin-bottom:20px;
+    margin-bottom:16px;
 }
 
 .login input[type="text"], input[type="password"] /*no to borders, no to outlines, yes to transparency!! */
@@ -90,4 +92,34 @@ h1{ /*moving the h1 header to the middle top so it is below the avatar */
 {
     color:orange;
     
+}
+
+.custom-select{
+    position: relative;
+    right:-100;
+}
+
+
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
 }

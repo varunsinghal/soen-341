@@ -1,7 +1,12 @@
 package com.soen.empower.controller;
 
+import com.soen.empower.entity.User;
+import com.soen.empower.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 /**
@@ -13,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Redirect the root access to login page.
@@ -32,6 +40,17 @@ public class IndexController {
     @RequestMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @RequestMapping("/create")
+    public String create() {
+        return "create";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String addUser(@ModelAttribute User user){
+        userService.add(user);
+        return "redirect:/login";
     }
 
 }

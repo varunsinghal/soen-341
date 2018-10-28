@@ -1,6 +1,10 @@
 package com.soen.empower.service;
 
+import com.soen.empower.entity.Parent;
+import com.soen.empower.entity.Teacher;
 import com.soen.empower.entity.User;
+import com.soen.empower.repository.ParentRepository;
+import com.soen.empower.repository.TeacherRepository;
 import com.soen.empower.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +22,10 @@ public class UserService {
     /** The user repository. */
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
+    @Autowired
+    private ParentRepository parentRepository;
 
     /**
      * Find all.
@@ -39,6 +47,8 @@ public class UserService {
     public void add(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getRole().equals("ROLE_TEACHER")) user.setTeacher(teacherRepository.save(new Teacher()));
+        if(user.getRole().equals("ROLE_PARENT")) user.setParent(parentRepository.save(new Parent()));
         userRepository.save(user);
     }
 

@@ -33,7 +33,7 @@ public class FriendController {
         return "redirect:/user/profile/" + friend.getOtherUser().getId();
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String removeFriend(HttpSession session, @RequestParam("id") long otherUserId) {
         long userId = (long) session.getAttribute("user_id");
         friendService.removeFriend(userId, otherUserId);

@@ -36,4 +36,18 @@ public class IndexControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("login"));
 
     }
+
+    @Test
+    public void getCreatePage_ReturnsSignUpPage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/create"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("create"));
+    }
+
+    @Test
+    public void submitCreatePage_RedirectsToLoginPage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/create"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/login"));
+    }
 }

@@ -13,13 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Class UserService.
- */
 @Service
 public class UserService {
-    
-    /** The user repository. */
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -27,11 +23,12 @@ public class UserService {
     @Autowired
     private ParentRepository parentRepository;
 
-    /**
-     * Find all.
-     *
-     * @return the list
-     */
+    public UserService(UserRepository userRepository, TeacherRepository teacherRepository, ParentRepository parentRepository) {
+        this.userRepository = userRepository;
+        this.teacherRepository = teacherRepository;
+        this.parentRepository = parentRepository;
+    }
+
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         for (User user : userRepository.findAll())
@@ -39,44 +36,22 @@ public class UserService {
         return users;
     }
 
-    /**
-     * Adds the.
-     *
-     * @param user the user
-     */
     public void add(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(user.getRole().equals("ROLE_TEACHER")) user.setTeacher(teacherRepository.save(new Teacher()));
-        if(user.getRole().equals("ROLE_PARENT")) user.setParent(parentRepository.save(new Parent()));
+        if (user.getRole().equals("ROLE_TEACHER")) user.setTeacher(teacherRepository.save(new Teacher()));
+        if (user.getRole().equals("ROLE_PARENT")) user.setParent(parentRepository.save(new Parent()));
         userRepository.save(user);
     }
 
-    /**
-     * Find by name.
-     *
-     * @param username the username
-     * @return the user
-     */
     public User findByName(String username) {
         return userRepository.findByUsername(username);
     }
 
-    /**
-     * Find by id.
-     *
-     * @param id the id
-     * @return the user
-     */
     public User findById(Long id) {
         return userRepository.findById(id);
     }
 
-    /**
-     * Save.
-     *
-     * @param user the user
-     */
     public void save(User user) {
         userRepository.save(user);
     }

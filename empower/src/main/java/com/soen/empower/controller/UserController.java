@@ -119,8 +119,9 @@ public class UserController {
      * @return redirect the user to their profile user/profile.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProfile(@ModelAttribute User user) {
+    public String saveProfile(HttpSession session, @ModelAttribute User user) {
         userService.save(user);
+        session.setAttribute("full_name", user.getFullName());
         return "redirect:/user/profile";
     }
 

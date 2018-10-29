@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: header"/>
+</head>
+<body>
+<div th:replace="fragments/layout :: nav"/>
+
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h7"><a th:href="@{/group/create}">Create</a></div>
+                    </li>
+                    <!--<li class="list-group-item">-->
+                        <!---->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 gedf-main">
+            <div class="card gedf-card" th:each="group : ${groups}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${group.name}"></h5>
+                    <p class="card-text text-muted" th:text="${group.description}"></p>
+                </div>
+            </div>
+        </div> <!-- .col md 6 -->
+        <div class="col-md-3 text-center">
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/layout :: footer"/>
+
+
+</body>
+</html>

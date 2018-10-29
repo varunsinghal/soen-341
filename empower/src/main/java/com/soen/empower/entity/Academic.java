@@ -1,82 +1,42 @@
 package com.soen.empower.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-/**
- * The Class Academic.
- */
 @Entity
 public class Academic {
-	
-	/** The id. */
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	/** The grade. */
-	private String grade;
-	
-	/** The student. */
-	@ManyToOne
-	@JoinColumn(name="student_id")
-	private Student student;
-	
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	/**
-	 * Gets the grade.
-	 *
-	 * @return the grade
-	 */
-	public String getGrade() {
-		return grade;
-	}
+    private String grade;
 
-	/**
-	 * Sets the grade.
-	 *
-	 * @param grade the new grade
-	 */
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-	/**
-	 * Gets the student.
-	 *
-	 * @return the student
-	 */
-	public Student getStudent() {
-		return student;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * Sets the student.
-	 *
-	 * @param student the new student
-	 */
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
 }

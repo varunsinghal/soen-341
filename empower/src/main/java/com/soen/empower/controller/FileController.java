@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * FileController
+ *
+ */
 @Controller
 @RequestMapping("/files")
 public class FileController {
@@ -16,6 +20,10 @@ public class FileController {
     @Autowired
     private StorageService storageService;
 
+    /**
+     * @param filename
+     * @return
+     */
     @RequestMapping("fetch/{filename:.+}")
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 

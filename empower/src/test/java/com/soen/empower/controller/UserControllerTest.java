@@ -15,8 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Arrays;
-
 import static org.mockito.Mockito.when;
 
 
@@ -45,27 +43,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getHome_ReturnsRedirectURL() throws Exception {
+    public void getHome_ReturnsToWallUrl() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/home"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/wall"));
-//        when(cardService.fetchAll()).thenReturn(Arrays.asList(Factory.card1, Factory.card2));
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("/user/home"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.view().name("user/home"));
     }
 
-//    @Test
-//    public void addPost_ReturnsHome() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/user/addPost", Factory.card1))
-//                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-//    }
-
-//    @Test
-//    public void addComment_ReturnsHome() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/user/addComment", Factory.comment1))
-//                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-//    }
 
     @Test
     public void viewProfile_ReturnsProfilePage() throws Exception {

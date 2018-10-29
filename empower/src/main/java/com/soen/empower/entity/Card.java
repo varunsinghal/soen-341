@@ -48,11 +48,12 @@ public class Card {
 
     }
 
-    public Card(Long id, String title, String text, User user) {
+    public Card(Long id, String title, String text, User user, User belongsTo) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.user = user;
+        this.belongsTo = belongsTo;
     }
 
     public Long getId() {

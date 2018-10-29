@@ -21,6 +21,12 @@ public class Like {
     public Like(){
     }
 
+    public Like(Long id, Card card, User user) {
+        this.id = id;
+        this.card = card;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

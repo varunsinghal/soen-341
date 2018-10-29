@@ -22,6 +22,13 @@ public class Friend {
     public Friend(){
     }
 
+    public Friend(Long id, User user, User otherUser, int enabled) {
+        this.id = id;
+        this.user = user;
+        this.otherUser = otherUser;
+        this.enabled = enabled;
+    }
+
     public Long getId() {
         return id;
     }

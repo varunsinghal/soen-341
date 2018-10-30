@@ -13,6 +13,22 @@
         </div>
 
         <div class="col-md-6 gedf-main">
+            <form method="post" th:action="@{/group/create}">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Group name</div>
+                        <input type="text" class="form-control" name="name">
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Description</div>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="hidden" name="owner.id" th:value="${session.user_id}">
+                        <input type="submit" name="submit" class="btn btn-success" value="Create group">
+                    </li>
+                </ul>
+            </form>
 
         </div> <!-- .col md 6 -->
         <div class="col-md-3 text-center">

@@ -13,11 +13,20 @@
             <div class="card">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="h7"><a th:href="@{/group/create}">Create</a></div>
+                        <form th:action="@{/group/search}" method="get">
+                            <input type="text" class="form-control" name="name" th:value="${searchString}?: ''"
+                                   placeholder="Find groups"/>
+                        </form>
                     </li>
-                    <!--<li class="list-group-item">-->
-                        <!---->
-                    <!--</li>-->
+                    <li class="list-group-item">
+                        <div class="h7"><a th:href="@{/group/}">My Groups</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7"><a th:href="@{/group/all}">All Groups</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7"><a th:href="@{/group/create}">New Group</a></div>
+                    </li>
                 </ul>
             </div>
         </div>

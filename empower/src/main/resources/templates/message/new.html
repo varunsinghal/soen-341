@@ -71,12 +71,12 @@
     </div>
 </div>
 
-
+<input type="hidden" id="apicontroller" th:value="@{/api/users}" >
 <div th:replace="fragments/layout :: footer"/>
 <script>
 $( function() {
 		$( "#username" ).autocomplete({
-			source: [{value:1, label: "a"}, {value:2, label: "b"}, {value:3, label: "c"}, {value:4, label: "d"}],
+			source: $("#apicontroller").val(),
 			select: function( event, ui ) {
 			    console.log(ui);
 				$("#username").val( ui.item.label );

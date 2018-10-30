@@ -25,4 +25,8 @@ public class GroupService {
     public void add(Group group) {
         groupRepository.save(group);
     }
+
+    public List<Group> findByPartialName(String name) {
+        return groupRepository.findByNameContainingIgnoreCase(name);
+    }
 }

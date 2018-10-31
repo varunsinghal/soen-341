@@ -28,5 +28,11 @@ public interface UserRepository extends CrudRepository<User, String> {
      */
     User findByUsername(String username);
 
+    /**
+     * Find list of users based search criteria
+     *
+     * @param String search
+     * @return list of users
+     */
     List<User> findByFullNameContainingIgnoreCase(String search);
 }

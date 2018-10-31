@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * The Class Conversation.
+ * The Class Conversation stores the conversations between two users.
  */
 @Entity
 public class Conversation {
     
-    /** The id. */
+    /** The conversation id. */
     @Id
     @GeneratedValue
     private Long id;
 
-    /** The user. */
+    /** The user who initiated the conversation*/
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    /** The other user. */
+    /** The other user involved in the conversation. */
     @ManyToOne
     @JoinColumn(name = "other_user_id")
     private User otherUser;
@@ -69,7 +69,7 @@ public class Conversation {
     }
 
     /**
-     * Gets the user.
+     * Gets the user who initiated the conversation.
      *
      * @return the user
      */
@@ -87,7 +87,7 @@ public class Conversation {
     }
 
     /**
-     * Gets the other user.
+     * Gets the other user who is involved the conversation.
      *
      * @return the other user
      */
@@ -123,7 +123,7 @@ public class Conversation {
     }
 
     /**
-     * Gets the updated.
+     * Gets the updated date of the conversation.
      *
      * @return the updated
      */

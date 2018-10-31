@@ -6,23 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
-
 /**
- * The Class Course.
+ * The Class Course has all the course related info.
  */
 @Entity
 public class Course {
 
-	/** The id. */
+	/** The course id. */
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	/** The name. */
+	/** The course name. */
 	private String name;
 
-	/** The teacher. */
+	/** The teacher for the course. */
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
@@ -48,7 +46,7 @@ public class Course {
 	}
 
 	/**
-	 * Gets the id.
+	 * Gets the course id.
 	 *
 	 * @return the id
 	 */
@@ -57,7 +55,7 @@ public class Course {
 	}
 
 	/**
-	 * Sets the id.
+	 * Sets the course id.
 	 *
 	 * @param id the new id
 	 */
@@ -66,7 +64,7 @@ public class Course {
 	}
 
 	/**
-	 * Gets the teacher.
+	 * Gets the teacher who is teaching the course.
 	 *
 	 * @return the teacher
 	 */
@@ -84,7 +82,7 @@ public class Course {
 	}
 
 	/**
-	 * Gets the name.
+	 * Gets the course name.
 	 *
 	 * @return the name
 	 */
@@ -93,7 +91,7 @@ public class Course {
 	}
 
 	/**
-	 * Sets the name.
+	 * Sets the course name.
 	 *
 	 * @param name the new name
 	 */

@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PreUpdate;
 
 /**
- * The Class Comment.
+ * The Class Comment which allows the user to comment on posts.
  */
 @Entity
 public class Comment {
@@ -60,16 +60,16 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the id.
+	 * Gets the comment id.
 	 *
-	 * @return the id
+	 * @return the comment id
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Sets the id.
+	 * Sets the comment id.
 	 *
 	 * @param id the new id
 	 */
@@ -78,25 +78,24 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the text.
+	 * Gets the comment text.
 	 *
-	 * @return the text
+	 * @return the comment text
 	 */
 	public String getText() {
 		return text;
 	}
 
 	/**
-	 * Sets the text.
+	 * Sets the comment text.
 	 *
-	 * @param text the new text
 	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	/**
-	 * Gets the user.
+	 * Gets the user related to the comment.
 	 *
 	 * @return the user
 	 */
@@ -114,7 +113,7 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the card.
+	 * Gets the comment card.
 	 *
 	 * @return the card
 	 */
@@ -123,7 +122,7 @@ public class Comment {
 	}
 
 	/**
-	 * Sets the card.
+	 * Sets the comment card.
 	 *
 	 * @param card the new card
 	 */
@@ -132,7 +131,7 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the created.
+	 * Gets the current date.
 	 *
 	 * @return the created
 	 */
@@ -141,16 +140,15 @@ public class Comment {
 	}
 
 	/**
-	 * Sets the created.
+	 * Sets the current date.
 	 *
-	 * @param created the new created
 	 */
 	public void setCreated(Date created) {
 		this.created = created;
 	}
 
 	/**
-	 * Gets the updated.
+	 * Gets the updated date.
 	 *
 	 * @return the updated
 	 */
@@ -159,7 +157,7 @@ public class Comment {
 	}
 
 	/**
-	 * Sets the updated.
+	 * Sets the updated date.
 	 *
 	 * @param updated the new updated
 	 */

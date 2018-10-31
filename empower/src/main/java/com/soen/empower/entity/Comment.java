@@ -11,36 +11,33 @@ import javax.persistence.PreUpdate;
 
 /**
  * The Class Comment which allows the user to comment on posts.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Comment {
 	
-	/** The id. */
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	/** The text. */
 	private String text;
 	
-	/** The user. */
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	/** The card. */
 	@ManyToOne
 	@JoinColumn(name="card_id")
 	private Card card;
 	
-	/** The created. */
 	private Date created = new Date();
 	
-	/** The updated. */
 	private Date updated = new Date();
 
 	/**
-	 * Sets the last update.
+	 * Constructing the last update component.
 	 */
 	@PreUpdate
 	public void setLastUpdate() {  this.updated = new Date(); }
@@ -60,34 +57,31 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the comment id.
+	 * Get the constructed comment id.
 	 *
-	 * @return the comment id
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Sets the comment id.
+	 * Constructing the comment id.
 	 *
-	 * @param id the new id
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Gets the comment text.
+	 * Get the constructed comment text.
 	 *
-	 * @return the comment text
 	 */
 	public String getText() {
 		return text;
 	}
 
 	/**
-	 * Sets the comment text.
+	 * Constructing the comment text.
 	 *
 	 */
 	public void setText(String text) {
@@ -95,25 +89,23 @@ public class Comment {
 	}
 
 	/**
-	 * Gets the user related to the comment.
+	 * Get the constructed user related to the comment.
 	 *
-	 * @return the user
 	 */
 	public User getUser() {
 		return user;
 	}
 
 	/**
-	 * Sets the user.
+	 * Constructing the user component.
 	 *
-	 * @param user the new user
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
 	/**
-	 * Gets the comment card.
+	 * Get the constructed comment card.
 	 *
 	 * @return the card
 	 */
@@ -122,7 +114,7 @@ public class Comment {
 	}
 
 	/**
-	 * Sets the comment card.
+	 * Constructing the comment card component.
 	 *
 	 * @param card the new card
 	 */

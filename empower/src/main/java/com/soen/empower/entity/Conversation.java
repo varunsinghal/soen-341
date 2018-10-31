@@ -51,18 +51,15 @@ public class Conversation {
     }
 
     /**
-     * Gets the id.
+     * Get the constructed conversation id.
      *
-     * @return the id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Sets the id.
-     *
-     * @param id the new id
+     * Constructing the conversation id.
      */
     public void setId(Long id) {
         this.id = id;
@@ -70,15 +67,13 @@ public class Conversation {
 
     /**
      * Gets the user who initiated the conversation.
-     *
-     * @return the user
      */
     public User getUser() {
         return user;
     }
 
     /**
-     * Sets the user.
+     * Constructing the user.
      *
      * @param user the new user
      */
@@ -89,23 +84,21 @@ public class Conversation {
     /**
      * Gets the other user who is involved the conversation.
      *
-     * @return the other user
      */
     public User getOtherUser() {
         return otherUser;
     }
 
     /**
-     * Sets the other user.
+     * Constructing the other user.
      *
-     * @param otherUser the new other user
      */
     public void setOtherUser(User otherUser) {
         this.otherUser = otherUser;
     }
 
     /**
-     * Gets the last message id.
+     * Gets the constructed last message id.
      *
      * @return the last message id
      */
@@ -114,7 +107,7 @@ public class Conversation {
     }
 
     /**
-     * Sets the last message id.
+     * Constructing the last message id.
      *
      * @param lastMessageId the new last message id
      */

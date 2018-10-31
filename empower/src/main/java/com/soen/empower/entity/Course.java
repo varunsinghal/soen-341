@@ -8,6 +8,9 @@ import javax.persistence.ManyToOne;
 
 /**
  * The Class Course has all the course related info.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Course {

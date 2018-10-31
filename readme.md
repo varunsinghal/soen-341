@@ -29,5 +29,5 @@
   * Dory Nakad
   * Ernest Majdalani
   * Kishor Tare
-  * Ofreish Talwar
+  * Ofreishdeep Talwar
   * Varun Singhal

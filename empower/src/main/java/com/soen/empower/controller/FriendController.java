@@ -12,13 +12,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * The Class FriendController.
+ */
 @Controller
 @RequestMapping("/friend")
 public class FriendController {
 
+    /** The friend service. */
     @Autowired
     private FriendService friendService;
 
+    /**
+     * Index friend.
+     *
+     * @param session the session
+     * @return the model and view
+     */
     @RequestMapping("")
     public ModelAndView indexFriend(HttpSession session) {
         ModelAndView model = new ModelAndView("friend/index");
@@ -27,12 +37,25 @@ public class FriendController {
         return model;
     }
 
+    /**
+     * Adds the friend.
+     *
+     * @param friend the friend
+     * @return the string
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@ModelAttribute Friend friend) {
         friendService.addFriend(friend);
         return "redirect:/user/profile/" + friend.getOtherUser().getId();
     }
 
+    /**
+     * Removes the friend.
+     *
+     * @param session the session
+     * @param otherUserId the other user id
+     * @return the string
+     */
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String removeFriend(HttpSession session, @RequestParam("id") long otherUserId) {
         long userId = (long) session.getAttribute("user_id");
@@ -41,18 +64,36 @@ public class FriendController {
     }
 
 
+    /**
+     * Accept requests.
+     *
+     * @param friend the friend
+     * @return the string
+     */
     @RequestMapping("/accept")
     public String acceptRequests(@ModelAttribute Friend friend) {
         friendService.accept(friend);
         return "redirect:/friend/received";
     }
 
+    /**
+     * Decline requests.
+     *
+     * @param friend the friend
+     * @return the string
+     */
     @RequestMapping("/decline")
     public String declineRequests(@ModelAttribute Friend friend) {
         friendService.decline(friend);
         return "redirect:/friend/received";
     }
 
+    /**
+     * View friend requests sent.
+     *
+     * @param session the session
+     * @return the model and view
+     */
     @RequestMapping("/sent")
     public ModelAndView viewFriendRequestsSent(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");
@@ -61,6 +102,12 @@ public class FriendController {
         return model;
     }
 
+    /**
+     * View friend requests received.
+     *
+     * @param session the session
+     * @return the model and view
+     */
     @RequestMapping("/received")
     public ModelAndView viewFriendRequestsReceived(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");

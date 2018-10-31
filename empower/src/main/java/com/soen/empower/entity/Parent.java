@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * The Class Parent.
+ * The Parent entity class depict the attributes of a parent .
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Parent {
@@ -34,7 +37,7 @@ public class Parent {
 	}
 
 	/**
-	 * Gets the id.
+	 * Gets the constructed parent id.
 	 *
 	 * @return the id
 	 */
@@ -43,7 +46,7 @@ public class Parent {
 	}
 
 	/**
-	 * Sets the id.
+	 * Constructing the parent id.
 	 *
 	 * @param id the new id
 	 */
@@ -52,18 +55,15 @@ public class Parent {
 	}
 
 	/**
-	 * Gets the students.
-	 *
-	 * @return the students
+	 * Gets the constructed students list.
 	 */
 	public List<Student> getStudents() {
 		return students;
 	}
 
 	/**
-	 * Sets the students.
+	 * Constructing the students list.
 	 *
-	 * @param students the new students
 	 */
 	public void setStudents(List<Student> students) {
 		this.students = students;

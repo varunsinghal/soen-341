@@ -10,24 +10,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * The Class Student.
+ * This entity class gives the Student attributes.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Student {
 
-	/** The id. */
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	/** The name. */
 	private String name;
 	
-	/** The academics. */
 	@OneToMany(mappedBy="student")
 	private List<Academic> academics;
 	
-	/** The parent. */
 	@ManyToOne
 	@JoinColumn(name="parent_id")
 	private Parent parent;
@@ -51,25 +50,24 @@ public class Student {
 	}
 
 	/**
-	 * Gets the id.
+	 * Gets the constructed student id.
 	 *
-	 * @return the id
+	 * @return the student id
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Sets the id.
+	 * Constructing the student id.
 	 *
-	 * @param id the new id
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Gets the name.
+	 * Gets the constructed student name.
 	 *
 	 * @return the name
 	 */
@@ -78,16 +76,15 @@ public class Student {
 	}
 
 	/**
-	 * Sets the name.
+	 * Constructing the student name.
 	 *
-	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Gets the academics.
+	 * Get the constructed student academics.
 	 *
 	 * @return the academics
 	 */
@@ -96,9 +93,8 @@ public class Student {
 	}
 
 	/**
-	 * Sets the academics.
+	 * Constructing the student academics.
 	 *
-	 * @param academics the new academics
 	 */
 	public void setAcademics(List<Academic> academics) {
 		this.academics = academics;

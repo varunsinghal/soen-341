@@ -91,6 +91,7 @@ public class Comment {
 	/**
 	 * Get the constructed user related to the comment.
 	 *
+	 * @return the user
 	 */
 	public User getUser() {
 		return user;
@@ -141,8 +142,6 @@ public class Comment {
 
 	/**
 	 * Gets the updated date.
-	 *
-	 * @return the updated
 	 */
 	public Date getUpdated() {
 		return updated;
@@ -150,8 +149,6 @@ public class Comment {
 
 	/**
 	 * Sets the updated date.
-	 *
-	 * @param updated the new updated
 	 */
 	public void setUpdated(Date updated) {
 		this.updated = updated;

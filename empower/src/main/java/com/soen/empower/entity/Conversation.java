@@ -5,6 +5,9 @@ import java.util.Date;
 
 /**
  * The Class Conversation stores the conversations between two users.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Conversation {

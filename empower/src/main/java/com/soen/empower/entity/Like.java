@@ -3,7 +3,10 @@ package com.soen.empower.entity;
 import javax.persistence.*;
 
 /**
- * The Class Like contains the logic for like functionality.
+ * The Entity Class contains the logic for like functionality.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 @Table(name = "likes")

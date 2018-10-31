@@ -9,21 +9,18 @@ import javax.persistence.OneToMany;
 
 
 /**
- * The Class Teacher.
+ * This entity Class gives the information about the Teacher.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Teacher {
 
-    /**
-     * The id.
-     */
     @Id
     @GeneratedValue
     private Long id;
 
-    /**
-     * The courses.
-     */
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
@@ -39,34 +36,31 @@ public class Teacher {
     }
 
     /**
-     * Gets the id.
+     * Gets the constructed teacher id.
      *
-     * @return the id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Sets the id.
+     * constructing the teacher id.
      *
-     * @param id the new id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Gets the courses.
+     * Gets the constructed teacher courses.
      *
-     * @return the courses
      */
     public List<Course> getCourses() {
         return courses;
     }
 
     /**
-     * Sets the courses.
+     * Constructing the teacher courses.
      *
      * @param courses the new courses
      */

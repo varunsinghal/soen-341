@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * The Class Message.
+ * The Entity Class Message shows the attributes of message functionality.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Message {

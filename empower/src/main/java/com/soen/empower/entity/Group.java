@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * The Class Group.
+ * This Entity Class Group.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 @Table(name = "groups")

@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 /**
  * The Class Dislike gives user the functionality to dislike a post.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 public class Dislike {

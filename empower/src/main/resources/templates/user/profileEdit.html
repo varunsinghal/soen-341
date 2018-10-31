@@ -11,13 +11,14 @@
     <div class="row">
         <div class="col-md-3">
         </div>
-
+<!-- this will give the user a option to change his fullname, email , date of birth, description BUT cannot change the role.!-->
         <div class="col-md-6 gedf-main">
             <form method="post" th:action="@{/user/save}">
                 <div class="card">
                     <div class="card-body">
                         <div class="h5" th:text="${user.username}"></div>
                     </div>
+                    <!-- each list from now on will show and give the option to make the changes they want to!-->
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h7 text-muted">Fullname</div>

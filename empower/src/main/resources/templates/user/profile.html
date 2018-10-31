@@ -8,7 +8,7 @@
 <div th:replace="fragments/layout :: nav"/>
 
 <div class="container-fluid gedf-wrapper">
-    <div class="row">
+    <div class="row"> <!-- created a list to display everything !-->
         <div class="col-md-3">
         </div>
 
@@ -17,6 +17,7 @@
                 <div class="card-body">
                     <div class="h5" th:text="${user.username}"></div>
                 </div>
+                <!-- each list from now will display and fetch whatever it is related to, fullname will fetch the fullname on the server, email will do too and so on!-->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <div class="h7 text-muted">Fullname</div>

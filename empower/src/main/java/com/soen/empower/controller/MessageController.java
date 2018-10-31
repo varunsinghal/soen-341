@@ -17,21 +17,25 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 /**
- * The Class MessageController.
+ * The Class MessageController consists methods like addNewMessage which allows 
+ * user to add to his previous conversation or start new conversation.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Controller
 @RequestMapping("/message")
 public class MessageController {
 
-    /** The message service. */
+    /** The message as a service. */
     @Autowired
     private MessageService messageService;
 
-    /** The conversation service. */
+    /** The conversation as a service. */
     @Autowired
     private ConversationService conversationService;
 
-    /** The user service. */
+    /** The user as a service. */
     @Autowired
     private UserService userService;
 
@@ -50,9 +54,8 @@ public class MessageController {
     }
 
     /**
-     * Index.
+     * Index of all the conversation.
      *
-     * @param session the session
      * @param conversationId the conversation id
      * @return the model and view
      */
@@ -67,7 +70,7 @@ public class MessageController {
     }
 
     /**
-     * New message.
+     *  newMessage method allows user to create new message.
      *
      * @param message the message
      * @return the model and view
@@ -78,10 +81,7 @@ public class MessageController {
     }
 
     /**
-     * Adds the new message.
-     *
-     * @param message the message
-     * @param conversation the conversation
+     * addNewMessage method adds the new message to existing conversation.
      * @return the string
      */
     @RequestMapping(value = "/addNewMessage", method = RequestMethod.POST)

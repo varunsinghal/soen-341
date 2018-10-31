@@ -13,21 +13,24 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 /**
- * The GroupController Class
+ * The GroupController Class consists the functionality of create new group
+ * and search group.
+ * 
+ * @version 1.0
+ * @since 1.0
  */
 @Controller
 @RequestMapping("/group")
 public class GroupController {
 
-    /** The group service. */
+    /** The group as a service. */
     @Autowired
     private GroupService groupService;
 
     /**
      * Index group.
      *
-     * @param session the session
-     * @return the model and view
+     * @return the view group/index
      */
     @RequestMapping("")
     public ModelAndView indexGroup(HttpSession session) {
@@ -37,7 +40,7 @@ public class GroupController {
     }
 
     /**
-     * All group.
+     * allGroup method All group.
      *
      * @return the model and view
      */
@@ -49,10 +52,9 @@ public class GroupController {
     }
 
     /**
-     * Search group.
+     * searchGroup method Searches group using group name.
      *
-     * @param search the search
-     * @return the model and view
+     * @return the view named search/group
      */
     @RequestMapping("/search")
     public ModelAndView searchGroup(@RequestParam("name") String search){
@@ -63,9 +65,9 @@ public class GroupController {
     }
 
     /**
-     * Creates the group.
+     * Creates the new group.
      *
-     * @return the string
+     * @return the string with group name
      */
     @RequestMapping("/create")
     public String createGroup() {
@@ -75,7 +77,6 @@ public class GroupController {
     /**
      * Creates the group submit.
      *
-     * @param group the group
      * @return the string
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)

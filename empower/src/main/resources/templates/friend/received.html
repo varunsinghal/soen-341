@@ -13,6 +13,7 @@
         </div>
 
         <div class="col-md-6 gedf-main">
+            <!-- Nav bar at the top of page with 3 links -->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/friend}"><i class="fas fa-user-friends"></i> Current friends</a>
@@ -29,7 +30,7 @@
                     </a>
                 </li>
             </ul>
-
+            <!-- received friend requests -->
             <div class="card gedf-card" th:each="request : ${requests}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${request.user.fullName}"></h5>

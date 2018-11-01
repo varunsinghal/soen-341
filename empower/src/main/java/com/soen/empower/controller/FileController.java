@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * FileController
- *
  */
 @Controller
 @RequestMapping("/files")
@@ -21,8 +20,10 @@ public class FileController {
     private StorageService storageService;
 
     /**
-     * @param filename
-     * @return
+     * Service to render the files from the 'upload-dir' folder of file system.
+     *
+     * @param filename string based file name with extension
+     * @return Resource file as downloadable media.
      */
     @RequestMapping("fetch/{filename:.+}")
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {

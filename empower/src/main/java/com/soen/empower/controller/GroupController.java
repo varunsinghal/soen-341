@@ -28,7 +28,7 @@ public class GroupController {
     private GroupService groupService;
 
     /**
-     * Index group.
+     * Default controller loaded with the list of groups.
      *
      * @return the view group/index
      */

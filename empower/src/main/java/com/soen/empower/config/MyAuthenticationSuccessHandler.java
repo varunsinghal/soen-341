@@ -13,18 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * The Class MyAuthenticationSuccessHandler.
- */
+
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-    
-    /** The user service. */
+
     @Autowired
     private UserService userService;
 
-    /*
+    /**
+     * On successful authentication, the session variables are set for the user depending upon the
+     * role - ROLE_TEACHER or ROLE_PARENT.
+     *
      * @see org.springframework.security.web.authentication.AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.Authentication)
+     * @since 1.0
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,

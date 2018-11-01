@@ -13,18 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 /**
- * The Class FriendController.
+ * Friend controller accessible via localhost/friend/
  */
 @Controller
 @RequestMapping("/friend")
 public class FriendController {
 
-    /** The friend service. */
     @Autowired
     private FriendService friendService;
 
     /**
-     * Index friend.
+     * Default controller which list the friends of current logged in user.
      *
      * @param session the session
      * @return the model and view
@@ -65,7 +64,7 @@ public class FriendController {
 
 
     /**
-     * Accept requests.
+     * Accept friend requests.
      *
      * @param friend the friend
      * @return the string
@@ -77,7 +76,7 @@ public class FriendController {
     }
 
     /**
-     * Decline requests.
+     * Decline friend requests.
      *
      * @param friend the friend
      * @return the string

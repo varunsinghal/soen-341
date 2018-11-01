@@ -10,24 +10,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
-/**
- * The Class SecurityConfig.
- */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
-    /** The data source. */
+
     @Autowired
     private DataSource dataSource;
 
-
-    /** The my authentication success handler. */
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     /**
-     * Configure global.
+     * Enabled JDBC connection based authentication. Added permission set to the authenticated user.
      *
      * @param auth the auth
      * @throws Exception the exception
@@ -42,7 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select username, role from users where username=?");
     }
 
-        //Authorization
+    /**
+     * For all request this acts as middleware which decides with URL patterns are accessible
+     * publicly, privately (with permission sets).
+     *
+     * @param http current request
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

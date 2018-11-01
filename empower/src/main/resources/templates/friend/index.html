@@ -13,6 +13,7 @@
         </div>
 
         <div class="col-md-6 gedf-main">
+            <!-- Nav bar at the top of page with 3 links -->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" th:href="@{/friend}"><i class="fas fa-user-friends"></i> Current friends</a>
@@ -30,6 +31,7 @@
                 </li>
             </ul>
 
+            <!--- list of all friends -->
             <div class="card gedf-card" th:each="friend : ${friends}">
                 <div class="card-body" th:if="${friend.user.id} != ${session.user_id}">
                     <h5 class="card-title" th:text="${friend.user.fullName}"></h5>

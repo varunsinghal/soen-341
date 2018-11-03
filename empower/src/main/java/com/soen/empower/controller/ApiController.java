@@ -2,6 +2,8 @@ package com.soen.empower.controller;
 
 import com.soen.empower.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,4 +33,5 @@ public class ApiController {
     public List<Object> fetchUsers(@RequestParam("term") String name) {
         return messageService.findUsersForNewMessage(name);
     }
+
 }

@@ -5,6 +5,7 @@ import com.soen.empower.entity.Conversation;
 import com.soen.empower.entity.Message;
 import com.soen.empower.service.ConversationService;
 import com.soen.empower.service.MessageService;
+import com.soen.empower.service.NotificationService;
 import com.soen.empower.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,8 @@ public class MessageController {
      */
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
 
     /**
      * Index.
@@ -98,6 +101,7 @@ public class MessageController {
         Message savedMessage = messageService.add(message);
         resolvedConversation.setLastMessageId(savedMessage.getId());
         conversationService.update(resolvedConversation);
+        notificationService.notify(savedMessage);
         return "redirect:/message/" + resolvedConversation.getId();
     }
 

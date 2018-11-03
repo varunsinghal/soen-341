@@ -3,6 +3,7 @@ package com.soen.empower.controller;
 import com.soen.empower.fixture.Factory;
 import com.soen.empower.service.ConversationService;
 import com.soen.empower.service.MessageService;
+import com.soen.empower.service.NotificationService;
 import com.soen.empower.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,9 @@ public class MessageControllerTest {
 
     @MockBean
     private UserService userService;
+
+    @MockBean
+    private NotificationService notificationService;
 
     @Test
     public void getIndex_ReturnsConversation() throws Exception {

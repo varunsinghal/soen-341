@@ -36,3 +36,9 @@ body {
 .wall-image{
     height: 200px;
 }
+
+#newNotification i{
+        vertical-align: top;
+        font-size: 0.7em;
+        display:none;
+}

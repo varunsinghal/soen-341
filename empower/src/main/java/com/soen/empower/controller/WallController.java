@@ -39,6 +39,9 @@ public class WallController {
     @Autowired
     private StorageService storageService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @RequestMapping("")
     public String indexWall(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");
@@ -68,6 +71,7 @@ public class WallController {
     @RequestMapping(value = "/addPost/{id}", method = RequestMethod.POST)
     public String addPost(@ModelAttribute Card card, @PathVariable("id") long userId) {
         cardService.add(card);
+        notificationService.notify(card);
         return "redirect:/wall/" + userId;
     }
 
@@ -76,6 +80,7 @@ public class WallController {
         storageService.store(file);
         card.setFilename(file.getOriginalFilename());
         cardService.add(card);
+        notificationService.notify(card);
         return "redirect:/wall/" + userId;
     }
 

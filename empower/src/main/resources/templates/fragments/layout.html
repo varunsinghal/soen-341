@@ -70,7 +70,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" id="notifications-area" aria-labelledby="navbarDropdown">
                         <li th:each="notification : ${session.notifications}">
-                            <a href="#" class="dropdown-item" th:attr="notificationId=${notification.id}"
+                            <a th:href="@{/notification} + '/' + ${notification.id}" class="dropdown-item"
                                th:text="${notification.HTML}"></a>
                         </li>
                     </ul>

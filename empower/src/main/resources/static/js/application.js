@@ -2,6 +2,8 @@ $(':input').on('focus', function () {
   $(this).attr('autocomplete', 'off')
 });
 
+$("")
+
 
 /**
 * Open the web socket connection and subscribe the "/notify" channel.

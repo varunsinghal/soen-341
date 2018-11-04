@@ -48,6 +48,9 @@ public class WallControllerTest {
     @MockBean
     private StorageService storageService;
 
+    @MockBean
+    private NotificationService notificationService;
+
 
     @Test
     public void getIndex_ReturnsRedirectURL() throws Exception {

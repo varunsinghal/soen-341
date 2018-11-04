@@ -1,13 +1,13 @@
 package com.soen.empower.controller;
 
 import com.soen.empower.service.MessageService;
+import com.soen.empower.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -20,6 +20,8 @@ public class ApiController {
 
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private NotificationService notificationService;
 
     /**
      * To search the database via service layer to search the users.
@@ -32,6 +34,13 @@ public class ApiController {
     @RequestMapping("/users")
     public List<Object> fetchUsers(@RequestParam("term") String name) {
         return messageService.findUsersForNewMessage(name);
+    }
+
+    @RequestMapping("/session")
+    public String updateSession(HttpSession session) {
+        long userId = (long) session.getAttribute("user_id");
+        session.setAttribute("notifications", notificationService.fetchAll(userId));
+        return "Done";
     }
 
 }

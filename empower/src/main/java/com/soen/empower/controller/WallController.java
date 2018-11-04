@@ -94,6 +94,7 @@ public class WallController {
     @RequestMapping(value = "/addComment/{id}", method = RequestMethod.POST)
     public String addComment(@ModelAttribute Comment comment, @PathVariable("id") long userId) {
         commentService.add(comment);
+        notificationService.notify(comment);
         return "redirect:/wall/" + userId;
     }
 

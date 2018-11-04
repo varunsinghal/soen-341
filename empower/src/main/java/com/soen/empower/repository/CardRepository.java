@@ -8,7 +8,7 @@ import java.util.List;
  * The interface CardRepository
  */
 
-public interface CardRepository extends CrudRepository<Card, String> {
+public interface CardRepository extends CrudRepository<Card, Long> {
 	/* find all posts by descending order
 	 * @return list of cards(post)
 	 */
@@ -19,4 +19,6 @@ public interface CardRepository extends CrudRepository<Card, String> {
      * @return list of cards (posts)
      */
     List<Card> findByBelongsToIdOrderByIdDesc(long userId);
+
+    Card findById(long id);
 }

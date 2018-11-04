@@ -1,9 +1,7 @@
 package com.soen.empower.service;
 
-import com.soen.empower.entity.Card;
-import com.soen.empower.entity.Message;
-import com.soen.empower.entity.Notification;
-import com.soen.empower.entity.User;
+import com.soen.empower.entity.*;
+import com.soen.empower.repository.CardRepository;
 import com.soen.empower.repository.NotificationRepository;
 import com.soen.empower.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,9 @@ public class NotificationService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CardRepository cardRepository;
+
     /**
      * Send notification to users subscribed on channel "/user/queue/notify".
      * <p>
@@ -47,7 +48,18 @@ public class NotificationService {
         User toUser = userRepository.findById(card.getBelongsTo().getId());
         User fromUser = userRepository.findById(card.getUser().getId());
         if(!toUser.getId().equals(fromUser.getId())) {
-            String HTML = fromUser.getFullName() + " posted on your wall about '" + card.getTitle() + "' : " + card.getText();
+            String HTML = fromUser.getFullName() + " posted on your wall about : " + card.getTitle();
+            sendNotification(toUser, HTML, "wall");
+        }
+    }
+
+
+    public void notify(Comment comment) {
+        Card card = cardRepository.findById((long) comment.getCard().getId());
+        User toUser = userRepository.findById(card.getBelongsTo().getId());
+        User fromUser = userRepository.findById(comment.getUser().getId());
+        if(!toUser.getId().equals(fromUser.getId())){
+            String HTML = fromUser.getFullName() + " commented on the post : " + comment.getText();
             sendNotification(toUser, HTML, "wall");
         }
     }
@@ -72,6 +84,5 @@ public class NotificationService {
     public void delete(Notification notification) {
         notificationRepository.delete(notification);
     }
-
 }
 

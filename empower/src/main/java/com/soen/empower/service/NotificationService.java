@@ -51,7 +51,7 @@ public class NotificationService {
 
 
     public List<Notification> fetchAll(Long id) {
-        return notificationRepository.findByUserId(id);
+        return notificationRepository.findByUserIdOrderByIdDesc(id);
     }
 }
 

@@ -28,6 +28,12 @@ return;
 function notify(message) {
 $("#newNotification i").css("display", "inline-block");
 $("#notifications-area").prepend(message);
+$.ajax({
+    url: '/api/session',
+    success: function(result){
+        console.log("session variable of notification updated.");
+    }
+});
 return;
 }
 

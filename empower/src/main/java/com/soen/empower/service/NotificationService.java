@@ -1,5 +1,6 @@
 package com.soen.empower.service;
 
+import com.soen.empower.entity.Card;
 import com.soen.empower.entity.Message;
 import com.soen.empower.entity.Notification;
 import com.soen.empower.entity.User;
@@ -42,11 +43,20 @@ public class NotificationService {
         sendNotification(toUser, HTML, "message");
     }
 
+    public void notify(Card card) {
+        User toUser = userRepository.findById(card.getBelongsTo().getId());
+        User fromUser = userRepository.findById(card.getUser().getId());
+        if(!toUser.getId().equals(fromUser.getId())) {
+            String HTML = fromUser.getFullName() + " posted on your wall about '" + card.getTitle() + "' : " + card.getText();
+            sendNotification(toUser, HTML, "wall");
+        }
+    }
+
     private void sendNotification(User toUser, String HTML, String type) {
         Notification notification = new Notification(HTML, toUser, type);
         notification = notificationRepository.save(notification);
-        String wrappedHTML = "<li>" + "<a href='/notification/'" + notification.getId() +
-                "' class='dropdown-item'>" + HTML + "</a></li>";
+        String wrappedHTML = "<li>" + "<a href='/notification/" + notification.getId() + "' class='dropdown-item'>"
+                + HTML + "</a></li>";
         messagingTemplate.convertAndSendToUser(toUser.getUsername(), "/queue/notify", wrappedHTML);
     }
 
@@ -62,5 +72,6 @@ public class NotificationService {
     public void delete(Notification notification) {
         notificationRepository.delete(notification);
     }
+
 }
 

@@ -68,9 +68,12 @@
                         <i class="fas fa-bell"></i> Notifications
                         <span id="newNotification"><i class="fas fa-circle"></i></span>
                     </a>
-                    <div class="dropdown-menu" id="notifications-area" aria-labelledby="navbarDropdown">
-
-                    </div>
+                    <ul class="dropdown-menu dropdown-menu-right" id="notifications-area" aria-labelledby="navbarDropdown">
+                        <li th:each="notification : ${session.notifications}">
+                            <a href="#" class="dropdown-item" th:attr="notificationId=${notification.id}"
+                               th:text="${notification.HTML}"></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>

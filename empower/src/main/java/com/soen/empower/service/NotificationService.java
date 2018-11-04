@@ -10,6 +10,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class for sending notification messages.
@@ -44,7 +45,7 @@ public class NotificationService {
     private void sendNotification(User toUser, String HTML, String type) {
         Notification notification = new Notification(HTML, toUser, type);
         notification = notificationRepository.save(notification);
-        String wrappedHTML = "<li>" + "<a href='#' notificationId ='" + notification.getId() +
+        String wrappedHTML = "<li>" + "<a href='/notification/'" + notification.getId() +
                 "' class='dropdown-item'>" + HTML + "</a></li>";
         messagingTemplate.convertAndSendToUser(toUser.getUsername(), "/queue/notify", wrappedHTML);
     }
@@ -52,6 +53,14 @@ public class NotificationService {
 
     public List<Notification> fetchAll(Long id) {
         return notificationRepository.findByUserIdOrderByIdDesc(id);
+    }
+
+    public Notification find(long id) {
+        return notificationRepository.findById(id);
+    }
+
+    public void delete(Notification notification) {
+        notificationRepository.delete(notification);
     }
 }
 

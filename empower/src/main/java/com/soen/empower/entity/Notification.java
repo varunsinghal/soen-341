@@ -9,6 +9,7 @@ public class Notification {
     @GeneratedValue
     private Long id;
     private String HTML;
+    private String type;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -17,9 +18,10 @@ public class Notification {
     Notification(){
     }
 
-    public Notification(String HTML, User user) {
+    public Notification(String HTML, User user, String type) {
         this.HTML = HTML;
         this.user = user;
+        this.type = type;
     }
 
     public Long getId() {
@@ -44,5 +46,13 @@ public class Notification {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

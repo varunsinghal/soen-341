@@ -1,6 +1,8 @@
 package com.soen.empower.config;
 
+import com.soen.empower.entity.Notification;
 import com.soen.empower.entity.User;
+import com.soen.empower.service.NotificationService;
 import com.soen.empower.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @Component
@@ -19,6 +22,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
 
     /**
      * On successful authentication, the session variables are set for the user depending upon the
@@ -35,6 +40,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         request.getSession().setAttribute("user_id", user.getId());
         request.getSession().setAttribute("name", user.getUsername());
         request.getSession().setAttribute("full_name", user.getFullName());
+        request.getSession().setAttribute("notifications", notificationService.fetchAll(user.getId()));
 
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("ROLE_TEACHER".equals(auth.getAuthority()))

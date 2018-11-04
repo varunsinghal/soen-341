@@ -27,7 +27,7 @@ return;
 */
 function notify(message) {
 $("#newNotification i").css("display", "inline-block");
-$("#notifications-area").append($.parseHTML(message));
+$("#notifications-area").prepend(message);
 return;
 }
 

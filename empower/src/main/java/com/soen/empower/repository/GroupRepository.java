@@ -16,4 +16,8 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
 	 */
 	
     List<Group> findByNameContainingIgnoreCase(String name);
+
+    List<Group> findByMembersId(long userId);
+
+    Group findById(long groupId);
 }

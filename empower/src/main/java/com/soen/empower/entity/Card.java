@@ -20,6 +20,10 @@ public class Card {
     private User belongsTo;
 
     @ManyToOne
+    @JoinColumn(name="belongs_to_group_id")
+    private Group belongsToGroup;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -146,5 +150,13 @@ public class Card {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public Group getBelongsToGroup() {
+        return belongsToGroup;
+    }
+
+    public void setBelongsToGroup(Group belongsToGroup) {
+        this.belongsToGroup = belongsToGroup;
     }
 }

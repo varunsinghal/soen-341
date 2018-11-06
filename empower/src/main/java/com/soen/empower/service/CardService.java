@@ -42,4 +42,8 @@ public class CardService {
     public List<Card> fetchCardsFor(long userId) {
         return cardRepository.findByBelongsToIdOrderByIdDesc(userId);
     }
+
+    public List<Card> fetchCardsForGroup(long groupId){
+        return cardRepository.findByBelongsToGroupIdOrderByIdDesc(groupId);
+    }
 }

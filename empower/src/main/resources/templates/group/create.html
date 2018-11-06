@@ -25,6 +25,15 @@
                         <textarea name="description" class="form-control" rows="3"></textarea>
                     </li>
                     <li class="list-group-item">
+                        <div class="form-group">
+                            <label class="sr-only">search</label>
+                            <input class="form-control" placeholder="Username" type="text" id="username"/>
+                        </div>
+                    </li>
+                    <li id="members" class="list-group-item">
+                        <input type="hidden" name="members[0].id" th:value="${session.user_id}">
+                    </li>
+                    <li class="list-group-item">
                         <input type="hidden" name="owner.id" th:value="${session.user_id}">
                         <input type="submit" name="submit" class="btn btn-success" value="Create group">
                     </li>
@@ -38,8 +47,31 @@
     </div>
 </div>
 
-<div th:replace="fragments/layout :: footer"/>
+<input type="hidden" id="apicontroller" th:value="@{/api/users}" >
 
+<div th:replace="fragments/layout :: footer"/>
+<script>
+$( function() {
+        var memberCount = 1;
+		$( "#username" ).autocomplete({
+			source: $("#apicontroller").val(),
+			select: function( event, ui ) {
+			    console.log(ui);
+				$("#members").append('<input type="hidden" name="members[' + memberCount + '].id" value="' + ui.item.value + '" >');
+				$("#members").append(memberCount + 1 + '. ' + ui.item.label + ' <br>');
+				memberCount = memberCount + 1;
+				return false;
+			},
+			change: function (event, ui) {
+				if(!ui.item){
+					$("#username").val("");
+				}
+			}
+		});
+	} );
+
+
+</script>
 
 </body>
 </html>

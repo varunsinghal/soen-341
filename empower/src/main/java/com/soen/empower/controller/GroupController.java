@@ -84,4 +84,5 @@ public class GroupController {
         groupService.add(group);
         return "redirect:/group";
     }
+
 }

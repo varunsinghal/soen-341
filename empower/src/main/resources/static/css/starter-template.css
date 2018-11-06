@@ -47,3 +47,9 @@ body {
 .navbar .navbar-nav .nav-link.active{
     color: blue;
 }
+
+.list-group-item.active{
+    background-color: #05728f;
+}
+.list-group-item.active div a{ color:white;}
+

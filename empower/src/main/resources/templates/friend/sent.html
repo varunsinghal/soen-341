@@ -10,33 +10,19 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
+            <div th:replace="fragments/submenu :: friend(sent)"></div>
         </div>
 
         <div class="col-md-6 gedf-main">
-            <!-- Nav bar at the top of page with 3 links -->
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/friend}"><i class="fas fa-user-friends"></i> Current friends</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/friend/received}">
-                        <i class="fa fa-arrow-left"></i> Received
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/friend/sent}">
-                        <i class="fa fa-arrow-right"></i>
-                        Sent
-                    </a>
-                </li>
-            </ul>
             <!-- list of all requests received -->
             <div class="card gedf-card" th:each="request : ${requests}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${request.otherUser.fullName}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="${request.otherUser.username}"></h6>
                     <p class="card-text"></p>
-                    <a th:href="@{/user/profile/} + ${request.otherUser.id}" class="card-link">View profile</a>
+                    <a th:href="@{/user/profile/} + ${request.otherUser.id}" class="card-link">
+                        <i class="fas fa-user"></i> View profile
+                    </a>
                 </div>
             </div>
         </div> <!-- .col md 6 -->

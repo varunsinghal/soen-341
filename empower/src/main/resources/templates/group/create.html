@@ -58,7 +58,7 @@ $( function() {
 			select: function( event, ui ) {
 			    console.log(ui);
 				$("#members").append('<input type="hidden" name="members[' + memberCount + '].id" value="' + ui.item.value + '" >');
-				$("#members").append(memberCount + 1 + '. ' + ui.item.label + ' <br>');
+				$("#members").append(memberCount + '. ' + ui.item.label + ' <br>');
 				memberCount = memberCount + 1;
 				return false;
 			},

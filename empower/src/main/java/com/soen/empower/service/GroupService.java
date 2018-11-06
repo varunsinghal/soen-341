@@ -29,4 +29,12 @@ public class GroupService {
     public List<Group> findByPartialName(String name) {
         return groupRepository.findByNameContainingIgnoreCase(name);
     }
+
+    public List<Group> fetchJoinedGroups(long userId) {
+        return groupRepository.findByMembersId(userId);
+    }
+
+    public Group findById(long groupId) {
+        return groupRepository.findById(groupId);
+    }
 }

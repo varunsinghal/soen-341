@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div th:fragment="friend(activeTab)">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:classappend="${activeTab == 'current'} ? 'active' : null">
+                <div class="h7">
+                    <a class="nav-link" th:href="@{/friend}">
+                        <i class="fas fa-user-friends"></i> Current friends</a>
+                </div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'received'} ? 'active' : null">
+                <div class="h7">
+                    <a class="nav-link" th:href="@{/friend/received}">
+                        <i class="fa fa-arrow-left"></i> Received
+                    </a>
+                </div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'sent'} ? 'active' : null">
+                <div class="h7">
+                    <a class="nav-link" th:href="@{/friend/sent}">
+                        <i class="fa fa-arrow-right"></i>
+                        Sent
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

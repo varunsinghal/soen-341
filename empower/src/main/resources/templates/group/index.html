@@ -5,13 +5,13 @@
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
-<div th:replace="fragments/layout :: nav"/>
+<div th:replace="fragments/layout :: nav(group)"/>
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
             <div class="card">
-                <ul class="list-group list-group-flush">
+              say it right  <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <form th:action="@{/group/search}" method="get">
                             <input type="text" class="form-control" name="name" th:value="${searchString}?: ''"

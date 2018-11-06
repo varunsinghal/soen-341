@@ -41,4 +41,9 @@ body {
         vertical-align: top;
         font-size: 0.7em;
         display:none;
+        color: #05728f;
+}
+
+.navbar .navbar-nav .nav-link.active{
+    color: blue;
 }

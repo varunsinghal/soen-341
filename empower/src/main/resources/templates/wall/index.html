@@ -10,15 +10,7 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h5" th:text="${owner.fullName}">Full name</div>
-                    <div class="h7 text-muted" th:text="${owner.username}"></div>
-                    <div class="h7 text-muted">
-                        <a th:href="@{/user/profile/}"><i class="fas fa-external-link-alt"></i> View profile</a>
-                    </div>
-                </div>
-            </div>
+            <div th:replace="fragments/submenu :: wall"></div>
         </div>
         <div class="col-md-6 gedf-main">
 
@@ -31,7 +23,6 @@
                                aria-controls="posts" aria-selected="true">Make
                                 announcement</a>
                         </li>
-                        <!-- TODO: Image upload -->
                         <li class="nav-item">
                             <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
                                aria-selected="false" href="#images">Image</a>

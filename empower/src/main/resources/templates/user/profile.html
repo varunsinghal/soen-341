@@ -9,6 +9,7 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
+            <div th:replace="fragments/submenu :: user('profile')"></div>
         </div>
 
         <div class="col-md-6 gedf-main">
@@ -43,17 +44,6 @@
         <div class="col-md-3 text-center">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" height="200px">
             <ul class="nav flex-column">
-                <li class="nav-item" th:if="${session.user_id} == ${user.id}">
-                    <a class="nav-link" th:href="@{/user/edit/}"><i class="fas fa-edit"></i> Edit profile</a>
-                </li>
-                <li class="nav-item" th:if="${session.user_id} == ${user.id}">
-                    <a class="nav-link" th:href="@{/wall/}"><i class="fas fa-comment-alt"></i> My wall</a>
-                </li>
-                <li class="nav-item" th:if="${session.user_id} != ${user.id} and ${friendStatus} == '1'">
-                    <a class="nav-link" th:href="@{/wall/} + ${user.id}">
-                        <i class="fas fa-comment-alt"></i> Visit the wall
-                    </a>
-                </li>
                 <li class="nav-item" th:if="${session.user_id} != ${user.id} and ${friendStatus} == '1'">
                     <a class="nav-link" th:href="@{/friend/remove} + '?id=' + ${user.id}" id="removeFriend">
                         <i class="fas fa-user-minus"></i> Remove friend

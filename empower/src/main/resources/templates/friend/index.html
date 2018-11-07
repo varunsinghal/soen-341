@@ -21,9 +21,10 @@
                     <h6 class="card-subtitle mb-2 text-muted" th:text="${friend.user.username}"></h6>
                     <p class="card-text"></p>
                     <a th:href="@{/user/profile/} + ${friend.user.id}" class="card-link">
-                        <i class="fas fa-user"></i> View profile</a>
+                        <i class="fas fa-user"></i> View profile
+                    </a>
                     &ensp;&ensp;&ensp;
-                    <a th:href="@{/wall/} + ${friend.otherUser.id}" class="card-link">
+                    <a th:href="@{/wall/} + ${friend.user.id}" class="card-link">
                         <i class="fas fa-comment-alt"></i> Visit the wall
                     </a>
                 </div>

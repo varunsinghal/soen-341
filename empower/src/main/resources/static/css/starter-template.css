@@ -45,7 +45,7 @@ body {
 }
 
 .navbar .navbar-nav .nav-link.active{
-    color: blue;
+    color: #05728f;
 }
 
 .list-group-item.active{

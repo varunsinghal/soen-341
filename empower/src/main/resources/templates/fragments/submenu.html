@@ -98,12 +98,6 @@
                        placeholder="Find groups"/>
             </form>
         </li>
-        <li class="list-group-item" th:if="${group != null}"
-            th:classappend="${activeTab == 'wall'} ? 'active' : null">
-            <div class="h7">
-                <a th:href="@{/group/} + ${group.id}" th:text="${group.name}">Group name</a>
-            </div>
-        </li>
         <li class="list-group-item" th:classappend="${activeTab == 'index'} ? 'active' : null">
             <div class="h7"><a th:href="@{/group/}">My Groups</a></div>
         </li>

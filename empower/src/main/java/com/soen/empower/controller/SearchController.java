@@ -1,5 +1,6 @@
 package com.soen.empower.controller;
 
+import com.soen.empower.service.GroupService;
 import com.soen.empower.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class SearchController {
    
     @Autowired
     private UserService userService;
+    @Autowired
+    private GroupService groupService;
 
     /**
      * Search by search index.
@@ -30,7 +33,8 @@ public class SearchController {
     @RequestMapping("")
     public ModelAndView searchIndex(@RequestParam("name") String search) {
         ModelAndView model = new ModelAndView("search/index");
-        model.addObject("results", userService.findByPartialName(search));
+        model.addObject("users", userService.findByPartialName(search));
+        model.addObject("groups", groupService.findByPartialName(search));
         return model;
     }
 }

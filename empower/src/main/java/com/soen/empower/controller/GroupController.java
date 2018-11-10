@@ -49,6 +49,7 @@ public class GroupController {
     public ModelAndView indexGroup(HttpSession session) {
         ModelAndView model = new ModelAndView("group/index");
         long userId = (long) session.getAttribute("user_id");
+        model.addObject("activeTab", "index");
         model.addObject("groups", groupService.fetchJoinedGroups(userId));
         return model;
     }
@@ -61,6 +62,7 @@ public class GroupController {
     @RequestMapping("/all")
     public ModelAndView allGroup() {
         ModelAndView model = new ModelAndView("group/index");
+        model.addObject("activeTab", "all");
         model.addObject("groups", groupService.fetchAll());
         return model;
     }
@@ -73,6 +75,7 @@ public class GroupController {
     @RequestMapping("/search")
     public ModelAndView searchGroup(@RequestParam("name") String search) {
         ModelAndView model = new ModelAndView("group/index");
+        model.addObject("activeTab", "search");
         model.addObject("groups", groupService.findByPartialName(search));
         model.addObject("searchString", search);
         return model;

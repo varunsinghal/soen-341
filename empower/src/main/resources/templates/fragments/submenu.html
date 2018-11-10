@@ -4,96 +4,110 @@
 <body>
 
 <div th:fragment="friend(activeTab)">
-    <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" th:classappend="${activeTab == 'current'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/friend}">
-                        <i class="fas fa-user-friends"></i> Current friends</a>
-                </div>
-            </li>
-            <li class="list-group-item" th:classappend="${activeTab == 'received'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/friend/received}">
-                        <i class="fa fa-arrow-left"></i> Received
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item" th:classappend="${activeTab == 'sent'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/friend/sent}">
-                        <i class="fa fa-arrow-right"></i>
-                        Sent
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:classappend="${activeTab == 'current'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/friend}">
+                    <i class="fas fa-user-friends"></i> Current friends</a>
+            </div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'received'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/friend/received}">
+                    <i class="fa fa-arrow-left"></i> Received
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'sent'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/friend/sent}">
+                    <i class="fa fa-arrow-right"></i>
+                    Sent
+                </a>
+            </div>
+        </li>
+    </ul>
 </div>
 <!-- todo : merge wall controller and user controller -->
 <div th:fragment="wall">
-    <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="h5" th:text="${owner.fullName}">
-                </div>
-            </li>
-            <li class="list-group-item active">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/wall/} + ${owner.id}">
-                        <i class="fas fa-comment-alt"></i> Wall
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/user/profile/} + ${owner.id}">
-                        <i class="fas fa-user"></i> Profile
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item" th:if="${session.user_id == owner.id}">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/user/edit}">
-                        <i class="fas fa-edit"></i> Edit profile
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="h5" th:text="${owner.fullName}">
+            </div>
+        </li>
+        <li class="list-group-item active">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/wall/} + ${owner.id}">
+                    <i class="fas fa-comment-alt"></i> Wall
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/user/profile/} + ${owner.id}">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item" th:if="${session.user_id == owner.id}">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/user/edit}">
+                    <i class="fas fa-edit"></i> Edit profile
+                </a>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <div th:fragment="user(activeTab)">
-    <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="h5" th:text="${user.fullName}">
-                </div>
-            </li>
-            <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/wall/} + ${user.id}">
-                        <i class="fas fa-comment-alt"></i> Wall
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item" th:classappend="${activeTab == 'profile'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/user/profile/} + ${user.id}">
-                        <i class="fas fa-user"></i> Profile
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item" th:if="${session.user_id == user.id}"
-                th:classappend="${activeTab == 'edit'} ? 'active' : null">
-                <div class="h7">
-                    <a class="nav-link" th:href="@{/user/edit}">
-                        <i class="fas fa-edit"></i> Edit profile
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="h5" th:text="${user.fullName}">
+            </div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/wall/} + ${user.id}">
+                    <i class="fas fa-comment-alt"></i> Wall
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'profile'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/user/profile/} + ${user.id}">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item" th:if="${session.user_id == user.id}"
+            th:classappend="${activeTab == 'edit'} ? 'active' : null">
+            <div class="h7">
+                <a class="nav-link" th:href="@{/user/edit}">
+                    <i class="fas fa-edit"></i> Edit profile
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="group(activeTab)">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:classappend="${activeTab == 'search'} ? 'active' : null">
+            <form th:action="@{/group/search}" method="get">
+                <input type="text" class="form-control" name="name" th:value="${searchString}?: ''"
+                       placeholder="Find groups"/>
+            </form>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'index'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/}">My Groups</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'all'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/all}">All Groups</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'create'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/create}">New Group</a></div>
+        </li>
+    </ul>
 </div>
 
 </body>

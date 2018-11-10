@@ -14,14 +14,25 @@
 
         <div class="col-md-6 gedf-main">
             <!-- search page to display all the results -->
-            <div class="card gedf-card" th:each="result : ${results}">
+            <div class="card gedf-card" th:each="user : ${users}">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${result.fullName}"></h5>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="${result.role}"></h6>
-                    <p class="card-text" th:text="${result.username}"></p>
-                    <a th:href="@{/user/profile/} + ${result.id}" class="card-link">View profile</a>
+                    <h5 class="card-title" th:text="${user.fullName}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${user.role}"></h6>
+                    <p class="card-text" th:text="${user.username}"></p>
+                    <a th:href="@{/user/profile/} + ${user.id}" class="card-link">View profile</a>
                 </div>
             </div>
+            <div class="card gedf-card" th:each="group : ${groups}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${group.name}"></h5>
+                    <p class="card-text text-muted">
+                        <span th:text="${group.description}"></span><br/>
+                        Members (<span th:text="${#lists.size(group.members)}"></span>)
+                    </p>
+
+                </div>
+            </div>
+
         </div> <!-- .col md 6 -->
         <div class="col-md-3 text-center">
 

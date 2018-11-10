@@ -1,6 +1,7 @@
 package com.soen.empower.controller;
 
 import com.soen.empower.fixture.Factory;
+import com.soen.empower.service.GroupService;
 import com.soen.empower.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,14 +27,17 @@ public class SearchControllerTest {
     @MockBean
     private UserService userService;
 
+    @MockBean
+    private GroupService groupService;
+
     @Test
     public void getSearch_ReturnSearchTemplate() throws Exception {
         when(userService.findByPartialName("varun")).thenReturn(Arrays.asList(Factory.user1, Factory.user2));
         mockMvc.perform(MockMvcRequestBuilders.get("/search?name=varun"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("search/index"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("results"))
-                .andExpect(MockMvcResultMatchers.model().attribute("results", Arrays.asList(Factory.user1, Factory.user2)));
+                .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
+                .andExpect(MockMvcResultMatchers.model().attribute("users", Arrays.asList(Factory.user1, Factory.user2)));
 
     }
 }

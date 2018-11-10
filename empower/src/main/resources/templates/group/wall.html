@@ -10,11 +10,7 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    Menu item
-                </div>
-            </div>
+            <div th:replace="fragments/submenu :: group(wall)"></div>
         </div>
         <div class="col-md-6 gedf-main">
 
@@ -76,7 +72,7 @@
                                 </div>
                                 <br><br>
                                 <div class="btn-toolbar justify-content-between">
-                                    <input type="hidden" name="text" value="" />
+                                    <input type="hidden" name="text" value=""/>
                                     <input type="hidden" name="user.id" th:value="${session.user_id}"/>
                                     <input type="hidden" name="belongsToGroup.id" th:value="${group.id}">
                                     <div class="btn-group">

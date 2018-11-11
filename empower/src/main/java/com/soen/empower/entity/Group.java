@@ -5,28 +5,48 @@ import java.util.List;
 
 /**
  * This Entity Class Group.
- * 
+ *
  * @version 1.0
  * @since 1.0
  */
 @Entity
 @Table(name = "groups")
 public class Group {
-    
-    /** The id. */
+
+    /**
+     * The id.
+     */
     @Id
     @GeneratedValue
     private Long id;
 
-    /** The name. */
+    /**
+     * The name.
+     */
     private String name;
-    
-    /** The description. */
+
+    /**
+     * The description.
+     */
     private String description;
 
-    /** The members. */
-    @OneToMany(mappedBy = "group")
-    private List<Member> members;
+    /**
+     * The owner.
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
+
+    /**
+     * The members.
+     */
+    @ManyToMany
+    @JoinTable
+    private List<User> members;
+
+    @ManyToMany
+    @JoinTable
+    private List<User> admins;
 
     /**
      * Gets the constructed group id.
@@ -48,7 +68,6 @@ public class Group {
 
     /**
      * Gets the constructed group name.
-     *
      */
     public String getName() {
         return name;
@@ -63,7 +82,6 @@ public class Group {
 
     /**
      * Gets the constructed group description.
-     *
      */
     public String getDescription() {
         return description;
@@ -76,11 +94,27 @@ public class Group {
         this.description = description;
     }
 
-    public List<Member> getMembers() {
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<User> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(List<User> members) {
         this.members = members;
+    }
+
+    public List<User> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(List<User> admins) {
+        this.admins = admins;
     }
 }

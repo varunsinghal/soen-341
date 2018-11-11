@@ -21,12 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
-    /**
-     * Enabled JDBC connection based authentication. Added permission set to the authenticated user.
-     *
-     * @param auth the auth
-     * @throws Exception the exception
-     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // Roles - Teacher and Parent

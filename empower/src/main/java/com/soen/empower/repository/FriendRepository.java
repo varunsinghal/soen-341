@@ -4,6 +4,7 @@ import com.soen.empower.entity.Friend;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+
 /*
  * The interface FriendRepository
  */
@@ -22,7 +23,7 @@ public interface FriendRepository extends CrudRepository<Friend, String> {
      * @param two arguments i.e. userId(Long), enabled(int)
      * @return list of friends
      */
-    
+
     List<Friend> findAllByUserIdAndEnabled(long userId, int enabled);
 
     /**
@@ -31,7 +32,7 @@ public interface FriendRepository extends CrudRepository<Friend, String> {
      * @param two arguments i.e. UserId(Long), enabled(int)
      * @return list of friends
      */
-    
+
     List<Friend> findAllByOtherUserIdAndEnabled(long userId, int enabled);
 
     /**

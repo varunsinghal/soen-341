@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="card(group)">
+    <div class="card-body">
+        <a th:href="@{/group/} + ${group.id}">
+            <h5 class="card-title" th:text="${group.name}"></h5>
+        </a>
+        <p class="card-text text-muted">
+            <span th:text="${group.description}"></span><br/>
+            Members (<span th:text="${#lists.size(group.members)}"></span>)
+        </p>
+    </div>
+</div>
+</body>
+</html>

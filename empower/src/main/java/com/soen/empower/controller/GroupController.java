@@ -113,6 +113,13 @@ public class GroupController {
         return model;
     }
 
+    @RequestMapping("/{id}/members")
+    public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId){
+        ModelAndView model = new ModelAndView("group/members");
+        model.addObject("group", groupService.findById(groupId));
+        return model;
+    }
+
     /**
      * addPost method receives POST request to save feed post.
      *

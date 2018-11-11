@@ -24,15 +24,9 @@ public class Group {
     /** The description. */
     private String description;
 
-    /** The owner. */
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User owner;
-
     /** The members. */
-    @ManyToMany
-    @JoinTable
-    private List<User> members;
+    @OneToMany(mappedBy = "group")
+    private List<Member> members;
 
     /**
      * Gets the constructed group id.
@@ -82,36 +76,11 @@ public class Group {
         this.description = description;
     }
 
-    /**
-     * Gets the constructed group owner.
-     *
-     * @return the owner
-     */
-    public User getOwner() {
-        return owner;
-    }
-
-    /**
-     * Constructing the group owner.
-     *
-     */
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    /**
-     * Gets the constructed group members.
-     *
-     */
-    public List<User> getMembers() {
+    public List<Member> getMembers() {
         return members;
     }
 
-    /**
-     * Constructing the group members.
-     *
-     */
-    public void setMembers(List<User> members) {
+    public void setMembers(List<Member> members) {
         this.members = members;
     }
 }

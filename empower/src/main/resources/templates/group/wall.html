@@ -202,8 +202,8 @@
                     <h5 class="card-title" th:text="${group.name}">About this group ! </h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="${group.description}"></h6>
                     <p class="card-text"></p>
-
                 </div>
+                <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, wall)"></div>
             </div>
         </div>
     </div>

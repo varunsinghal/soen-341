@@ -33,15 +33,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Dislike> dislikes;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Card> cards;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Comment> comments;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Conversation> conversations;
-
     @OneToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
@@ -49,9 +40,6 @@ public class User {
     @OneToOne
     @JoinColumn(name = "parent_id")
     private Parent parent;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Friend> friends;
 
     public User() {
     }
@@ -64,22 +52,6 @@ public class User {
         this.parent = parent;
         this.teacher = teacher;
     }
-
-//    public List<Card> getCards() {
-//        return cards;
-//    }
-//
-//    public void setCards(List<Card> cards) {
-//        this.cards = cards;
-//    }
-//
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
 
     public Long getId() {
         return id;
@@ -153,14 +125,6 @@ public class User {
         this.description = description;
     }
 
-//    public List<Conversation> getConversations() {
-//        return conversations;
-//    }
-//
-//    public void setConversations(List<Conversation> conversations) {
-//        this.conversations = conversations;
-//    }
-
     public String getEmail() {
         return email;
     }
@@ -193,11 +157,4 @@ public class User {
         this.dislikes = dislikes;
     }
 
-    //    public List<Friend> getFriends() {
-//        return friends;
-//    }
-//
-//    public void setFriends(List<Friend> friends) {
-//        this.friends = friends;
-//    }
 }

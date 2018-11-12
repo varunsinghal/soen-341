@@ -1,7 +1,9 @@
 package com.soen.empower.service;
 
 import com.soen.empower.entity.Group;
+import com.soen.empower.entity.User;
 import com.soen.empower.repository.GroupRepository;
+import com.soen.empower.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ public class GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     GroupService(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
@@ -46,5 +50,19 @@ public class GroupService {
     public boolean isAdmin(long userId, long groupId) {
         Group group = groupRepository.findByAdminsIdAndId(userId, groupId);
         return group != null;
+    }
+
+    public void addAdmin(long groupId, long userId) {
+        Group group = groupRepository.findById(groupId);
+        User admin = userRepository.findById(userId);
+        group.getAdmins().add(admin);
+        groupRepository.save(group);
+    }
+
+    public void removeAdmin(long groupId, long userId){
+        Group group = groupRepository.findById(groupId);
+        User admin = userRepository.findById(userId);
+        group.getAdmins().remove(admin);
+        groupRepository.save(group);
     }
 }

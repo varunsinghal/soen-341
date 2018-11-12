@@ -37,4 +37,14 @@ public class GroupService {
     public Group findById(long groupId) {
         return groupRepository.findById(groupId);
     }
+
+    public boolean isOwner(long userId, long groupId) {
+        Group group = groupRepository.findByOwnerIdAndId(userId, groupId);
+        return group != null;
+    }
+
+    public boolean isAdmin(long userId, long groupId) {
+        Group group = groupRepository.findByAdminsIdAndId(userId, groupId);
+        return group != null;
+    }
 }

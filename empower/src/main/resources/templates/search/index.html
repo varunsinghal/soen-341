@@ -15,15 +15,10 @@
         <div class="col-md-6 gedf-main">
             <!-- search page to display all the results -->
             <div class="card gedf-card" th:each="user : ${users}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${user.fullName}"></h5>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="${user.role}"></h6>
-                    <p class="card-text" th:text="${user.username}"></p>
-                    <a th:href="@{/user/profile/} + ${user.id}" class="card-link">View profile</a>
-                </div>
+                <div th:replace="user/card :: card(${user})"/>
             </div>
             <div class="card gedf-card" th:each="group : ${groups}">
-                <div th:replace="group/card :: card(${group})" />
+                <div th:replace="group/card :: card(${group})"/>
             </div>
 
         </div> <!-- .col md 6 -->

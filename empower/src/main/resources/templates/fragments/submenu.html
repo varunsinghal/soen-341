@@ -110,5 +110,27 @@
     </ul>
 </div>
 
+
+<div th:fragment="groupRightMenu(id,activeTab)">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/} + ${id}"><i class="fas fa-comment-alt"></i> Wall</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'owners'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/} + ${id} + '/owners'"><i class="fas fa-user" style="color:green"></i> Owners</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'admins'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/} + ${id} + '/admins'"><i class="fas fa-users" style="color:red"></i> Admins</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'members'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/} + ${id} + '/members'"><i class="fas fa-users"></i> Members</a></div>
+        </li>
+        <li class="list-group-item" th:classappend="${activeTab == 'leave'} ? 'active' : null">
+            <div class="h7"><a th:href="@{/group/} + ${id} + '/leave'"><i class="fas fa-sign-out-alt"></i> Leave group</a></div>
+        </li>
+    </ul>
+</div>
+
+
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: header"/>
+</head>
+<body>
+<div th:replace="fragments/layout :: nav(group)"/>
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div th:replace="fragments/submenu :: group(page)"></div>
+        </div>
+
+        <div class="col-md-6 gedf-main">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Description</div>
+                        <div class="h6" th:text="${group.description}"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Owner</div>
+                        <div class="h6" th:text="${group.owner.fullName}"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Contact owner</div>
+                        <div class="h6" th:text="${group.owner.email}"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted">Total members</div>
+                        <div class="h6" th:text="${#lists.size(group.members)}"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h7 text-muted"></div>
+                        <div class="h6" th:if="${isMember == true}">Leave the group</div>
+                        <div class="h6" th:unless="${isMember == true}">Request to join group</div>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- .col md 6 -->
+        <div class="col-md-3">
+            <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, ${group.name}, page)"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/layout :: footer"/>
+
+</body>
+</html>

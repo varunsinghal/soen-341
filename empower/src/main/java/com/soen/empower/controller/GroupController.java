@@ -3,6 +3,7 @@ package com.soen.empower.controller;
 import com.soen.empower.entity.*;
 import com.soen.empower.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,9 +22,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/group")
 public class GroupController {
 
-    /**
-     * The group as a service.
-     */
     @Autowired
     private GroupService groupService;
     @Autowired
@@ -103,14 +101,26 @@ public class GroupController {
     }
 
     @RequestMapping("/{id}")
+    public ModelAndView viewGroupPage(HttpSession session, @PathVariable("id") long groupId){
+        ModelAndView model = new ModelAndView("group/page");
+        long userId = (long) session.getAttribute("user_id");
+        model.addObject("group", groupService.findById(groupId));
+        model.addObject("isMember", groupService.isMember(userId, groupId));
+        return model;
+    }
+
+    @RequestMapping("/{id}/wall")
     public ModelAndView viewGroup(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/wall");
         long userId = (long) session.getAttribute("user_id");
-        model.addObject("cards", cardService.fetchCardsForGroup(groupId));
-        model.addObject("group", groupService.findById(groupId));
-        model.addObject("likedCards", likeService.findCardsFor(userId));
-        model.addObject("dislikedCards", dislikeService.findCardsFor(userId));
-        return model;
+        if(groupService.isMember(userId, groupId)){
+            model.addObject("cards", cardService.fetchCardsForGroup(groupId));
+            model.addObject("group", groupService.findById(groupId));
+            model.addObject("likedCards", likeService.findCardsFor(userId));
+            model.addObject("dislikedCards", dislikeService.findCardsFor(userId));
+            return model;
+        }
+        throw new AccessDeniedException("403 returned");
     }
 
     /**
@@ -151,7 +161,7 @@ public class GroupController {
 
     @RequestMapping("/{id}/join")
     public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId){
-        return "redirect:/group/all";
+        return "redirect:/group/"+ groupId;
     }
 
     /**

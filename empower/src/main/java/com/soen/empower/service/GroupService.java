@@ -59,10 +59,15 @@ public class GroupService {
         groupRepository.save(group);
     }
 
-    public void removeAdmin(long groupId, long userId){
+    public void removeAdmin(long groupId, long userId) {
         Group group = groupRepository.findById(groupId);
         User admin = userRepository.findById(userId);
         group.getAdmins().remove(admin);
         groupRepository.save(group);
+    }
+
+    public boolean isMember(long userId, long groupId) {
+        Group group = groupRepository.findByIdAndMembersId(groupId, userId);
+        return group != null;
     }
 }

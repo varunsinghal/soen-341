@@ -66,8 +66,26 @@ public class GroupService {
         groupRepository.save(group);
     }
 
-    public boolean isMember(long userId, long groupId) {
+    public int isMember(long userId, long groupId) {
         Group group = groupRepository.findByIdAndMembersId(groupId, userId);
-        return group != null;
+        if(group != null) return 1;
+        group = groupRepository.findByIdAndRequestsId(groupId, userId);
+        if(group != null) return 0;
+        return -1;
+    }
+
+    public void addRequest(long userId, long groupId) {
+        Group group = groupRepository.findById(groupId);
+        group.getRequests().add(userRepository.findById(userId));
+        groupRepository.save(group);
+    }
+
+    public void leave(long userId, long groupId) {
+        Group group = groupRepository.findById(groupId);
+        User user = userRepository.findById(userId);
+        group.getAdmins().remove(user);
+        group.getMembers().remove(user);
+        //TODO: Owner leaves the group ??
+        groupRepository.save(group);
     }
 }

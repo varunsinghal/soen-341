@@ -26,4 +26,6 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
 	Group findByAdminsIdAndId(long userId, long groupId);
 
 	Group findByIdAndMembersId(long groupId, long userId);
+
+	Group findByIdAndRequestsId(long groupId, long userId);
 }

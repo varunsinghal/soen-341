@@ -113,7 +113,7 @@ public class GroupController {
     public ModelAndView viewGroup(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/wall");
         long userId = (long) session.getAttribute("user_id");
-        if(groupService.isMember(userId, groupId)){
+        if(groupService.isMember(userId, groupId) == 1){
             model.addObject("cards", cardService.fetchCardsForGroup(groupId));
             model.addObject("group", groupService.findById(groupId));
             model.addObject("likedCards", likeService.findCardsFor(userId));
@@ -161,8 +161,18 @@ public class GroupController {
 
     @RequestMapping("/{id}/join")
     public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId){
+        long userId = (long) session.getAttribute("user_id");
+        groupService.addRequest(userId, groupId);
         return "redirect:/group/"+ groupId;
     }
+
+    @RequestMapping("/{id}/leave")
+    public String leaveGroup(HttpSession session, @PathVariable("id") long groupId){
+        long userId = (long) session.getAttribute("user_id");
+        groupService.leave(userId, groupId);
+        return "redirect:/group/"+ groupId;
+    }
+
 
     /**
      * addPost method receives POST request to save feed post.

@@ -33,8 +33,15 @@
                     </li>
                     <li class="list-group-item">
                         <div class="h7 text-muted"></div>
-                        <div class="h6" th:if="${isMember == true}">Leave the group</div>
-                        <div class="h6" th:unless="${isMember == true}">Request to join group</div>
+                        <div class="h6" th:if="${isMember == 1}">
+                            <a th:href="@{/group/} + ${group.id} + '/leave'">Leave the group</a>
+                        </div>
+                        <div class="h6" th:if="${isMember == -1}">
+                            <a th:href="@{/group/} +${group.id} + '/join'">Request to join group</a>
+                        </div>
+                        <div class="h6" th:if="${isMember == 0}">
+                            Request has been sent.
+                        </div>
                     </li>
                 </ul>
             </div>

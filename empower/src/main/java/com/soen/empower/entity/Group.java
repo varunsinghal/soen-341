@@ -48,6 +48,10 @@ public class Group {
     @JoinTable
     private List<User> admins;
 
+    @ManyToMany
+    @JoinTable
+    private List<User> requests;
+
     /**
      * Gets the constructed group id.
      *
@@ -116,5 +120,13 @@ public class Group {
 
     public void setAdmins(List<User> admins) {
         this.admins = admins;
+    }
+
+    public List<User> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<User> requests) {
+        this.requests = requests;
     }
 }

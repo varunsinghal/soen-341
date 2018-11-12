@@ -131,6 +131,29 @@ public class GroupController {
         return model;
     }
 
+    @RequestMapping("/{id}/addAdmin")
+    public String addAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+        groupService.addAdmin(groupId, userId);
+        return "redirect:/group/" + groupId + "/members";
+    }
+
+    @RequestMapping("/{id}/removeAdmin")
+    public String removeAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+        groupService.removeAdmin(groupId, userId);
+        return "redirect:/group/" + groupId + "/members";
+    }
+
+    @RequestMapping("/{id}/received")
+    public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId){
+        ModelAndView model = new ModelAndView("/group/index");
+        return model;
+    }
+
+    @RequestMapping("/{id}/join")
+    public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId){
+        return "redirect:/group/all";
+    }
+
     /**
      * addPost method receives POST request to save feed post.
      *

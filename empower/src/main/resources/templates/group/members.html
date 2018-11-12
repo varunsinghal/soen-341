@@ -22,29 +22,23 @@
                     <!-- privileges -->
                     <span th:if="${#lists.contains(group.owner, member)}"><i class="fas fa-shield-alt"></i> Owner&ensp;|&ensp;</span>
                     <span th:if="${#lists.contains(group.admins, member)}"><i class="fas fa-award"></i> Admin&ensp;|&ensp;</span>
-                    <span><i class="far fa-star"></i> Member</span>&ensp;|&ensp;
+                    <span><i class="far fa-star"></i> Member</span>&ensp;
                     <!-- owner panel to promote or revoke admin access -->
                     <span th:if="${isOwner} == true and ${member.id} != ${group.owner.id}">
+                        &ensp;|&ensp;
                         <a th:href="@{/group/} + ${group.id} + '/removeAdmin?userId=' + ${member.id}" th:if="${#lists.contains(group.admins, member)}"><i class="fas fa-arrow-down"></i> Revoke admin access</a>
                         <a th:href="@{/group/} + ${group.id} + '/addAdmin?userId=' + ${member.id}" th:unless="${#lists.contains(group.admins, member)}"><i class="fas fa-arrow-up"></i> Promote to admin</a>
-                        &ensp;|&ensp;
                     </span>
                     <!-- admin panel to remove members only if member is not owner -->
                     <span th:if="${isAdmin} == true and ${member.id} != ${group.owner.id}">
-                        <a th:href="@{/group/}"><i class="fas fa-user-minus"></i> Remove from group</a>&ensp;|&ensp;
+                        &ensp;|&ensp;
+                        <a th:href="@{/group/}"><i class="fas fa-user-minus"></i> Remove from group</a>
                     </span>
                 </div>
             </div>
         </div> <!-- .col md 6 -->
         <div class="col-md-3">
-            <div class="card gedf-card">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${group.name}">About this group ! </h5>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="${group.description}"></h6>
-                    <p class="card-text"></p>
-                </div>
-                <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, members)"></div>
-            </div>
+            <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, ${group.name}, members)"></div>
         </div><!-- .col md 3 -->
     </div>
 </div>

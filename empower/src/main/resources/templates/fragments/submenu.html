@@ -111,18 +111,25 @@
 </div>
 
 
-<div th:fragment="groupRightMenu(id,activeTab)">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
-            <div class="h7"><a th:href="@{/group/} + ${id}"><i class="fas fa-comment-alt"></i> Wall</a></div>
-        </li>
-        <li class="list-group-item" th:classappend="${activeTab == 'members'} ? 'active' : null">
-            <div class="h7"><a th:href="@{/group/} + ${id} + '/members'"><i class="fas fa-users"></i> Members</a></div>
-        </li>
-        <li class="list-group-item" th:classappend="${activeTab == 'leave'} ? 'active' : null">
-            <div class="h7"><a th:href="@{/group/} + ${id} + '/leave'"><i class="fas fa-sign-out-alt"></i> Leave group</a></div>
-        </li>
-    </ul>
+<div th:fragment="groupRightMenu(id,name,activeTab)">
+    <div class="card gedf-card">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="h5"><span th:text="${name}"></span></div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'page'} ? 'active' : null">
+                <div class="h7"><a th:href="@{/group/} + ${id}"><i class="fas fa-file-alt"></i> About</a></div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
+                <div class="h7"><a th:href="@{/group/} + ${id} + '/wall'"><i class="fas fa-comment-alt"></i>
+                    Wall</a></div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'members'} ? 'active' : null">
+                <div class="h7"><a th:href="@{/group/} + ${id} + '/members'"><i class="fas fa-users"></i>
+                    Members</a></div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 

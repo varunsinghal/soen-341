@@ -35,8 +35,8 @@
                         <input type="hidden" name="members[0].id" th:value="${session.user_id}">
                     </li>
                     <li class="list-group-item">
-                        <input type="hidden" name="owner.id" th:value="${session.user_id}">
                         <input type="hidden" name="admins[0].id" th:value="${session.user_id}">
+                        <input type="hidden" name="owner.id" th:value="${session.user_id}">
                         <input type="submit" name="submit" class="btn btn-success" value="Create group">
                     </li>
                 </ul>

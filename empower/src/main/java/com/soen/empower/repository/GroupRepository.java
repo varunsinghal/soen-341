@@ -20,4 +20,8 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
     List<Group> findByMembersId(long userId);
 
     Group findById(long groupId);
+
+    Group findByOwnerIdAndId(long userId, long groupId);
+
+	Group findByAdminsIdAndId(long userId, long groupId);
 }

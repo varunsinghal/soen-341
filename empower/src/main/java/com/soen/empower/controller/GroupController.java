@@ -113,9 +113,20 @@ public class GroupController {
         return model;
     }
 
+    /**
+     * isOwner to activate the owner panel - promote/revoke admin access
+     * isAdmin to activate the admin panel - remove member
+     *
+     * @param session
+     * @param groupId
+     * @return
+     */
     @RequestMapping("/{id}/members")
     public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId){
         ModelAndView model = new ModelAndView("group/members");
+        long userId = (long) session.getAttribute("user_id");
+        model.addObject("isOwner", groupService.isOwner(userId, groupId));
+        model.addObject("isAdmin", groupService.isAdmin(userId, groupId));
         model.addObject("group", groupService.findById(groupId));
         return model;
     }

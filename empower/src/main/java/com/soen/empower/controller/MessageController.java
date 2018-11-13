@@ -19,10 +19,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  * The Class MessageController consists methods like addNewMessage which allows
- * user to add to his previous conversation or start new conversation.
+ * user to add to his previous conversation or start new conversation. Added notification
+ * service to notify of recent messages.
  *
- * @version 1.0
- * @since 1.0
+ * @version 5.0
+ * @since 3.0
  */
 @Controller
 @RequestMapping("/message")

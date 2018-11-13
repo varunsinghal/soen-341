@@ -13,7 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 /**
- * Friend controller accessible via localhost/friend/
+ * Friend controller
+ *
+ * @author Varun Singhal
+ * @version 5.0
+ * @since 3.0
  */
 @Controller
 @RequestMapping("/friend")
@@ -37,7 +41,8 @@ public class FriendController {
     }
 
     /**
-     * Adds the friend.
+     * Adds the friend. Since, add a record in the database requires creation of entity object,
+     * it is preferred to resolve it using ModelAttribute.
      *
      * @param friend the friend
      * @return the string
@@ -49,11 +54,13 @@ public class FriendController {
     }
 
     /**
-     * Removes the friend.
+     * Removes the friend. Since, editing a pre-existing record or deleting a record first needs to
+     * identify the exact same record and then the entity is deleted or saved. So, an {id} is
+     * sufficient to carry out the process.
      *
-     * @param session the session
+     * @param session     the session
      * @param otherUserId the other user id
-     * @return the string
+     * @return redirect to profile of other user because, the remove friend option is present on their profile.
      */
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String removeFriend(HttpSession session, @RequestParam("id") long otherUserId) {
@@ -64,9 +71,10 @@ public class FriendController {
 
 
     /**
-     * Accept friend requests.
+     * Accept friend requests. To save the queries, the exact same record is replicated in the UI screen.
+     * On saving the object, it will update the pre-existing the record.
      *
-     * @param friend the friend
+     * @param friend the friend object.
      * @return the string
      */
     @RequestMapping("/accept")
@@ -76,7 +84,8 @@ public class FriendController {
     }
 
     /**
-     * Decline friend requests.
+     * Decline friend requests. To save the queries, the exact same record is replicated in the UI screen.
+     * On saving the object, it will update the pre-existing the record.
      *
      * @param friend the friend
      * @return the string

@@ -9,7 +9,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service class for sending notification messages.
@@ -44,26 +43,47 @@ public class NotificationService {
         sendNotification(toUser, HTML, "message");
     }
 
+    /**
+     * Send notification to users subscribed on channel "/user/queue/notify".
+     * <p>
+     * The message will be sent only to the user with the given username.
+     *
+     * @param card The feed story's card.
+     */
     public void notify(Card card) {
         User toUser = userRepository.findById(card.getBelongsTo().getId());
         User fromUser = userRepository.findById(card.getUser().getId());
-        if(!toUser.getId().equals(fromUser.getId())) {
+        if (!toUser.getId().equals(fromUser.getId())) {
             String HTML = fromUser.getFullName() + " posted on your wall about : " + card.getTitle();
             sendNotification(toUser, HTML, "wall");
         }
     }
 
-
+    /**
+     * Send notification to users subscribed on channel "/user/queue/notify".
+     * <p>
+     * The message will be sent only to the user with the given username.
+     * Notification is sent to the wall owner.
+     *
+     * @param comment comment on the wall post.
+     */
     public void notify(Comment comment) {
         Card card = cardRepository.findById((long) comment.getCard().getId());
         User toUser = userRepository.findById(card.getBelongsTo().getId());
         User fromUser = userRepository.findById(comment.getUser().getId());
-        if(!toUser.getId().equals(fromUser.getId())){
+        if (!toUser.getId().equals(fromUser.getId())) {
             String HTML = fromUser.getFullName() + " commented on the post : " + comment.getText();
             sendNotification(toUser, HTML, "wall");
         }
     }
 
+    /**
+     * Save the notification and send it to the channel /queue/notify.
+     *
+     * @param toUser user id
+     * @param HTML   content
+     * @param type   platform of notification - message, comment, wall
+     */
     private void sendNotification(User toUser, String HTML, String type) {
         Notification notification = new Notification(HTML, toUser, type);
         notification = notificationRepository.save(notification);
@@ -73,14 +93,31 @@ public class NotificationService {
     }
 
 
+    /**
+     * Fetch all notifications for a given user id
+     *
+     * @param id user id
+     * @return list of notification
+     */
     public List<Notification> fetchAll(Long id) {
         return notificationRepository.findByUserIdOrderByIdDesc(id);
     }
 
+    /**
+     * Find the notification by id.
+     *
+     * @param id notification id
+     * @return notification
+     */
     public Notification find(long id) {
         return notificationRepository.findById(id);
     }
 
+    /**
+     * remove the notification once it has been visited.
+     *
+     * @param notification entity
+     */
     public void delete(Notification notification) {
         notificationRepository.delete(notification);
     }

@@ -16,10 +16,22 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
+/**
+ * Storage service.
+ *
+ * @version 4.0
+ * @see <a href="https://spring.io/guides/gs/uploading-files/">Uploading files</a>
+ * @since 4.0
+ */
 @Service
 public class StorageService {
     private Path rootLocation = Paths.get("upload-dir");
 
+    /**
+     * Upload method
+     *
+     * @param file receives a file.
+     */
     public void store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
@@ -39,6 +51,11 @@ public class StorageService {
         }
     }
 
+    /**
+     * Load all the files.
+     *
+     * @return all the paths in stream.
+     */
     public Stream<Path> loadAll() {
         try {
             return Files.walk(this.rootLocation, 1)
@@ -50,10 +67,22 @@ public class StorageService {
         return null;
     }
 
+    /**
+     * load the file with filename as string
+     *
+     * @param filename string
+     * @return path object
+     */
     public Path load(String filename) {
         return rootLocation.resolve(filename);
     }
 
+    /**
+     * locate the file and return as a resource
+     *
+     * @param filename file to fetched
+     * @return resource file
+     */
     public Resource loadAsResource(String filename) {
         try {
             Path file = load(filename);
@@ -70,10 +99,16 @@ public class StorageService {
         return null;
     }
 
+    /**
+     * Do not use this.
+     */
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
+    /**
+     * Initialise the storage.
+     */
     public void init() {
         try {
             Files.createDirectories(rootLocation);

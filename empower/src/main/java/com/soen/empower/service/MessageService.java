@@ -17,7 +17,9 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    /** The message repository. */
+    /**
+     * The message repository.
+     */
     @Autowired
     private MessageRepository messageRepository;
 
@@ -40,11 +42,18 @@ public class MessageService {
      * @param conversationId the conversation id
      * @return the list
      */
-    public List<Message> fetch(Long conversationId){
+    public List<Message> fetch(Long conversationId) {
         return messageRepository.findAllByConversationId(conversationId);
     }
 
-    public List<Object> findUsersForNewMessage(String search){
+    /**
+     * This service is present in message because, it creates a format which is responsible to
+     * search users while creating new messages/conversations.
+     *
+     * @param search user's full name
+     * @return list of users in hashmap format.
+     */
+    public List<Object> findUsersForNewMessage(String search) {
         List<Object> users = new ArrayList<>();
         for (User user : userRepository.findByFullNameContainingIgnoreCase(search)) {
             HashMap<String, String> hm = new HashMap<>();

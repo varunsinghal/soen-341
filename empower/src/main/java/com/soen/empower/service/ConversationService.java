@@ -13,7 +13,9 @@ import java.util.List;
 @Service
 public class ConversationService {
 
-    /** The conversation repository. */
+    /**
+     * The conversation repository.
+     */
     @Autowired
     private ConversationRepository conversationRepository;
 
@@ -28,7 +30,9 @@ public class ConversationService {
     }
 
     /**
-     * Resolve.
+     * It tries to find the conversation by swapping the user id and other user id to find 1 entry
+     * for given 2 users. Else, it will create a conversation as per the model attribute received
+     * from the UI.
      *
      * @param conversation the conversation
      * @return the conversation
@@ -38,22 +42,22 @@ public class ConversationService {
                 conversation.getUser().getId(), conversation.getOtherUser().getId());
         if (resolvedConversation == null) resolvedConversation = conversationRepository.findByUserIdAndOtherUserId(
                 conversation.getOtherUser().getId(), conversation.getUser().getId());
-        if(resolvedConversation == null) resolvedConversation = conversationRepository.save(conversation);
+        if (resolvedConversation == null) resolvedConversation = conversationRepository.save(conversation);
         return resolvedConversation;
     }
 
     /**
-     * Fetch by id.
+     * Fetch by conversation by Id.
      *
      * @param id the id
      * @return the conversation
      */
-    public Conversation fetchById(Long id){
+    public Conversation fetchById(Long id) {
         return conversationRepository.findById(id);
     }
 
     /**
-     * Update.
+     * Update the resolved conversation.
      *
      * @param resolvedConversation the resolved conversation
      */

@@ -153,10 +153,16 @@ public class GroupController {
         return "redirect:/group/" + groupId + "/members";
     }
 
-    @RequestMapping("/{id}/received")
+    @RequestMapping("/{id}/requests")
     public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId){
-        ModelAndView model = new ModelAndView("/group/index");
-        return model;
+        long userId = (long) session.getAttribute("user_id");
+        if(groupService.isAdmin(userId, groupId)){
+            ModelAndView model = new ModelAndView("/group/requests");
+            model.addObject("group", groupService.findById(groupId));
+            model.addObject("requests", groupService.fetchJoinRequests(groupId));
+            return model;
+        }
+        throw new AccessDeniedException("403 returned");
     }
 
     @RequestMapping("/{id}/join")

@@ -118,15 +118,30 @@
                 <div class="h5"><span th:text="${name}"></span></div>
             </li>
             <li class="list-group-item" th:classappend="${activeTab == 'page'} ? 'active' : null">
-                <div class="h7"><a th:href="@{/group/} + ${id}"><i class="fas fa-file-alt"></i> About</a></div>
+                <div class="h7">
+                    <a th:href="@{/group/} + ${id}">
+                        <i class="fas fa-file-alt"></i>&ensp;About
+                    </a>
+                </div>
             </li>
             <li class="list-group-item" th:classappend="${activeTab == 'wall'} ? 'active' : null">
-                <div class="h7"><a th:href="@{/group/} + ${id} + '/wall'"><i class="fas fa-comment-alt"></i>
-                    Wall</a></div>
+                <div class="h7">
+                    <a th:href="@{/group/} + ${id} + '/wall'">
+                        <i class="fas fa-comment-alt"></i>&ensp;Wall</a></div>
             </li>
             <li class="list-group-item" th:classappend="${activeTab == 'members'} ? 'active' : null">
-                <div class="h7"><a th:href="@{/group/} + ${id} + '/members'"><i class="fas fa-users"></i>
-                    Members</a></div>
+                <div class="h7">
+                    <a th:href="@{/group/} + ${id} + '/members'">
+                        <i class="fas fa-users"></i>&ensp;Members
+                    </a>
+                </div>
+            </li>
+            <li class="list-group-item" th:classappend="${activeTab == 'requests'} ? 'active' : null">
+                <div class="h7">
+                    <a th:href="@{/group/} + ${id} + '/requests'">
+                        <i class="fas fa-sign-in-alt"></i>&ensp;Join Requests
+                    </a>
+                </div>
             </li>
         </ul>
     </div>

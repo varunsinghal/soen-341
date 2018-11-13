@@ -23,17 +23,26 @@
                     <span th:if="${#lists.contains(group.owner, member)}"><i class="fas fa-shield-alt"></i> Owner&ensp;|&ensp;</span>
                     <span th:if="${#lists.contains(group.admins, member)}"><i class="fas fa-award"></i> Admin&ensp;|&ensp;</span>
                     <span><i class="far fa-star"></i> Member</span>&ensp;
+                    <!-- .privileges -->
                     <!-- owner panel to promote or revoke admin access -->
                     <span th:if="${isOwner} == true and ${member.id} != ${group.owner.id}">
                         &ensp;|&ensp;
-                        <a th:href="@{/group/} + ${group.id} + '/removeAdmin?userId=' + ${member.id}" th:if="${#lists.contains(group.admins, member)}"><i class="fas fa-arrow-down"></i> Revoke admin access</a>
-                        <a th:href="@{/group/} + ${group.id} + '/addAdmin?userId=' + ${member.id}" th:unless="${#lists.contains(group.admins, member)}"><i class="fas fa-arrow-up"></i> Promote to admin</a>
+                        <a th:href="@{/group/} + ${group.id} + '/removeAdmin?userId=' + ${member.id}"
+                           th:if="${#lists.contains(group.admins, member)}">
+                            <i class="fas fa-arrow-down"></i> Revoke admin access
+                        </a>
+                        <a th:href="@{/group/} + ${group.id} + '/addAdmin?userId=' + ${member.id}"
+                           th:unless="${#lists.contains(group.admins, member)}">
+                            <i class="fas fa-arrow-up"></i> Promote to admin
+                        </a>
                     </span>
+                    <!-- .owner panel -->
                     <!-- admin panel to remove members only if member is not owner -->
                     <span th:if="${isAdmin} == true and ${member.id} != ${group.owner.id}">
                         &ensp;|&ensp;
                         <a th:href="@{/group/}"><i class="fas fa-user-minus"></i> Remove from group</a>
                     </span>
+                    <!-- .admin panel -->
                 </div>
             </div>
         </div> <!-- .col md 6 -->

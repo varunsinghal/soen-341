@@ -92,4 +92,19 @@ public class GroupService {
     public List<User> fetchJoinRequests(long groupId) {
         return groupRepository.findById(groupId).getRequests();
     }
+
+    public void acceptRequest(long userId, long groupId) {
+        Group group = groupRepository.findById(groupId);
+        User user = userRepository.findById(userId);
+        group.getRequests().remove(user);
+        group.getMembers().add(user);
+        groupRepository.save(group);
+    }
+
+    public void declineRequest(long userId, long groupId) {
+        Group group = groupRepository.findById(groupId);
+        User user = userRepository.findById(userId);
+        group.getRequests().remove(user);
+        groupRepository.save(group);
+    }
 }

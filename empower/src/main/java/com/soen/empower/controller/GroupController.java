@@ -101,7 +101,7 @@ public class GroupController {
     }
 
     @RequestMapping("/{id}")
-    public ModelAndView viewGroupPage(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewGroupPage(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/page");
         long userId = (long) session.getAttribute("user_id");
         model.addObject("group", groupService.findById(groupId));
@@ -113,7 +113,7 @@ public class GroupController {
     public ModelAndView viewGroup(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/wall");
         long userId = (long) session.getAttribute("user_id");
-        if(groupService.isMember(userId, groupId) == 1){
+        if (groupService.isMember(userId, groupId) == 1) {
             model.addObject("cards", cardService.fetchCardsForGroup(groupId));
             model.addObject("group", groupService.findById(groupId));
             model.addObject("likedCards", likeService.findCardsFor(userId));
@@ -132,7 +132,7 @@ public class GroupController {
      * @return
      */
     @RequestMapping("/{id}/members")
-    public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/members");
         long userId = (long) session.getAttribute("user_id");
         model.addObject("isOwner", groupService.isOwner(userId, groupId));
@@ -142,21 +142,21 @@ public class GroupController {
     }
 
     @RequestMapping("/{id}/addAdmin")
-    public String addAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+    public String addAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId) {
         groupService.addAdmin(groupId, userId);
         return "redirect:/group/" + groupId + "/members";
     }
 
     @RequestMapping("/{id}/removeAdmin")
-    public String removeAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+    public String removeAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId) {
         groupService.removeAdmin(groupId, userId);
         return "redirect:/group/" + groupId + "/members";
     }
 
     @RequestMapping("/{id}/requests")
-    public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
-        if(groupService.isAdmin(userId, groupId)){
+        if (groupService.isAdmin(userId, groupId)) {
             ModelAndView model = new ModelAndView("/group/requests");
             model.addObject("group", groupService.findById(groupId));
             model.addObject("requests", groupService.fetchJoinRequests(groupId));
@@ -165,20 +165,35 @@ public class GroupController {
         throw new AccessDeniedException("403 returned");
     }
 
+    @RequestMapping("/{id}/requests/accept")
+    public String acceptRequests(HttpSession session,
+                                 @PathVariable("id") long groupId,
+                                 @RequestParam("userId") long userId) {
+        groupService.acceptRequest(userId, groupId);
+        return "redirect:/group/" + groupId + "/requests";
+    }
+
+    @RequestMapping("/{id}/requests/decline")
+    public String declineRequests(HttpSession session,
+                                  @PathVariable("id") long groupId,
+                                  @RequestParam("userId") long userId) {
+        groupService.declineRequest(userId, groupId);
+        return "redirect:/group/" + groupId + "/requests";
+    }
+
     @RequestMapping("/{id}/join")
-    public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId){
+    public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
         groupService.addRequest(userId, groupId);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
     @RequestMapping("/{id}/leave")
-    public String leaveGroup(HttpSession session, @PathVariable("id") long groupId){
+    public String leaveGroup(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
         groupService.leave(userId, groupId);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
-
 
     /**
      * addPost method receives POST request to save feed post.
@@ -192,7 +207,7 @@ public class GroupController {
         return "redirect:/group/" + groupId;
     }
 
-    @RequestMapping(value="/addPostImage/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/addPostImage/{id}", method = RequestMethod.POST)
     public String addPostImage(@ModelAttribute Card card, @RequestParam("file") MultipartFile file, @PathVariable("id") long groupId) {
         storageService.store(file);
         card.setFilename(file.getOriginalFilename());
@@ -213,28 +228,28 @@ public class GroupController {
         return "redirect:/group/" + groupId;
     }
 
-    @RequestMapping(value ="/addLike/{id}", method = RequestMethod.POST)
-    public String addLike(@ModelAttribute Like like, @PathVariable("id") long groupId){
+    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
+    public String addLike(@ModelAttribute Like like, @PathVariable("id") long groupId) {
         likeService.add(like);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
-    @RequestMapping(value ="/addDislike/{id}", method = RequestMethod.POST)
-    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId){
+    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
+    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId) {
         dislikeService.add(dislike);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
-    @RequestMapping(value ="/removeLike/{id}", method = RequestMethod.POST)
-    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long groupId){
+    @RequestMapping(value = "/removeLike/{id}", method = RequestMethod.POST)
+    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long groupId) {
         likeService.remove(like);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
-    @RequestMapping(value ="/removeDislike/{id}", method = RequestMethod.POST)
-    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId){
+    @RequestMapping(value = "/removeDislike/{id}", method = RequestMethod.POST)
+    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId) {
         dislikeService.remove(dislike);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
 

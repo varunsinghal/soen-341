@@ -4,23 +4,41 @@ import com.soen.empower.entity.Card;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-/*
- * The interface CardRepository
- */
 
+/**
+ * The Interface CardRepository.
+ */
 public interface CardRepository extends CrudRepository<Card, Long> {
-	/* find all posts by descending order
-	 * @return list of cards(post)
-	 */
+
+    /**
+     * Find all by order by id desc.
+     *
+     * @return the list
+     */
     List<Card> findAllByOrderByIdDesc();
 
-    /* find all posts in descending order based on userId
-     * @param Long userId
-     * @return list of cards (posts)
+
+    /**
+     * Find by belongs to id order by id desc.
+     *
+     * @param userId the user id
+     * @return the list
      */
     List<Card> findByBelongsToIdOrderByIdDesc(long userId);
 
+    /**
+     * Find by id.
+     *
+     * @param id the id
+     * @return the card
+     */
     Card findById(long id);
 
+    /**
+     * Find by belongs to group id order by id desc.
+     *
+     * @param groupId the group id
+     * @return the list
+     */
     List<Card> findByBelongsToGroupIdOrderByIdDesc(long groupId);
 }

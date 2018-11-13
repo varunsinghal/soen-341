@@ -15,8 +15,9 @@ import javax.servlet.http.HttpSession;
  * The GroupController Class consists the functionality of create new group
  * and search group.
  *
- * @version 1.0
- * @since 1.0
+ * @author Varun
+ * @version 5.0
+ * @since 4.0
  */
 @Controller
 @RequestMapping("/group")
@@ -39,7 +40,7 @@ public class GroupController {
 
 
     /**
-     * Default controller loaded with the list of groups.
+     * Default controller loaded with the list of groups in which the user is enrolled.
      *
      * @return the view group/index
      */
@@ -53,7 +54,7 @@ public class GroupController {
     }
 
     /**
-     * allGroup method All group.
+     * allGroup method fetches all the groups within the application.
      *
      * @return the model and view
      */
@@ -66,7 +67,7 @@ public class GroupController {
     }
 
     /**
-     * searchGroup method Searches group using group name.
+     * Narrow search - searchGroup method Searches group using group name.
      *
      * @return the view named search/group
      */
@@ -80,7 +81,7 @@ public class GroupController {
     }
 
     /**
-     * Creates the new group.
+     * Creates the new group - group name, description, members.
      *
      * @return the string with group name
      */
@@ -90,7 +91,8 @@ public class GroupController {
     }
 
     /**
-     * Creates the group submit.
+     * Creates the group submit. The owner is by default added as admin and member. This control
+     * is done in the UI as the model attribute resolves the object as a whole.
      *
      * @return the string
      */
@@ -100,8 +102,18 @@ public class GroupController {
         return "redirect:/group";
     }
 
+    /**
+     * Group's info page created to show the status with respect to each user. Whether, they are
+     * already a member or not. The reason for this page? - reusable cards of group would require
+     * much more attributes to resolve such relation and it will make us revisit all the controllers
+     * again. Specially the search controller.
+     *
+     * @param session Logged in HttpSession
+     * @param groupId current visited group
+     * @return the view group/page
+     */
     @RequestMapping("/{id}")
-    public ModelAndView viewGroupPage(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewGroupPage(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/page");
         long userId = (long) session.getAttribute("user_id");
         model.addObject("group", groupService.findById(groupId));
@@ -109,11 +121,18 @@ public class GroupController {
         return model;
     }
 
+    /**
+     * View the wall of the group. All the functionalities have been replicated from the wallcontroller.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @return the view group/wall
+     */
     @RequestMapping("/{id}/wall")
-    public ModelAndView viewGroup(HttpSession session, @PathVariable("id") long groupId) {
+    public ModelAndView viewGroupWall(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/wall");
         long userId = (long) session.getAttribute("user_id");
-        if(groupService.isMember(userId, groupId) == 1){
+        if (groupService.isMember(userId, groupId) == 1) {
             model.addObject("cards", cardService.fetchCardsForGroup(groupId));
             model.addObject("group", groupService.findById(groupId));
             model.addObject("likedCards", likeService.findCardsFor(userId));
@@ -124,15 +143,16 @@ public class GroupController {
     }
 
     /**
+     * Display a list of members inside the currently visited group.
      * isOwner to activate the owner panel - promote/revoke admin access
      * isAdmin to activate the admin panel - remove member
      *
-     * @param session
-     * @param groupId
-     * @return
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @return the list of members
      */
     @RequestMapping("/{id}/members")
-    public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewMembers(HttpSession session, @PathVariable("id") long groupId) {
         ModelAndView model = new ModelAndView("group/members");
         long userId = (long) session.getAttribute("user_id");
         model.addObject("isOwner", groupService.isOwner(userId, groupId));
@@ -141,22 +161,45 @@ public class GroupController {
         return model;
     }
 
+    /**
+     * This action is available to Owner.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @param userId  make admin
+     * @return redirect to members page
+     */
     @RequestMapping("/{id}/addAdmin")
-    public String addAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+    public String addAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId) {
         groupService.addAdmin(groupId, userId);
         return "redirect:/group/" + groupId + "/members";
     }
 
+    /**
+     * This action is available to owner of the group.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @param userId  remove from admin
+     * @return redirect to members page
+     */
     @RequestMapping("/{id}/removeAdmin")
-    public String removeAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId ){
+    public String removeAdmin(HttpSession session, @PathVariable("id") long groupId, @RequestParam("userId") long userId) {
         groupService.removeAdmin(groupId, userId);
         return "redirect:/group/" + groupId + "/members";
     }
 
+    /**
+     * This action is available to admins only.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @return the view group/requests
+     */
     @RequestMapping("/{id}/requests")
-    public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId){
+    public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
-        if(groupService.isAdmin(userId, groupId)){
+        if (groupService.isAdmin(userId, groupId)) {
             ModelAndView model = new ModelAndView("/group/requests");
             model.addObject("group", groupService.findById(groupId));
             model.addObject("requests", groupService.fetchJoinRequests(groupId));
@@ -165,20 +208,65 @@ public class GroupController {
         throw new AccessDeniedException("403 returned");
     }
 
+    /**
+     * Action avaible only to admins to accept the join requests.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @param userId  to make member
+     * @return redirect to requests page.
+     */
+    @RequestMapping("/{id}/requests/accept")
+    public String acceptRequests(HttpSession session,
+                                 @PathVariable("id") long groupId,
+                                 @RequestParam("userId") long userId) {
+        groupService.acceptRequest(userId, groupId);
+        return "redirect:/group/" + groupId + "/requests";
+    }
+
+    /**
+     * Action available to admins only.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @param userId  to remove the request
+     * @return redirect to groups join requests page
+     */
+    @RequestMapping("/{id}/requests/decline")
+    public String declineRequests(HttpSession session,
+                                  @PathVariable("id") long groupId,
+                                  @RequestParam("userId") long userId) {
+        groupService.declineRequest(userId, groupId);
+        return "redirect:/group/" + groupId + "/requests";
+    }
+
+    /**
+     * Action available to any third person to request to join the group.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @return redirect to group info page
+     */
     @RequestMapping("/{id}/join")
-    public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId){
+    public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
         groupService.addRequest(userId, groupId);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
 
+    /**
+     * Action available to members through the group info page.
+     *
+     * @param session HttpSession of logged in user
+     * @param groupId currently visited group
+     * @return redirect to group info page
+     */
     @RequestMapping("/{id}/leave")
-    public String leaveGroup(HttpSession session, @PathVariable("id") long groupId){
+    public String leaveGroup(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
         groupService.leave(userId, groupId);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId;
     }
-
 
     /**
      * addPost method receives POST request to save feed post.
@@ -189,15 +277,23 @@ public class GroupController {
     @RequestMapping(value = "/addPost/{id}", method = RequestMethod.POST)
     public String addPost(@ModelAttribute Card card, @PathVariable("id") long groupId) {
         cardService.add(card);
-        return "redirect:/group/" + groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
-    @RequestMapping(value="/addPostImage/{id}", method = RequestMethod.POST)
+    /**
+     * Adds the post which contains a caption and image to be posted on a specific group.
+     *
+     * @param card    entity named card
+     * @param file    multipart file object
+     * @param groupId currently visited group
+     * @return redirect to the wall
+     */
+    @RequestMapping(value = "/addPostImage/{id}", method = RequestMethod.POST)
     public String addPostImage(@ModelAttribute Card card, @RequestParam("file") MultipartFile file, @PathVariable("id") long groupId) {
         storageService.store(file);
         card.setFilename(file.getOriginalFilename());
         cardService.add(card);
-        return "redirect:/group/" + groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
 
@@ -210,32 +306,59 @@ public class GroupController {
     @RequestMapping(value = "/addComment/{id}", method = RequestMethod.POST)
     public String addComment(@ModelAttribute Comment comment, @PathVariable("id") long groupId) {
         commentService.add(comment);
-        return "redirect:/group/" + groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
-    @RequestMapping(value ="/addLike/{id}", method = RequestMethod.POST)
-    public String addLike(@ModelAttribute Like like, @PathVariable("id") long groupId){
+    /**
+     * Add like to the card object. This object is instantiated using model attribute to save time of
+     * mapping the object manually.
+     *
+     * @param like    entity
+     * @param groupId visited group
+     * @return redirect to group wall
+     */
+    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
+    public String addLike(@ModelAttribute Like like, @PathVariable("id") long groupId) {
         likeService.add(like);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
-    @RequestMapping(value ="/addDislike/{id}", method = RequestMethod.POST)
-    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId){
+    /**
+     * Added dislike to the card object.
+     *
+     * @param dislike entity
+     * @param groupId visited group
+     * @return redirect to the wall
+     */
+    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
+    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId) {
         dislikeService.add(dislike);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
-    @RequestMapping(value ="/removeLike/{id}", method = RequestMethod.POST)
-    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long groupId){
+    /**
+     * remove the like to make the post neutral.
+     *
+     * @param like    entity
+     * @param groupId visited group
+     * @return redirect to wall
+     */
+    @RequestMapping(value = "/removeLike/{id}", method = RequestMethod.POST)
+    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long groupId) {
         likeService.remove(like);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
 
-    @RequestMapping(value ="/removeDislike/{id}", method = RequestMethod.POST)
-    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId){
+    /**
+     * remove dislike from the post to make it neutral.
+     *
+     * @param dislike entity
+     * @param groupId visited group
+     * @return redirect to wall
+     */
+    @RequestMapping(value = "/removeDislike/{id}", method = RequestMethod.POST)
+    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long groupId) {
         dislikeService.remove(dislike);
-        return "redirect:/group/"+ groupId;
+        return "redirect:/group/" + groupId + "/wall";
     }
-
-
 }

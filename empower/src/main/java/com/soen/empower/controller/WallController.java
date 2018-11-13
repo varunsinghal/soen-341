@@ -48,6 +48,13 @@ public class WallController {
         return "redirect:/wall/" + userId;
     }
 
+    /**
+     * View the wall of the user.
+     *
+     * @param session HttpSession of logged in user
+     * @param userId  visited user's wall
+     * @return the view wall
+     */
     @RequestMapping("/{id}")
     public ModelAndView indexWall(HttpSession session, @PathVariable("id") long userId) {
         long loggedInUserId = (long) session.getAttribute("user_id");
@@ -65,7 +72,8 @@ public class WallController {
     /**
      * addPost method receives POST request to save feed post.
      *
-     * @param card mapped data structure to entity with name card.
+     * @param card   mapped data structure to entity with name card
+     * @param userId visited user's wall
      * @return redirect the request to home.
      */
     @RequestMapping(value = "/addPost/{id}", method = RequestMethod.POST)
@@ -75,7 +83,15 @@ public class WallController {
         return "redirect:/wall/" + userId;
     }
 
-    @RequestMapping(value="/addPostImage/{id}", method = RequestMethod.POST)
+    /**
+     * Adds the post which contains a caption and image to be posted on a specific group.
+     *
+     * @param card   entity named card
+     * @param file   multipart file object
+     * @param userId visited user's wall
+     * @return redirect to the wall
+     */
+    @RequestMapping(value = "/addPostImage/{id}", method = RequestMethod.POST)
     public String addPostImage(@ModelAttribute Card card, @RequestParam("file") MultipartFile file, @PathVariable("id") long userId) {
         storageService.store(file);
         card.setFilename(file.getOriginalFilename());
@@ -88,7 +104,8 @@ public class WallController {
     /**
      * addComment method receives POST request to save comment to the given feed post.
      *
-     * @param comment mapped data structure to entity named comment.
+     * @param comment mapped data structure to entity named comment
+     * @param userId  visited user's wall
      * @return redirect the request to home.
      */
     @RequestMapping(value = "/addComment/{id}", method = RequestMethod.POST)
@@ -98,30 +115,58 @@ public class WallController {
         return "redirect:/wall/" + userId;
     }
 
-    @RequestMapping(value ="/addLike/{id}", method = RequestMethod.POST)
-    public String addLike(@ModelAttribute Like like, @PathVariable("id") long userId){
+    /**
+     * Add like to the card object. This object is instantiated using model attribute to save time of
+     * mapping the object manually.
+     *
+     * @param like   entity
+     * @param userId visited user's wall
+     * @return redirect to wall
+     */
+    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
+    public String addLike(@ModelAttribute Like like, @PathVariable("id") long userId) {
         likeService.add(like);
-        return "redirect:/wall/"+ userId;
+        return "redirect:/wall/" + userId;
     }
 
-    @RequestMapping(value ="/addDislike/{id}", method = RequestMethod.POST)
-    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId){
+    /**
+     * Added dislike to the card object.
+     *
+     * @param dislike entity
+     * @param userId  visited user's wall
+     * @return redirect to the wall
+     */
+    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
+    public String addDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId) {
         dislikeService.add(dislike);
-        return "redirect:/wall/"+ userId;
+        return "redirect:/wall/" + userId;
     }
 
-    @RequestMapping(value ="/removeLike/{id}", method = RequestMethod.POST)
-    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long userId){
+    /**
+     * remove the like to make the post neutral.
+     *
+     * @param like   entity
+     * @param userId visited user's wall
+     * @return redirect to wall
+     */
+    @RequestMapping(value = "/removeLike/{id}", method = RequestMethod.POST)
+    public String removeLike(@ModelAttribute Like like, @PathVariable("id") long userId) {
         likeService.remove(like);
-        return "redirect:/wall/"+ userId;
+        return "redirect:/wall/" + userId;
     }
 
-    @RequestMapping(value ="/removeDislike/{id}", method = RequestMethod.POST)
-    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId){
+    /**
+     * remove dislike from the post to make it neutral.
+     *
+     * @param dislike entity
+     * @param userId  visited user's wall
+     * @return redirect to wall
+     */
+    @RequestMapping(value = "/removeDislike/{id}", method = RequestMethod.POST)
+    public String removeDislike(@ModelAttribute Dislike dislike, @PathVariable("id") long userId) {
         dislikeService.remove(dislike);
-        return "redirect:/wall/"+ userId;
+        return "redirect:/wall/" + userId;
     }
-
 
 
 }

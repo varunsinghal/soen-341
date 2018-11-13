@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 /**
- * Default controller triggered on access of http://localhost:8080/.
+ * Default controller triggered on access of http://localhost:8080/
  *
  * @author Varun Singhal
  * @version 1.0
@@ -33,22 +33,34 @@ public class IndexController {
     }
 
     /**
-     * Access to the url localhost:port/login to enable public user to login the system.
+     * Login form registered in the security config.
      *
-     * @return the view with name login
+     * @return login.html
      */
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
+    /**
+     * Registration form.
+     *
+     * @return create.html
+     */
     @RequestMapping("/create")
     public String create() {
         return "create";
     }
 
+    /**
+     * On submit of form from create.html, user is resolved to `User` object through
+     * modelAttribute.
+     *
+     * @param user filled form by new user
+     * @return redirect to login page.
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute User user){
+    public String addUser(@ModelAttribute User user) {
         userService.add(user);
         return "redirect:/login";
     }

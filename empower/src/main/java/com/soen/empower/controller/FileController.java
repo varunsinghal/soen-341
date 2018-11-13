@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * FileController
+ * FileController to handle file services.
  */
 @Controller
 @RequestMapping("/files")

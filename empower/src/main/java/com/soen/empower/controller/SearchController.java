@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * The SearchController is class for search functionality. 
- * 
+ * The SearchController is class for search functionality.
+ *
  * @author Kishor Tare.
- * @version 1.0
- * @since 1.0
+ * @version 5.0
+ * @since 4.0
  */
 @Controller
 @RequestMapping("/search")
 public class SearchController {
-   
+
     @Autowired
     private UserService userService;
     @Autowired
     private GroupService groupService;
 
     /**
-     * Search by search index.
+     * Search users by their full names and groups by their names. It uses the user/card and group/card
+     * to display the HTML view of the search results.
      *
      * @param search the search
      * @return the model where user can see search results.

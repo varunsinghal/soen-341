@@ -36,6 +36,15 @@ public class ApiController {
         return messageService.findUsersForNewMessage(name);
     }
 
+    /**
+     * In case, there is an update in session variable via repository layer, and session
+     * variables are created only once when the user logs in the application. This API is
+     * used to refresh the session context.
+     * Currently, only notification has been identified to be refreshed.
+     *
+     * @param session HttpSession of logged in user
+     * @return success string.
+     */
     @RequestMapping("/session")
     public String updateSession(HttpSession session) {
         long userId = (long) session.getAttribute("user_id");

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Friend service.
+ */
 @Service
 public class FriendService {
 
@@ -35,34 +38,74 @@ public class FriendService {
         return "-1";
     }
 
+    /**
+     * remove friend from repository, working of AND/OR - ( _ and _ and _) OR (_ and _ and _ and _ )
+     *
+     * @param userId      current logged in user driving the function
+     * @param otherUserId profile viewed by the current user
+     */
     public void removeFriend(long userId, long otherUserId) {
         Friend record = friendRepository.findByUserIdAndOtherUserIdAndEnabledOrUserIdAndOtherUserIdAndEnabled(userId, otherUserId, 1, otherUserId, userId, 1);
         friendRepository.delete(record);
     }
 
+    /**
+     * Add friend.
+     *
+     * @param friend entity
+     */
     public void addFriend(Friend friend) {
         friend.setEnabled(0);
         friendRepository.save(friend);
     }
 
+    /**
+     * Accept friend request.
+     *
+     * @param friend entity
+     */
     public void accept(Friend friend) {
         friend.setEnabled(1);
         friendRepository.save(friend);
     }
 
+    /**
+     * Decline friend request.
+     *
+     * @param friend entity
+     */
     public void decline(Friend friend) {
         friendRepository.delete(friend);
     }
 
+    /**
+     * Fetch those records which have user id as current logged in user and enabled flag = 0.
+     *
+     * @param userId current logged in user
+     * @return list of friend records
+     */
     public List<Friend> viewSentRequests(long userId) {
         return friendRepository.findAllByUserIdAndEnabled(userId, 0);
     }
 
 
+    /**
+     * Fetch those records in which otherUserId is current logged in user and enabled flag is 0.
+     *
+     * @param userId current logged in user
+     * @return list of friend
+     */
     public List<Friend> viewReceivedRequests(long userId) {
         return friendRepository.findAllByOtherUserIdAndEnabled(userId, 0);
     }
 
+    /**
+     * Fetch all records where userId or otherUserId is of current logged in user and enabled
+     * flag is 1.
+     *
+     * @param userId current logged in user
+     * @return list of friend entity
+     */
     public List<Friend> fetchFriends(long userId) {
         return friendRepository.findByUserIdAndEnabledOrOtherUserIdAndEnabled(userId, 1, userId, 1);
     }

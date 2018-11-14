@@ -15,6 +15,9 @@
 <div th:if="${param.logout}">
     <div class="alert alert-info">You have been logged out.</div>
 </div>
+<div th:if="${param.change}">
+    <div class="alert alert-success">Password has been changed.</div>
+</div>
 
 <div class="login">
     <img th:src="@{/img/avatar.png}" class="avatar">
@@ -30,13 +33,10 @@
         <!-- a submit button with a login value-->
 
         <!-- adding create an account button-->
-        <a th:href="@{/create}">Create an account</a>
+        <a th:href="@{/create}">Create an account</a><br/>
+        <a th:href="@{/forgot}">Forgot the password</a>
     </form>
 </div>
 
-
-<!-- <div th:replace="fragments/footer :: footer"/> -->
-<!-- <div th:replace="fragments/header :: header-css"/>   -->
-<!-- <div th:replace="fragments/header :: header"/>  -->
 </body>
 </html>

@@ -98,10 +98,59 @@ public class UserService {
 
     /**
      * find users by searching on full name
+     *
      * @param search string
      * @return list of users
      */
     public List<User> findByPartialName(String search) {
         return userRepository.findByFullNameContainingIgnoreCase(search);
+    }
+
+    /**
+     * fetch security question
+     *
+     * @param username string
+     * @return string
+     */
+    public String fetchSecurityQuestion(String username) {
+        if (username != null) return userRepository.findByUsername(username).getSecurityQuestion();
+        return "";
+    }
+
+    /**
+     * validate equality of password.
+     *
+     * @param newPassword     string
+     * @param confirmPassword string
+     * @return boolean
+     */
+    public boolean isValidPassword(String newPassword, String confirmPassword) {
+        if (newPassword.equals(confirmPassword)) return true;
+        return false;
+    }
+
+    /**
+     * validate the answer to security question is valid for a given username
+     *
+     * @param username string
+     * @param answer   string
+     * @return boolean
+     */
+    public boolean isValidAnswer(String username, String answer) {
+        String expected = userRepository.findByUsername(username).getSecurityAnswer();
+        return expected.equals(answer);
+    }
+
+    /**
+     * change the password for given username
+     *
+     * @param userName    string
+     * @param newPassword string
+     */
+    public void changePassword(String userName, String newPassword) {
+        User user = userRepository.findByUsername(userName);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }

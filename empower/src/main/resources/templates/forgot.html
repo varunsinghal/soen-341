@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Page</title>
+    <link th:href="@{/css/loginstyle.css}" href="/css/loginstyle.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="loginstyle.css">
+
+</head>
+<body>
+
+<div th:if="${param.error}">
+    <div class="alert alert-danger">Invalid security answer.</div>
+</div>
+
+<div class="login">
+    <img th:src="@{/img/avatar.png}" class="avatar">
+    <!--sourcing image-->
+    <h1>Forgot password</h1>
+    <form th:action="@{/security}" method="post">
+        <!-- creating a login form with username&passowrd-->
+        <p>Username</p>
+        <input type="text" name="username" placeholder="Enter the username">
+        <input type="submit" name="" value="Validate"><br>
+        <!-- a submit button with a change value-->
+
+        <!-- adding create an account button-->
+        <a th:href="@{/create}">Create an account</a>
+    </form>
+</div>
+
+</body>
+</html>

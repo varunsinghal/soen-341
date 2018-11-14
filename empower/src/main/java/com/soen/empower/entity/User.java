@@ -87,6 +87,10 @@ public class User {
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
+    private String securityQuestion;
+
+    private String securityAnswer;
+
     /**
      * Instantiates a new user.
      */
@@ -346,4 +350,19 @@ public class User {
         this.dislikes = dislikes;
     }
 
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
+    }
 }

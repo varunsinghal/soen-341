@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+<!-- Custom styles for header -->
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
+<!-- Custom styles for navigation bar -->
 <div th:replace="fragments/layout :: nav(group)"/>
 
 <div class="container-fluid gedf-wrapper">
@@ -19,9 +21,11 @@
             <div class="card gedf-card" th:each="request : ${requests}">
                 <div th:replace="user/card :: card(${request})"/>
                 <div class="card-footer">
+					<!-- For accepting the request -->
                     <i class="fas fa-check"></i>
                     <a th:href="@{/group/} + ${group.id} + '/requests/accept?userId=' + ${request.id}">Accept</a>
                     &ensp; | &ensp;
+					<!-- for declining the request -->
                     <i class="fas fa-times"></i>
                     <a th:href="@{/group/} + ${group.id} + '/requests/decline?userId=' + ${request.id}">Decline</a>
                 </div>
@@ -29,7 +33,7 @@
         </div> <!-- .col md 6 -->
         <div class="col-md-3">
             <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, ${group.name}, requests)"></div>
-        </div>
+        </div><!-- .col-md-3 -->
     </div>
 </div>
 

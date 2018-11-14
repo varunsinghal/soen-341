@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+	<!-- Custom styles for header -->
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
+<!-- Custom styles for navigaion bar -->
 <div th:replace="fragments/layout :: nav(group)"/>
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -14,6 +16,7 @@
 
         <div class="col-md-6 gedf-main">
             <div class="card">
+				<!-- List of information of group-->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <div class="h7 text-muted">Description</div>
@@ -31,6 +34,7 @@
                         <div class="h7 text-muted">Total members</div>
                         <div class="h6" th:text="${#lists.size(group.members)}"></div>
                     </li>
+					<!-- List requests to the group -->
                     <li class="list-group-item">
                         <div class="h7 text-muted"></div>
                         <div class="h6" th:if="${isMember == 1}">
@@ -48,10 +52,10 @@
         </div> <!-- .col md 6 -->
         <div class="col-md-3">
             <div th:replace="fragments/submenu :: groupRightMenu(${group.id}, ${group.name}, page)"></div>
-        </div>
+        </div><!-- .col-md-3 -->
     </div>
 </div>
-
+<!-- Custom styles for footer -->
 <div th:replace="fragments/layout :: footer"/>
 
 </body>

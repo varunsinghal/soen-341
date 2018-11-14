@@ -10,12 +10,15 @@
 <body>
 
 <div th:if="${param.error}">
+	<!-- Alert message-->
     <div class="alert alert-danger">Invalid username and password.</div>
 </div>
 <div th:if="${param.logout}">
+	<!-- Alert message-->
     <div class="alert alert-info">You have been logged out.</div>
 </div>
 <div th:if="${param.change}">
+	<!-- Alert message-->
     <div class="alert alert-success">Password has been changed.</div>
 </div>
 

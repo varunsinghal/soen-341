@@ -9,18 +9,21 @@
 <body>
 <div th:if="${param.username}">
     <div class="alert">
+		<!-- Alert message-->
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         Username is taken
     </div>
 </div>
 <div th:if="${param.password}">
     <div class="alert">
+		<!-- Alert message-->
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         Passwords do not match
     </div>
 </div>
 <div th:if="${param.email}">
     <div class="alert">
+		<!-- Alert message-->
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         Email already taken
     </div>
@@ -40,6 +43,7 @@
         <p>Password</p>
         <input type="password" name="password" placeholder="Create Password">
         <input type="password" name="" placeholder="Re-Enter Password">
+		<!-- Security question in case of username or password forgot-->
         <p>Security question</p>
         <input type="text" name="securityQuestion" placeholder="In case you forgot the password">
         <p>Security answer</p>

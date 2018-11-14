@@ -200,7 +200,7 @@ public class GroupController {
     public ModelAndView viewJoinRequests(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
         if (groupService.isAdmin(userId, groupId)) {
-            ModelAndView model = new ModelAndView("/group/requests");
+            ModelAndView model = new ModelAndView("group/requests");
             model.addObject("group", groupService.findById(groupId));
             model.addObject("requests", groupService.fetchJoinRequests(groupId));
             return model;

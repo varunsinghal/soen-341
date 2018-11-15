@@ -2,8 +2,9 @@
 <head>
 </head>
 <body>
-
+<!-- friend -->
 <div th:fragment="friend(activeTab)">
+	<!-- list of current friends, received and sent -->
     <ul class="list-group list-group-flush">
         <li class="list-group-item" th:classappend="${activeTab == 'current'} ? 'active' : null">
             <div class="h7">
@@ -29,7 +30,9 @@
     </ul>
 </div>
 <!-- todo : merge wall controller and user controller -->
+<!-- wall -->
 <div th:fragment="wall">
+	<!-- list of sub menus -->
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="h5" th:text="${owner.fullName}">
@@ -58,8 +61,9 @@
         </li>
     </ul>
 </div>
-
+<!-- User -->
 <div th:fragment="user(activeTab)">
+	<!-- list of sub menu -->
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="h5" th:text="${user.fullName}">
@@ -89,8 +93,9 @@
         </li>
     </ul>
 </div>
-
+<!-- group -->
 <div th:fragment="group(activeTab)">
+	<!-- list of group related items -->
     <ul class="list-group list-group-flush">
         <li class="list-group-item" th:classappend="${activeTab == 'search'} ? 'active' : null">
             <form th:action="@{/group/search}" method="get">
@@ -112,6 +117,7 @@
 
 
 <div th:fragment="groupRightMenu(id,name,activeTab)">
+	<!-- list of sub menus for group -->
     <div class="card gedf-card">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">

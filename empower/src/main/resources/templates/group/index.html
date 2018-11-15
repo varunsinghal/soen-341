@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+	<!-- Custom styles for header -->
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
+<!-- Custom styles for navigation bar -->
 <div th:replace="fragments/layout :: nav(group)"/>
 
 <div class="container-fluid gedf-wrapper">
@@ -13,7 +15,7 @@
             <div class="card">
                 <div th:replace="fragments/submenu :: group(${activeTab})"></div>
             </div>
-        </div>
+        </div><!-- .col-md-3 -->
         <!-- list of all the groups -->
         <div class="col-md-6 gedf-main">
             <div class="card gedf-card" th:each="group : ${groups}">
@@ -25,7 +27,7 @@
         </div>
     </div>
 </div>
-
+<!-- Custom styles for footer -->
 <div th:replace="fragments/layout :: footer"/>
 
 

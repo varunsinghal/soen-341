@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+	<!-- Custom styles for header -->
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
@@ -19,6 +20,7 @@
                     <div class="card-body">
                         <div class="h5" th:text="${user.username}"></div>
                     </div>
+					<!-- List of information regarding user to change, NOTE: not all information can be changed -->
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h7 text-muted">Fullname</div>
@@ -57,11 +59,11 @@
                     </ul>
                 </div>
             </form>
-        </div>
+        </div><!--.col-md-6-->
     </div>
 </div>
 
-
+<!-- Custom styles for footer -->
 <div th:replace="fragments/layout :: footer"/>
 
 

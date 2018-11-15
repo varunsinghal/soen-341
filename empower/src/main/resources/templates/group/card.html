@@ -2,6 +2,7 @@
 <head>
 </head>
 <body>
+<!-- Card in the group layout -->
 <div th:fragment="card(group)">
     <div class="card-body">
         <a th:href="@{/group/} + ${group.id}">
@@ -11,7 +12,7 @@
             <span th:text="${group.description}"></span><br/>
             Members (<span th:text="${#lists.size(group.members)}"></span>)
         </p>
-    </div>
+    </div><!-- card-body -->
 </div>
 </body>
 </html>

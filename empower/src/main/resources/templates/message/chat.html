@@ -67,6 +67,7 @@
                         </div>
                         <!-- -->
                     </div>
+					<!-- for new message -->
                     <form th:action="@{/message/addNewMessage}" method="post">
                         <input type="hidden" name="user.id" th:value="${currentConversation.user.id}"/>
                         <input type="hidden" name="otherUser.id" th:value="${currentConversation.otherUser.id}"/>
@@ -93,6 +94,7 @@
             </div>
         </div>
     </div>
+	<!-- Custom styles for footer -->
     <div th:replace="fragments/layout :: footer"/>
 </body>
 </html>

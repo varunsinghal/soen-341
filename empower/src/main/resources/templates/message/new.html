@@ -24,6 +24,7 @@
                         </li>
                     </ul>
                 </div>
+				<!-- New nessage -->
                 <form th:action="@{/message/addNewMessage}" method="post">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
@@ -73,6 +74,7 @@
 
 <input type="hidden" id="apicontroller" th:value="@{/api/users}" >
 <div th:replace="fragments/layout :: footer"/>
+<!-- Javascript code -->
 <script>
 $( function() {
 		$( "#username" ).autocomplete({

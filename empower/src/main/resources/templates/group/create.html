@@ -2,16 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+	<!-- Custom styles for header -->
     <div th:replace="fragments/layout :: header"/>
 </head>
 <body>
+<!-- Custom styles for navigation bar -->
 <div th:replace="fragments/layout :: nav(group)"/>
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
             <div th:replace="fragments/submenu :: group(create)"></div>
-        </div>
+        </div><!-- .col-md-3 -->
 
         <div class="col-md-6 gedf-main">
             <!-- create the group using title and description -->

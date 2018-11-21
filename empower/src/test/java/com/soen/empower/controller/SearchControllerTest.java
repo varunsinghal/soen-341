@@ -1,8 +1,9 @@
 package com.soen.empower.controller;
 
-import com.soen.empower.fixture.Factory;
+import com.soen.empower.entity.User;
 import com.soen.empower.service.GroupService;
 import com.soen.empower.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.when;
 
@@ -29,15 +30,23 @@ public class SearchControllerTest {
 
     @MockBean
     private GroupService groupService;
+    private User user;
+
+    @Before
+    public void setUp() {
+        user = new User();
+        user.setId(1L);
+        user.setFullName("varun singhal");
+    }
 
     @Test
     public void getSearch_ReturnSearchTemplate() throws Exception {
-        when(userService.findByPartialName("varun")).thenReturn(Arrays.asList(Factory.user1, Factory.user2));
+        when(userService.findByPartialName("varun")).thenReturn(Collections.singletonList(user));
         mockMvc.perform(MockMvcRequestBuilders.get("/search?name=varun"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("search/index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
-                .andExpect(MockMvcResultMatchers.model().attribute("users", Arrays.asList(Factory.user1, Factory.user2)));
+                .andExpect(MockMvcResultMatchers.model().attribute("users", Collections.singletonList(user)));
 
     }
 }

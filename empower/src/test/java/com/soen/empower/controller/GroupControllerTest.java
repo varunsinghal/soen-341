@@ -131,7 +131,7 @@ public class GroupControllerTest {
 
     @Test
     public void createGroup() throws Exception {
-         mockMvc.perform(MockMvcRequestBuilders.get("/group/create").sessionAttr("user_id", 1L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/group/create").sessionAttr("user_id", 1L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("group/create"));
     }

@@ -3,7 +3,6 @@ package com.soen.empower.controller;
 import com.soen.empower.entity.Conversation;
 import com.soen.empower.entity.Message;
 import com.soen.empower.entity.User;
-import com.soen.empower.fixture.Factory;
 import com.soen.empower.service.ConversationService;
 import com.soen.empower.service.MessageService;
 import com.soen.empower.service.NotificationService;

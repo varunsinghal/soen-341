@@ -48,6 +48,8 @@
                             <input type="hidden" name="username" th:value="${user.username}">
                             <input type="hidden" name="password" th:value="${user.password}">
                             <input type="hidden" name="role" th:value="${user.role}">
+                            <input type="hidden" name="securityQuestion" th:value="${user.securityQuestion}">
+                            <input type="hidden" name="securityAnswer" th:value="${user.securityAnswer}">
                             <div th:if="${user.role} == 'ROLE_TEACHER'">
                                 <input type="hidden" name="teacher.id" th:value="${user.teacher.id}">
                             </div>

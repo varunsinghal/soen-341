@@ -3,6 +3,7 @@ package com.soen.empower.controller;
 import com.soen.empower.entity.Friend;
 import com.soen.empower.entity.User;
 import com.soen.empower.service.FriendService;
+import com.soen.empower.service.NotificationService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,8 @@ public class FriendControllerTest {
 
     @MockBean
     private FriendService friendService;
+    @MockBean
+    private NotificationService notificationService;
 
     @Autowired
     private MockMvc mockMvc;

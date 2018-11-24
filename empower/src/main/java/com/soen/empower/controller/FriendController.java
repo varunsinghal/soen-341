@@ -2,6 +2,7 @@ package com.soen.empower.controller;
 
 import com.soen.empower.entity.Friend;
 import com.soen.empower.service.FriendService;
+import com.soen.empower.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,8 @@ public class FriendController {
 
     @Autowired
     private FriendService friendService;
+    @Autowired
+    private NotificationService notificationService;
 
     /**
      * Default controller which list the friends of current logged in user.
@@ -50,6 +53,7 @@ public class FriendController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@ModelAttribute Friend friend) {
         friendService.addFriend(friend);
+        notificationService.notify(friend);
         return "redirect:/user/profile/" + friend.getOtherUser().getId();
     }
 
@@ -80,6 +84,7 @@ public class FriendController {
     @RequestMapping("/accept")
     public String acceptRequests(@ModelAttribute Friend friend) {
         friendService.accept(friend);
+        notificationService.notify(friend);
         return "redirect:/friend/received";
     }
 

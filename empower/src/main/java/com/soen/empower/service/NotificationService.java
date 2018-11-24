@@ -77,6 +77,21 @@ public class NotificationService {
         }
     }
 
+    public void notify(Friend friend){
+        if(friend.getEnabled() == 0){ // new friend request
+            User toUser = userRepository.findById(friend.getOtherUser().getId());
+            User fromUser = userRepository.findById(friend.getUser().getId());
+            String HTML = fromUser.getFullName() + " sent you the friend request";
+            sendNotification(toUser, HTML, "friend/received");
+        }
+        else if(friend.getEnabled() == 1){ // accepted friend request
+            User toUser = userRepository.findById(friend.getUser().getId());
+            User fromUser = userRepository.findById(friend.getOtherUser().getId());
+            String HTML = fromUser.getFullName() + " accepted your friend request";
+            sendNotification(toUser, HTML, "friend");
+        }
+    }
+
     /**
      * Save the notification and send it to the channel /queue/notify.
      *

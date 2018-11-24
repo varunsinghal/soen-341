@@ -154,10 +154,10 @@ public class GroupService {
      * @param userId  user id
      * @param groupId group id
      */
-    public void addRequest(long userId, long groupId) {
+    public Group addRequest(long userId, long groupId) {
         Group group = groupRepository.findById(groupId);
         group.getRequests().add(userRepository.findById(userId));
-        groupRepository.save(group);
+        return groupRepository.save(group);
     }
 
     /**
@@ -191,12 +191,12 @@ public class GroupService {
      * @param userId  user id
      * @param groupId group id
      */
-    public void acceptRequest(long userId, long groupId) {
+    public Group acceptRequest(long userId, long groupId) {
         Group group = groupRepository.findById(groupId);
         User user = userRepository.findById(userId);
         group.getRequests().remove(user);
         group.getMembers().add(user);
-        groupRepository.save(group);
+        return groupRepository.save(group);
     }
 
     /**

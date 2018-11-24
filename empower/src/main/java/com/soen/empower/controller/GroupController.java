@@ -37,6 +37,8 @@ public class GroupController {
     private StorageService storageService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private NotificationService notificationService;
 
 
     /**
@@ -220,7 +222,8 @@ public class GroupController {
     public String acceptRequests(HttpSession session,
                                  @PathVariable("id") long groupId,
                                  @RequestParam("userId") long userId) {
-        groupService.acceptRequest(userId, groupId);
+        Group group = groupService.acceptRequest(userId, groupId);
+        notificationService.notify(group, userId);
         return "redirect:/group/" + groupId + "/requests";
     }
 
@@ -250,7 +253,8 @@ public class GroupController {
     @RequestMapping("/{id}/join")
     public String sendJoinRequest(HttpSession session, @PathVariable("id") long groupId) {
         long userId = (long) session.getAttribute("user_id");
-        groupService.addRequest(userId, groupId);
+        Group group = groupService.addRequest(userId, groupId);
+        notificationService.notify(group);
         return "redirect:/group/" + groupId;
     }
 

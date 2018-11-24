@@ -77,19 +77,31 @@ public class NotificationService {
         }
     }
 
-    public void notify(Friend friend){
-        if(friend.getEnabled() == 0){ // new friend request
+    public void notify(Friend friend) {
+        if (friend.getEnabled() == 0) { // new friend request
             User toUser = userRepository.findById(friend.getOtherUser().getId());
             User fromUser = userRepository.findById(friend.getUser().getId());
             String HTML = fromUser.getFullName() + " sent you the friend request";
             sendNotification(toUser, HTML, "friend/received");
-        }
-        else if(friend.getEnabled() == 1){ // accepted friend request
+        } else if (friend.getEnabled() == 1) { // accepted friend request
             User toUser = userRepository.findById(friend.getUser().getId());
             User fromUser = userRepository.findById(friend.getOtherUser().getId());
             String HTML = fromUser.getFullName() + " accepted your friend request";
             sendNotification(toUser, HTML, "friend");
         }
+    }
+
+    public void notify(Group group) {
+        for (User admin : group.getAdmins()) {
+            String HTML = group.getName() + " has pending join requests";
+            sendNotification(admin, HTML, "group/" + group.getId() + "/requests");
+        }
+    }
+
+    public void notify(Group group, long userId) {
+        User toUser = userRepository.findById(userId);
+        String HTML = "Your request to join " + group.getName() + " has been accepted.";
+        sendNotification(toUser, HTML, "group/" + group.getId() + "/wall");
     }
 
     /**

@@ -3,6 +3,7 @@ package com.soen.empower.service;
 import com.soen.empower.entity.Parent;
 import com.soen.empower.entity.Teacher;
 import com.soen.empower.entity.User;
+import com.soen.empower.repository.FriendRepository;
 import com.soen.empower.repository.ParentRepository;
 import com.soen.empower.repository.TeacherRepository;
 import com.soen.empower.repository.UserRepository;

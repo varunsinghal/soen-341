@@ -1,10 +1,14 @@
 package com.soen.empower.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soen.empower.entity.Friend;
 import com.soen.empower.repository.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -108,5 +112,28 @@ public class FriendService {
      */
     public List<Friend> fetchFriends(long userId) {
         return friendRepository.findByUserIdAndEnabledOrOtherUserIdAndEnabled(userId, 1, userId, 1);
+    }
+
+    public String fetchFriendsForTag(long userId) {
+        List<Object> users = new ArrayList<>();
+        for (Friend friend : friendRepository.findByUserIdAndEnabledOrOtherUserIdAndEnabled(userId, 1, userId, 1)) {
+            HashMap<String, String> hm = new HashMap<>();
+            if (friend.getUser().getId() == userId) {
+                hm.put("name", friend.getOtherUser().getFullName());
+                hm.put("username", friend.getOtherUser().getUsername());
+                hm.put("id", String.valueOf(friend.getOtherUser().getId()));
+            } else {
+                hm.put("name", friend.getUser().getFullName());
+                hm.put("username", friend.getUser().getUsername());
+                hm.put("id", String.valueOf(friend.getUser().getId()));
+            }
+            users.add(hm);
+        }
+        try {
+            return new ObjectMapper().writeValueAsString(users);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

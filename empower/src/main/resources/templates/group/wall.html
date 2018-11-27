@@ -185,7 +185,7 @@
                 <div class="card-body">
                     <form method="post" th:action="@{/group/addComment} + '/' + ${group.id}" class="form-inline">
                         <div class="input-group col-10" style="padding-left:0px">
-                            <input type="text" class="form-control" name="text" placeholder="Comment..."/>
+                            <input type="text" class="form-control comment" name="text" placeholder="Comment..."/>
                             <input type="hidden" name="user.id" th:value="${session.user_id}"/>
                             <input type="hidden" name="card.id" th:value="${card.id}"/><br>
                         </div>
@@ -203,5 +203,27 @@
 </div>
 
 <div th:replace="fragments/layout :: footer"/>
+<div style="display:none" id="membersList" th:text="${members}"></div>
+<script>
+var members = JSON.parse($("#membersList").text());
+
+var tribute = new Tribute({
+  values: members,
+   // column to search against in the object (accepts function or string)
+  lookup: 'name',
+  // template for displaying item in menu
+  menuItemTemplate: function (item) {
+    return item.original.name;
+  },
+  // function called on select that returns the content to insert
+  selectTemplate: function (item) {
+    return '@' + item.original.username;
+  }
+});
+
+tribute.attach($('#message'));
+
+
+</script>
 </body>
 </html>

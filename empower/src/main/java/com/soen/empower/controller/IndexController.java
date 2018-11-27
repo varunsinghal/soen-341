@@ -89,7 +89,7 @@ public class IndexController {
             model.addObject("username", username);
             return model;
         }
-        return new ModelAndView("redirect:/forgot?error");
+        return new ModelAndView("redirect:/forgot?customError=Invalid security answer.");
     }
 
     /**
@@ -106,9 +106,9 @@ public class IndexController {
                                  @RequestParam("confirmPassword") String confirmPassword) {
         if (userService.isValidPassword(newPassword, confirmPassword)) {
             userService.changePassword(username, newPassword);
-            return "redirect:/login?change";
+            return "redirect:/login?customSuccess=Password has been changed.";
         }
-        return "redirect:/password?error";
+        return "redirect:/forgot?customError=Password and confirm password does not match.";
     }
 
 

@@ -32,8 +32,8 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- list of menu items -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- list of alert messages-->
             <div th:if="${param.error}" class="ml-auto"> <!-- invalid login auth -->
                 <div class="alert alert-danger">Invalid username and password.</div>
             </div>
@@ -46,11 +46,11 @@
             <div th:if="${param.customSuccess}" class="ml-auto"> <!-- custom success messages -->
                 <div class="alert alert-success" th:text="${param.customSuccess}"></div>
             </div>
+            <!-- list of alert messages ends -->
+            <!-- login form -->
             <form class="ml-auto" method="post" th:action="@{/login}">
                 <ul class="navbar-nav ml-auto">
-
                     <li>
-
                         <div class="form-group">
                             <label>Username</label>
                             <input class="form-control mr-sm-2" type="text" name="username">
@@ -62,12 +62,11 @@
                             <label>Password</label>
                             <input class="form-control mr-sm-2" type="password" name="password">
                         </div>
-
+                        <a th:href="@{/forgot}">Forgot password?</a>
                     </li>
                     <li>  </li>
                     <li>
                         <div class="form-group"><label> </label>
-
                             <input type="submit" name="login" class="form-control mr-sm-2 btn btn-primary"
                                    value="Log in">
                         </div>
@@ -75,6 +74,7 @@
                     <li>  </li>
                 </ul>
             </form>
+            <!-- login form ends -->
         </div>
     </nav>
 
@@ -83,6 +83,9 @@
 </div>
 
 <div th:fragment="footer">
+    <div class="container">
+        <span class="text-muted">Copyrights &copy; Empower, 2018.</span>
+    </div>
     <!-- Bootstrap core JavaScript  ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script th:src="@{/js/jquery.min.js}"></script>

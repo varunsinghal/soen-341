@@ -184,7 +184,7 @@
                 <div class="card-body">
                     <form method="post" th:action="@{/wall/addComment} + '/' + ${owner.id}" class="form-inline">
                         <div class="input-group col-10" style="padding-left:0px">
-                            <input type="text" class="form-control" name="text" placeholder="Comment..."/>
+                            <input type="text" class="form-control comment" name="text" placeholder="Comment..."/>
                             <input type="hidden" name="user.id" th:value="${session.user_id}"/>
                             <input type="hidden" name="card.id" th:value="${card.id}"/><br>
                         </div>
@@ -229,12 +229,9 @@ var tribute = new Tribute({
   }
 });
 
-tribute.attach(document.getElementById('message'));
+tribute.attach($('#message'));
+tribute.attach($(".comment"));
 
-document.getElementById('message').addEventListener('tribute-replaced', function (e) {
-  console.log('Original event that triggered text replacement:', e.detail.event);
-  console.log('Matched item:', e.detail.item);
-});
 </script>
 </body>
 </html>

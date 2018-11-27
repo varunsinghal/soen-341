@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header">
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+              integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+              crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/starter-template.css}" rel="stylesheet">
+
+    </div>
+
+</head>
+<body>
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- brand -->
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/img/logo.png}" style="width:100px"/>
+        </a>
+        <!-- .brand -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- list of menu items -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div th:if="${param.error}" class="ml-auto"> <!-- invalid login auth -->
+                <div class="alert alert-danger">Invalid username and password.</div>
+            </div>
+            <div th:if="${param.logout}" class="ml-auto"> <!-- successful logout -->
+                <div class="alert alert-info">You have been logged out.</div>
+            </div>
+            <div th:if="${param.customError}" class="ml-auto"> <!-- custom error messages -->
+                <div class="alert alert-danger" th:text="${param.customError}"></div>
+            </div>
+            <div th:if="${param.customSuccess}" class="ml-auto"> <!-- custom success messages -->
+                <div class="alert alert-success" th:text="${param.customSuccess}"></div>
+            </div>
+            <form class="ml-auto" method="post" th:action="@{/login}">
+                <ul class="navbar-nav ml-auto">
+
+                    <li>
+
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control mr-sm-2" type="text" name="username">
+                        </div>
+                    </li>
+                    <li>   </li>
+                    <li>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control mr-sm-2" type="password" name="password">
+                        </div>
+
+                    </li>
+                    <li>  </li>
+                    <li>
+                        <div class="form-group"><label> </label>
+
+                            <input type="submit" name="login" class="form-control mr-sm-2 btn btn-primary"
+                                   value="Log in">
+                        </div>
+                    </li>
+                    <li>  </li>
+                </ul>
+            </form>
+        </div>
+    </nav>
+
+    <br/>
+    <br/>
+</div>
+
+<div th:fragment="footer">
+    <!-- Bootstrap core JavaScript  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/application.js}"></script>
+</div>
+
+</body>
+</html>

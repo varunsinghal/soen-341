@@ -41,17 +41,7 @@ public class IndexController {
      */
     @RequestMapping("/login")
     public String login() {
-        return "login";
-    }
-
-    /**
-     * Registration form.
-     *
-     * @return create.html
-     */
-    @RequestMapping("/create")
-    public String create() {
-        return "create";
+        return "index";
     }
 
     /**
@@ -64,7 +54,7 @@ public class IndexController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String addUser(@ModelAttribute User user) {
         userService.add(user);
-        return "redirect:/login";
+        return "redirect:/login?customSuccess=Account has been created.";
     }
 
     /**

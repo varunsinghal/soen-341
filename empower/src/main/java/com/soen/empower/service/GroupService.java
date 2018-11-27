@@ -1,5 +1,7 @@
 package com.soen.empower.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soen.empower.entity.Group;
 import com.soen.empower.entity.User;
 import com.soen.empower.repository.GroupRepository;
@@ -7,6 +9,8 @@ import com.soen.empower.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -210,5 +214,22 @@ public class GroupService {
         User user = userRepository.findById(userId);
         group.getRequests().remove(user);
         groupRepository.save(group);
+    }
+
+    public String fetchMembersForTag(long groupId) {
+        List<Object> users = new ArrayList<>();
+        for (User user : groupRepository.findById(groupId).getMembers()) {
+            HashMap<String, String> hm = new HashMap<>();
+            hm.put("name", user.getFullName());
+            hm.put("username", user.getUsername());
+            hm.put("id", String.valueOf(user.getId()));
+            users.add(hm);
+        }
+        try {
+            return new ObjectMapper().writeValueAsString(users);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

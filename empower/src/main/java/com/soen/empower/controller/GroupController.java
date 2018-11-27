@@ -139,6 +139,7 @@ public class GroupController {
             model.addObject("group", groupService.findById(groupId));
             model.addObject("likedCards", likeService.findCardsFor(userId));
             model.addObject("dislikedCards", dislikeService.findCardsFor(userId));
+            model.addObject("members", groupService.fetchMembersForTag(groupId));
             return model;
         }
         throw new AccessDeniedException("403 returned");

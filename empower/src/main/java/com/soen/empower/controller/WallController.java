@@ -1,5 +1,6 @@
 package com.soen.empower.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.soen.empower.entity.Card;
 import com.soen.empower.entity.Comment;
 import com.soen.empower.entity.Dislike;
@@ -64,6 +65,7 @@ public class WallController {
             model.addObject("owner", userService.findById(userId));
             model.addObject("likedCards", likeService.findCardsFor(loggedInUserId));
             model.addObject("dislikedCards", dislikeService.findCardsFor(loggedInUserId));
+            model.addObject("friends", friendService.fetchFriendsForTag(loggedInUserId));
             return model;
         }
         throw new AccessDeniedException("403 returned");

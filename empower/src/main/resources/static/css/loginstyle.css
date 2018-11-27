@@ -5,10 +5,10 @@ html{
 body{ /* this is just the background image of the login page*/
     margin: 0;
     padding: 0;
-    background: url(../img/blp.jpg);
+    /*background: url(../img/blp.jpg);*/
+    background-color: #eeeeee;
     background-size: cover;
     background-position: center;
-    font-family: sans-serif;
 }
 
 

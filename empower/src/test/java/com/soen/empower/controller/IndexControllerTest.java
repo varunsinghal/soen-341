@@ -33,21 +33,21 @@ public class IndexControllerTest {
     public void getLoginPage_ReturnsTemplate() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/login"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("login"));
+                .andExpect(MockMvcResultMatchers.view().name("index"));
 
     }
 
     @Test
     public void getCreatePage_ReturnsSignUpPage() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/create"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/login"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("create"));
+                .andExpect(MockMvcResultMatchers.view().name("index"));
     }
 
     @Test
     public void submitCreatePage_RedirectsToLoginPage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/create"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/login"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/login?customSuccess=Account has been created."));
     }
 }

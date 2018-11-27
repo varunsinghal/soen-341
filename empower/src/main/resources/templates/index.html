@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login | Empower</title>
+    <div th:replace="fragments/public-layout :: header"/>
+</head>
+<body>
+<div th:replace="fragments/public-layout :: nav"/>
+<div class="container-fluid row">
+    <div class="col-md-2"></div>
+    <div class="col-md-5"><br><br>
+        <h1>Parent Teacher Social Network</h1><br><br>
+
+        <h3><i class="fas fa-camera-retro"></i>   See photos and updates from friends in their wall.</h3>
+        <br><br>
+        <h3><i class="fas fa-search"></i>   Search for friends and groups. </h3>
+        <br><br>
+        <h3><i class="fas fa-comments"></i>   Send direct messages to users.</h3>
+        <br><br>
+        <h3><i class="fas fa-users"></i>   Groups make it easy to connect with specific set of users.</h3>
+    </div>
+    <div class="col-md-4">
+        <h1>Sign up</h1><br>
+        <form method="post" th:action="@{/create}">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-control" name="fullName">
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Date of birth</label>
+                <input type="text" class="form-control" name="dob" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Create Password">
+            </div>
+            <div class="form-group">
+                <label>Confirm password</label>
+                <input type="password" name="" class="form-control" placeholder="Re-Enter Password">
+            </div>
+            <div class="form-group">
+                <!-- Security question in case of username or password forgot-->
+                <label>Security question</label>
+                <input type="text" name="securityQuestion" class="form-control"
+                       placeholder="In case you forgot the password">
+            </div>
+            <div class="form-group">
+                <label>Security answer</label>
+                <input type="password" class="form-control" name="securityAnswer" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>Role:</label><br>
+                <input type="radio" class="form-check form-check-inline" name="role" value="ROLE_TEACHER">Teacher   
+                <input type="radio" class="form-check form-check-inline" name="role" value="ROLE_PARENT">Parent
+            </div>
+            <br>
+
+            <div class="form-group">
+                <input type="Submit" class="btn btn-success" name="submit" value="  Sign up  ">
+            </div>
+            <br>
+
+        </form>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div th:replace="fragments/public-layout :: footer"/>
+</body>
+</html>

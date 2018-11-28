@@ -333,4 +333,5 @@ public class Card {
     public void setBelongsToGroup(Group belongsToGroup) {
         this.belongsToGroup = belongsToGroup;
     }
+
 }

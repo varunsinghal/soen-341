@@ -16,6 +16,8 @@ public class CommentService {
      */
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private TagService tagService;
 
     /**
      * Adds the.
@@ -23,6 +25,7 @@ public class CommentService {
      * @param comment the comment
      */
     public void add(Comment comment) {
+        comment = tagService.process(comment);
         commentRepository.save(comment);
     }
 

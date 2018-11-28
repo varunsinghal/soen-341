@@ -17,6 +17,9 @@ public class CardService {
     @Autowired
     private CardRepository cardRepository;
 
+    @Autowired
+    private TagService tagService;
+
     /**
      * Added placeholder for dependency injection to support test cases.
      *
@@ -41,6 +44,7 @@ public class CardService {
      * @param card the card
      */
     public void add(Card card) {
+        card = tagService.process(card);
         cardRepository.save(card);
     }
 

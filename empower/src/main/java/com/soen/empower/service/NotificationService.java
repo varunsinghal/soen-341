@@ -104,6 +104,21 @@ public class NotificationService {
         sendNotification(toUser, HTML, "group/" + group.getId() + "/wall");
     }
 
+    void notify(User user, Card card) {
+        User cardOwner = userRepository.findById(card.getUser().getId());
+        String HTML = "You have been tagged to a post by " + cardOwner.getFullName();
+        String type = card.getBelongsTo() == null ? "group/" + card.getBelongsToGroup().getId() + "/wall" : "wall/" + card.getBelongsTo().getId();
+        sendNotification(user, HTML, type);
+    }
+
+    void notify(User user, Comment comment){
+        Card card = cardRepository.findById((long) comment.getCard().getId());
+        User commentOwner = userRepository.findById(comment.getUser().getId());
+        String HTML = "You have been tagged in a comment by " + commentOwner.getFullName();
+        String type = card.getBelongsTo() == null ? "group/" + card.getBelongsToGroup().getId() + "/wall" : "wall/" + card.getBelongsTo().getId();
+        sendNotification(user, HTML, type);
+    }
+
     /**
      * Save the notification and send it to the channel /queue/notify.
      *

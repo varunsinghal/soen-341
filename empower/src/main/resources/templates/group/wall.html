@@ -131,7 +131,7 @@
                     <p class="card-text" th:if="${card.filename} != null">
                         <img th:src="@{/files/fetch/} + ${card.filename}" class="wall-image">
                     </p>
-                    <p class="card-text" th:if="${card.text} != null" th:text="${card.text}"></p>
+                    <p class="card-text" th:if="${card.text} != null" th:utext="${card.text}"></p>
                 </div>
                 <!-- like dislike -->
                 <div class="card-footer form-inline">
@@ -178,7 +178,7 @@
                         <a th:href="@{/user/profile/} + ${comment.user.id}"><span
                                 th:text="${comment.user.fullName}"></span></a>
                         :
-                        <span th:text="${comment.text}"><i>Some comment...</i></span>
+                        <span th:utext="${comment.text}"><i>Some comment...</i></span>
                         <span th:text="${comment.created}" style="float:right"></span>
                     </li>
                 </ul>

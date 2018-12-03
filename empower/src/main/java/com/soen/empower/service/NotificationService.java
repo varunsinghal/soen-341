@@ -104,19 +104,19 @@ public class NotificationService {
         sendNotification(toUser, HTML, "group/" + group.getId() + "/wall");
     }
 
-    void notify(User user, Card card) {
+    void notify(User tag, Card card) {
         User cardOwner = userRepository.findById(card.getUser().getId());
         String HTML = "You have been tagged to a post by " + cardOwner.getFullName();
         String type = card.getBelongsTo() == null ? "group/" + card.getBelongsToGroup().getId() + "/wall" : "wall/" + card.getBelongsTo().getId();
-        sendNotification(user, HTML, type);
+        sendNotification(tag, HTML, type);
     }
 
-    void notify(User user, Comment comment){
+    void notify(User tag, Comment comment){
         Card card = cardRepository.findById((long) comment.getCard().getId());
         User commentOwner = userRepository.findById(comment.getUser().getId());
         String HTML = "You have been tagged in a comment by " + commentOwner.getFullName();
         String type = card.getBelongsTo() == null ? "group/" + card.getBelongsToGroup().getId() + "/wall" : "wall/" + card.getBelongsTo().getId();
-        sendNotification(user, HTML, type);
+        sendNotification(tag, HTML, type);
     }
 
     /**

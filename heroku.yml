@@ -3,3 +3,5 @@ build:
     - java
   pre:
     - cd empower
+  run:
+    web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/empower-0.0.1-SNAPSHOT.jar

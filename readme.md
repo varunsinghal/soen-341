@@ -7,11 +7,6 @@
 * A software web application designed to allow parents to communicate with teachers and vice versa. The main purpose of the software is to help parents to keep informed about their children academic progress, schools events, volunteering opportunities. 
 * Version: Sprint 6
 
-
-### Run the demo application ###
-To visit the online version of the application - [https://soen-341.herokuapp.com](https://soen-341.herokuapp.com)
-This link is only for demo purpose, all the records/accounts created using the above link will persist in system for half an hour only.
-
 ### How do I get set up? ###
 
 * Summary of set up: Import project as Maven project in Eclipse/Intellij.
